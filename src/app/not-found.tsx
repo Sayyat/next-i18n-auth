@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2025. Sayat Raykul
  */
-
+"use client";
 import Link from "next/link";
 import { useTranslation } from "@/i18n";
 
