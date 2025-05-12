@@ -12,33 +12,41 @@ export default function helpTask(gulp) {
     console.log(chalk.bold("\ni18n Translation System Help\n"));
 
     console.log(chalk.cyan("Available Tasks:"));
+
+    // gulp
+    console.log(chalk.green("  gulp"));
+    console.log("    Run the default task sequence");
     console.log(
-      chalk.green("  gulp") +
-        " - Run the default task sequence (namespaces, templates, types)",
+      "    generate-namespaces -> generate-templates -> generate-types",
     );
 
     console.log(chalk.green("\n  gulp generate-namespaces"));
     console.log("    Scans your codebase and generates namespace definitions");
     console.log("    Output: " + chalk.yellow(configs.generatedNamespacesPath));
 
+    // gulp generate-templates
     console.log(chalk.green("\n  gulp generate-templates"));
     console.log("    Extracts translation keys from your source files");
-    console.log(
-      "    Creates/updates translation files for your default language",
-    );
+    console.log("    Creates/updates translation files for all languages");
+    console.log("    Keeps old translations to avoid data loss");
     console.log("    Output: " + chalk.yellow(i18n.options.resource.savePath));
 
+    // gulp generate-types
     console.log(chalk.green("\n  gulp generate-types"));
-    console.log(
-      "    Generates TypeScript type definitions for your translations",
-    );
+    console.log("    Generates type definitions for your translations");
     console.log("    Output: " + chalk.yellow(configs.generatedTypesPath));
 
+    // gulp generate-translations
     console.log(
       chalk.green("\n  gulp generate-translations") +
         chalk.yellow(" [--l=<language>]"),
     );
-    console.log("    Translates missing keys using machine translation");
+    console.log(
+      "    Translates only missing keys using 'Deep Translate' on 'Rapid api'",
+    );
+    console.log(
+      "    You must provide your RAPIDAPI_KEY variable in .env file (See .demo-env)",
+    );
     console.log("    Parameters:");
     console.log(
       "      " +
@@ -53,8 +61,47 @@ export default function helpTask(gulp) {
     );
     console.log(
       "      " +
-        chalk.green("gulp generate-translations --l=fr") +
-        " - Translate only French",
+        chalk.green("gulp generate-translations --l=kk") +
+        " - Translate only Kazakh",
+    );
+
+    // gulp generate-types
+    console.log(chalk.green("\n  gulp watch"));
+    console.log(
+      "    Runs generate-namespaces -> generate-templates -> generate-types on file changes",
+    );
+
+    // gulp create-feature
+    console.log(
+      chalk.green("\n  gulp create-feature") +
+        chalk.yellow(" [--name=<feature-name>]") +
+        chalk.yellow(" [--js]"),
+    );
+    console.log("    Generates boilerplate for a new feature");
+    console.log("    Parameters:");
+    console.log(
+      "      " +
+        chalk.yellow("--name=<feature-name>") +
+        " - Name for new feature (in camelCase or kebab-case)",
+    );
+    console.log(
+      "      " +
+        chalk.yellow("--js") +
+        " - Generate JavaScript/JSX instead of TypeScript/TSX",
+    );
+
+    console.log("    Examples:");
+    console.log(
+      "      " + chalk.green("gulp create-feature --name=my-feature"),
+    );
+    console.log(
+      "      - Generates feature named 'my-feature' with TypeScript/TSX files",
+    );
+    console.log(
+      "      " + chalk.green("gulp create-feature --name=my-feature --js"),
+    );
+    console.log(
+      "      - Generates feature named 'my-feature' with JavaScript/JSX files",
     );
 
     console.log(chalk.green("\n  gulp help"));
@@ -80,6 +127,16 @@ export default function helpTask(gulp) {
       "  4. Run " +
         chalk.green("gulp generate-translations") +
         " to translate missing keys",
+    );
+    console.log(
+      "  5. Run " +
+        chalk.green("gulp watch") +
+        " to run generate-namespaces -> generate-templates -> generate-types on file changes",
+    );
+    console.log(
+      "  6. Run " +
+        chalk.green("gulp create-feature") +
+        " to generate boilerplate for a new feature",
     );
 
     console.log(chalk.cyan("\nConfiguration:"));
