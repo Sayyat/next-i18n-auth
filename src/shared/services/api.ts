@@ -13,18 +13,35 @@ import { getTranslation } from "@/i18n/lib/server";
 async function extractErrorMessage(error: unknown): Promise<string> {
   const { t } = await getTranslation("shared.services.api");
 
+  // these keys are only for i18next-scanner to be translated
+  // add your backend errors here and run `gulp` command
+  const errorsForI18nextScanner = [
+    t("ERR_FR_TOO_MANY_REDIRECTS"),
+    t("ERR_BAD_OPTION_VALUE"),
+    t("ERR_BAD_OPTION"),
+    t("ERR_NETWORK"),
+    t("ERR_DEPRECATED"),
+    t("ERR_BAD_RESPONSE"),
+    t("ERR_BAD_REQUEST"),
+    t("ERR_NOT_SUPPORT"),
+    t("ERR_INVALID_URL"),
+    t("ERR_CANCELED"),
+    t("ECONNABORTED"),
+    t("ETIMEDOUT"),
+  ];
+
   if (axios.isAxiosError(error) && error.response?.data) {
     const { code, message } = error.response.data;
-    // console.log({code, message})
+    // console.log({ code, message });
 
     if (!code && !message) {
-      return t("serverError");
+      return t("Server error");
     }
     // ✅ Try to translate error code, otherwise return `message`
-    const translatedMessage = t(code);
+    const translatedMessage = t(code, { defaultValue: message });
     return translatedMessage !== code ? translatedMessage : message;
   }
-  return t("unknownError");
+  return t("Unknown Error");
 }
 
 // Handle API responses
