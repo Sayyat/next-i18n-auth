@@ -1,4 +1,18 @@
 {
   "serverError": "Ошибка сервера",
-  "unknownError": "неизвестноОшибка"
+  "unknownError": "Неизвестно ошибка",
+  "Server error": "Ошибка сервера",
+  "Unknown Error": "Неизвестно ошибка",
+  "ECONNABORTED": "Соединение было прервано",
+  "ERR_BAD_OPTION": "Неверная опция",
+  "ERR_BAD_OPTION_VALUE": "Неверное значение опции",
+  "ERR_BAD_REQUEST": "Неверный запрос",
+  "ERR_BAD_RESPONSE": "Получен неверный ответ",
+  "ERR_CANCELED": "Запрос был отменен",
+  "ERR_DEPRECATED": "Функция устарела",
+  "ERR_FR_TOO_MANY_REDIRECTS": "Слишком много перенаправлений",
+  "ERR_INVALID_URL": "Неверный URL",
+  "ERR_NETWORK": "Сетевая ошибка",
+  "ERR_NOT_SUPPORT": "Функция не поддерживается",
+  "ETIMEDOUT": "Время запроса истекло"
 }

@@ -157,7 +157,21 @@ export type TNamespaceTranslationKeys = {
     | "Theme";
   "shared.services.api": 
     | "serverError"
-    | "unknownError";
+    | "unknownError"
+    | "Server error"
+    | "Unknown Error"
+    | "ECONNABORTED"
+    | "ERR_BAD_OPTION"
+    | "ERR_BAD_OPTION_VALUE"
+    | "ERR_BAD_REQUEST"
+    | "ERR_BAD_RESPONSE"
+    | "ERR_CANCELED"
+    | "ERR_DEPRECATED"
+    | "ERR_FR_TOO_MANY_REDIRECTS"
+    | "ERR_INVALID_URL"
+    | "ERR_NETWORK"
+    | "ERR_NOT_SUPPORT"
+    | "ETIMEDOUT";
 };
 
 export type TAllTranslationKeys = 
@@ -270,4 +284,18 @@ export type TAllTranslationKeys =
   | "shared.components.ThemeSelect.System"
   | "shared.components.ThemeSelect.Theme"
   | "shared.services.api.serverError"
-  | "shared.services.api.unknownError";
+  | "shared.services.api.unknownError"
+  | "shared.services.api.Server error"
+  | "shared.services.api.Unknown Error"
+  | "shared.services.api.ECONNABORTED"
+  | "shared.services.api.ERR_BAD_OPTION"
+  | "shared.services.api.ERR_BAD_OPTION_VALUE"
+  | "shared.services.api.ERR_BAD_REQUEST"
+  | "shared.services.api.ERR_BAD_RESPONSE"
+  | "shared.services.api.ERR_CANCELED"
+  | "shared.services.api.ERR_DEPRECATED"
+  | "shared.services.api.ERR_FR_TOO_MANY_REDIRECTS"
+  | "shared.services.api.ERR_INVALID_URL"
+  | "shared.services.api.ERR_NETWORK"
+  | "shared.services.api.ERR_NOT_SUPPORT"
+  | "shared.services.api.ETIMEDOUT";

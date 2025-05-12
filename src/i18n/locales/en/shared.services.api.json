@@ -1,4 +1,18 @@
 {
-  "serverError": "serverError",
-  "unknownError": "unknownError"
+  "serverError": "Server error",
+  "unknownError": "Unknown error",
+  "Server error": "Server error",
+  "Unknown Error": "Unknown Error",
+  "ECONNABORTED": "Connection was aborted",
+  "ERR_BAD_OPTION": "Bad option provided",
+  "ERR_BAD_OPTION_VALUE": "Invalid value for the option",
+  "ERR_BAD_REQUEST": "Bad request",
+  "ERR_BAD_RESPONSE": "Received a bad response",
+  "ERR_CANCELED": "Request was canceled",
+  "ERR_DEPRECATED": "The feature is deprecated",
+  "ERR_FR_TOO_MANY_REDIRECTS": "Too many redirects",
+  "ERR_INVALID_URL": "Invalid URL",
+  "ERR_NETWORK": "Network error",
+  "ERR_NOT_SUPPORT": "Feature not supported",
+  "ETIMEDOUT": "Request timed out"
 }

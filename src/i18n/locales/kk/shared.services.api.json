@@ -1,4 +1,18 @@
 {
-  "serverError": "сервер қатесі",
-  "unknownError": "белгісізҚате"
+  "serverError": "Сервер қатесі",
+  "unknownError": "Белгісіз қате",
+  "Server error": "Сервер қатесі",
+  "Unknown Error": "Белгісіз қате",
+  "ECONNABORTED": "Қосылу үзіліп кетті",
+  "ERR_BAD_OPTION": "Жарамсыз опция енгізілді",
+  "ERR_BAD_OPTION_VALUE": "Опцияның мәні жарамсыз",
+  "ERR_BAD_REQUEST": "Жарамсыз сұраныс",
+  "ERR_BAD_RESPONSE": "Қате жауап алынды",
+  "ERR_CANCELED": "Сұраныс тоқтатылды",
+  "ERR_DEPRECATED": "Бұл функция ескірген",
+  "ERR_FR_TOO_MANY_REDIRECTS": "Көбіне бағыттау орын алды",
+  "ERR_INVALID_URL": "Жарамсыз URL",
+  "ERR_NETWORK": "Желі қатесі",
+  "ERR_NOT_SUPPORT": "Функция қолдау таппайды",
+  "ETIMEDOUT": "Сұраныстың уақыт шегі аяқталды"
 }
