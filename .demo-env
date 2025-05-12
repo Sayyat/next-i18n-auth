@@ -1,5 +1,5 @@
-NEXTAUTH_URL=http://127.0.0.1:3001
-NEXTAUTH_SECRET=jDl4JCqvF7WSqFQd8IExXhMqU2pw9ggUBWvJqmPz39c=
+AUTH_URL=http://127.0.0.1:3001
+AUTH_SECRET=jDl4JCqvF7WSqFQd8IExXhMqU2pw9ggUBWvJqmPz39c=
 NEXT_PUBLIC_API_URL=https://treatment-admin.ziz.kz
 API_URL=https://treatment-admin.ziz.kz
 NODE_ENV=development
