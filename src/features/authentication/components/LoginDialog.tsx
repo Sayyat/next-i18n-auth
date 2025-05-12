@@ -69,15 +69,10 @@ export const LoginDialog: React.FC<ILoginDialogProps> = ({
       const res = await loginMutation.mutateAsync({
         ...data,
       });
-      console.log({ res });
       if (res?.ok) {
-        toast.success(t("Success"));
-        // await refetch()
         setCurrentModal(undefined); // Close modal on success
       }
-    } catch (error) {
-      console.log({ error });
-      toast.error(t("Unexpected error occured"));
+    } catch {
     } finally {
       setLoading(false);
     }

@@ -88,12 +88,9 @@ export const RegisterDialog: React.FC<IRegisterDialogProps> = ({
       });
 
       if (res?.ok) {
-        toast.success(t("Success"));
-        // await refetch()
         setCurrentModal(undefined); // Close modal on success
       }
-    } catch (error) {
-      toast.error(t("Unexpected error occurred"));
+    } catch {
     } finally {
       setLoading(false);
     }
