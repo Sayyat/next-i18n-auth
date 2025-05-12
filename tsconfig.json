@@ -1,0 +1,75 @@
+{
+  "compilerOptions": {
+    // Good choice for Next.js, especially if you’re using latest features
+    "target": "ESNext",
+    // Next.js often uses these libs for DOM, iteration, and newer features
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    // Good for allowing .js in TypeScript if needed
+    "allowJs": true,
+    // Skips checking .d.ts files in node_modules (improves build speed)
+    "skipLibCheck": true,
+    // Strict mode is recommended
+    "strict": true,
+    // Next.js typically doesn't emit from TS, so "noEmit": true is correct
+    "noEmit": true,
+    // Interop needed for certain ES modules
+    "esModuleInterop": true,
+    // The module used by Next.js is ESNext or NodeNext (both can work)
+    "module": "esnext",
+    // Next.js can handle modern bundling, so "moduleResolution": "bundler" is fine
+    "moduleResolution": "bundler",
+    // Allows importing JSON files
+    "resolveJsonModule": true,
+    // Good for partial compilation isolation
+    "isolatedModules": true,
+    // Usually "preserve" or "react-jsx" in Next.js
+    "jsx": "preserve",
+    // Speeds up subsequent builds
+    "incremental": true,
+    // Ensures next-auth custom declarations are merged
+    "types": [
+      "@testing-library/jest-dom",
+      "next-auth"
+    ],
+    // Next.js plugin for better IntelliSense
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    // Path aliases for simpler imports
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "src/**/*.d.ts",
+    ".next/types/**/*.ts"
+    //    "gulpfile.mjs",
+    // If you need type checking in .next, uncomment if necessary
+    //    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "dist",
+    "build",
+    ".next",
+    "node_modules",
+    "**/*.test.ts"
+  ],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
+}

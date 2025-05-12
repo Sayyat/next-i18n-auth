@@ -1,0 +1,178 @@
+name: Next.js CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: self-hosted
+    outputs:
+      build_start_time: ${{ steps.record_build_start_time.outputs.build_start_time }}
+
+    steps:
+      - name: Запись времени начала сборки
+        id: record_build_start_time
+        run: echo "build_start_time=$(date +%s)" >> $GITHUB_OUTPUT
+
+      - name: Checkout репозитория
+        uses: actions/checkout@v4
+
+      - name: Сохранение коммит-сообщения и имени пользователя
+        run: |
+          echo "GITHUB_COMMIT_MESSAGE=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
+          echo "GITHUB_ACTOR=${{ github.actor }}" >> $GITHUB_ENV
+          echo "Коммит: ${{ github.event.head_commit.message }}"
+          echo "Пользователь: ${{ github.actor }}"
+
+      - name: Оповещение в Telegram — старт сборки
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ vars.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d "chat_id=${{ vars.TELEGRAM_CHAT_ID }}" \
+            -d "parse_mode=Markdown" \
+            --data-urlencode "text=\`\`\`
+          🚀 Сборка началась
+          👤: $GITHUB_ACTOR
+          💻: ${{ vars.PROJECT_NAME }}
+          Commit: $GITHUB_COMMIT_MESSAGE
+          \`\`\`"
+
+      - name: Detect package manager
+        id: detect-package-manager
+        run: |
+          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
+            echo "manager=yarn" >> $GITHUB_OUTPUT
+            echo "command=install" >> $GITHUB_OUTPUT
+            echo "runner=yarn" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ -f "${{ github.workspace }}/package-lock.json" ]; then
+            echo "manager=npm" >> $GITHUB_OUTPUT
+            echo "command=ci" >> $GITHUB_OUTPUT
+            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "Unable to determine package manager" >&2
+            exit 1
+          fi
+
+      - name: Установка Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Кеширование зависимостей
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock', '**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock', '**/package-lock.json') }}
+
+      - name: Включение Yarn через Corepack
+        run: corepack enable yarn
+
+      - name: Установка зависимостей
+        run: |
+          if [ "${{ steps.detect-package-manager.outputs.manager }}" == "yarn" ]; then
+            yarn install --frozen-lockfile
+          else
+            npm ci
+          fi
+
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - name: Checkout репозитория
+        uses: actions/checkout@v4
+
+      - name: Создание .env файла из GitHub Variables
+        run: |
+          touch .env.production
+          echo "AUTH_SECRET=${{ vars.AUTH_SECRET }}" >> .env.production
+          echo "AUTH_URL=${{ vars.AUTH_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}" >> .env.production
+          echo "API_URL=${{ vars.API_URL }}" >> .env.production
+          echo "NODE_ENV=${{ vars.NODE_ENV }}" >> .env.production
+          echo "NEXT_TELEMETRY_DISABLED=1" >> .env.production
+      - name: Проверка и создание сети Docker (если отсутствует)
+        run: |
+          docker network inspect js_network >/dev/null 2>&1 || docker network create js_network
+
+      - name: Сборка нового Docker-образа
+        run: docker compose -f docker/production/compose.yaml build
+
+      - name: Остановка старого контейнера (если существует)
+        run: |
+          if docker ps -q --filter "name=treatment_frontend" | grep -q .; then
+            echo "Останавливаем старый контейнер..."
+            docker stop treatment_frontend || true
+            docker rm treatment_frontend || true
+          else
+            echo "Старый контейнер не найден."
+          fi
+
+      - name: Запуск нового контейнера
+        run: docker compose -f docker/production/compose.yaml up -d
+
+      - name: Проверка работоспособности контейнера
+        run: curl --max-time 30 -f http://127.0.0.1:3000 || echo "Контейнер не доступен"
+
+      - name: Вычисление времени сборки и деплоя
+        if: always()
+        id: compute_time
+        run: |
+          END_TIME=$(date +%s)
+          START_TIME=${{ needs.build.outputs.build_start_time }}
+          DURATION=$(( END_TIME - START_TIME ))
+          echo "build_time=$DURATION" >> $GITHUB_OUTPUT
+
+      - name: Оповещение в Telegram — успешный деплой
+        if: success()
+        run: |
+          build_time=${{ steps.compute_time.outputs.build_time }}
+          curl -s -X POST "https://api.telegram.org/bot${{ vars.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d "chat_id=${{ vars.TELEGRAM_CHAT_ID }}" \
+            -d "parse_mode=Markdown" \
+            --data-urlencode "text=\`\`\`
+          ✅: Деплой успешно завершён 
+          💻: ${{ vars.PROJECT_NAME }}
+          ⏱️: Время сборки+деплоя: ${build_time} c
+          💪: Отличная работа, $GITHUB_ACTOR! 😎
+          \`\`\`"
+
+      - name: Оповещение в Telegram — ошибка деплоя
+        if: failure()
+        run: |
+          build_time=${{ steps.compute_time.outputs.build_time }}
+          curl -s -X POST "https://api.telegram.org/bot${{ vars.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d "chat_id=${{ vars.TELEGRAM_CHAT_ID }}" \
+            -d "parse_mode=Markdown" \
+            --data-urlencode "text=\`\`\`
+          ❌: Ошибка при деплое
+          💻: ${{ vars.PROJECT_NAME }}
+          ⏱️: Время сборки+деплоя: ${build_time} c
+          ❗️: $GITHUB_ACTOR, Переделай свой говнокод 💩
+          \`\`\`"
+
+  cleanup:
+    runs-on: self-hosted
+    if: always()
+    needs: [ build, deploy ]
+    steps:
+      - name: Удалить неиспользуемые ресурсы Docker
+        run: |
+          docker image prune -af
+          docker container prune -f
+          docker network prune -f
+#          docker builder prune -af

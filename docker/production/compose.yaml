@@ -1,0 +1,13 @@
+services:
+  next-i18n-auth:
+    build:
+      context: ../../
+      dockerfile: docker/production/Dockerfile
+      cache_from:
+        - next-i18n-auth:latest
+    image: next-i18n-auth
+    restart: always
+    ports:
+      - "127.0.0.1:3000:3000"
+    env_file:
+      - ../../.env.production

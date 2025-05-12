@@ -1,0 +1,13 @@
+services:
+  next-i18n-auth-development:
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+#    image: next-i18n-auth-development
+    ports:
+      - "3000:3000"
+    volumes:
+#      - ../../:/app  # Sync the local project folder with the container
+      - /app/node_modules  # Use node_modules from the container, not the host
+    env_file:
+      - ../../.env.development
