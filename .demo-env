@@ -4,3 +4,5 @@ NEXT_PUBLIC_API_URL=https://treatment-admin.ziz.kz
 API_URL=https://treatment-admin.ziz.kz
 NODE_ENV=development
 NEXT_TELEMETRY_DISABLED=1
+
+RAPIDAPI_KEY=
