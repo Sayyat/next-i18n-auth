@@ -110,7 +110,7 @@ jobs:
           docker network inspect js_network >/dev/null 2>&1 || docker network create js_network
 
       - name: Сборка нового Docker-образа
-        run: docker compose -f docker/production/compose.yaml build
+        run: docker compose -f docker/production/docker-compose.yaml build
 
       - name: Остановка старого контейнера (если существует)
         run: |
@@ -123,7 +123,7 @@ jobs:
           fi
 
       - name: Запуск нового контейнера
-        run: docker compose -f docker/production/compose.yaml up -d
+        run: docker compose -f docker/production/docker-compose.yaml up -d
 
       - name: Проверка работоспособности контейнера
         run: curl --max-time 30 -f http://127.0.0.1:3000 || echo "Контейнер не доступен"
