@@ -2,7 +2,7 @@ name: Next.js CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "dev" ]
 
   workflow_dispatch:
 
