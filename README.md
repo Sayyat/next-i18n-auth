@@ -1,10 +1,11 @@
 # Next i18n Auth Boilerplate
-> A complete, production-grade Next.js starter with internationalization, authentication, UI components, testing and more.
-Production-ready Next.js boilerplate for authentication, i18n, theming and testing.
+
+> A complete, production-grade Next.js starter with internationalization, authentication, UI components, testing, and more.
+> Production-ready Next.js boilerplate for authentication, i18n, theming, and testing.
 
 ---
 
-[![Vercel](https://vercelbadge.vercel.app/api/Sayyat/next-i18n-auth)](https://next-i18n-auth-mu.vercel.app/)
+[![Vercel](https://vercelbadge.vercel.app/api/Sayyat/next-i18n-auth)](https://next-i18n-auth.vercel.app/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Built With Next.js](https://img.shields.io/badge/Built%20with-Next.js-000?logo=nextdotjs)](https://nextjs.org/)
 [![GitHub Stars](https://img.shields.io/github/stars/Sayyat/next-i18n-auth?style=social)](https://github.com/Sayyat/next-i18n-auth/stargazers)
@@ -20,20 +21,20 @@ Production-ready Next.js boilerplate for authentication, i18n, theming and testi
 
 ## Deployment
 
-This project is live and deployed on **Vercel**!  
-Visit the live demo: **[Next i18n Auth Boilerplate Live](https://next-i18n-auth-mu.vercel.app/)**
+This project is live and deployed on **Vercel**!
+Visit the live demo: **[Next i18n Auth Boilerplate Live](https://next-i18n-auth.vercel.app/)**
 
 ## Features
 
-- ⚡️ **Next.js 14**: Fast and scalable React framework with App Router.
-- 🌍 **next-intl**: Internationalization (i18n) with fully typed translations.
-- 🔒 **Next-Auth v5**: Authentication with JWT, OAuth, and social providers.
-- 🎨 **shadcn/ui**: Beautiful accessible components with Tailwind CSS.
-- 🛡️ **Zod**: End-to-end type-safe validation.
-- 🚀 **TypeScript**: 100% typed full-stack application.
-- 🌓 **Dark Mode**: Light / dark mode with system preference.
-- 📈 **React Query**: Powerful data fetching and caching.
-- 🧪 **Vitest & Playwright**: Full testing stack (unit, integration, e2e).
+* ⚡️ **Next.js 15**: Fast and scalable React framework with App Router.
+* 🌍 **i18next**: Internationalization (i18n) with fully [automated](./docs/automation.md) typed translations.
+* 🔒 **Next-Auth v5**: Authentication with JWT, OAuth, and social providers.
+* 🎨 **shadcn/ui**: Beautiful accessible components with Tailwind CSS.
+* 🛡️ **Zod**: End-to-end type-safe validation.
+* 🚀 **TypeScript**: 100% typed full-stack application.
+* 🌓 **Dark Mode**: Light/dark mode with system preference.
+* 📈 **React Query**: Powerful data fetching and caching.
+* 🧪 **Vitest & Playwright**: Full testing stack (unit, integration, e2e).
 
 ---
 
@@ -43,9 +44,9 @@ Visit the live demo: **[Next i18n Auth Boilerplate Live](https://next-i18n-auth-
 
 Make sure you have the following installed:
 
-- Node.js >= 18.x
-- Yarn (preferred) or npm
-- Git
+* Node.js >= 18.x
+* Yarn (preferred) or npm
+* Git
 
 ### Installation
 
@@ -65,10 +66,13 @@ Make sure you have the following installed:
 3. Create a `.env` file in the root directory and add the following environment variables:
 
    ```env
-   API_URL=<Your API URL>
+   AUTH_URL=http://127.0.0.1:3001
    AUTH_SECRET=<Your Auth Secret>
-   NEXTAUTH_URL=http://localhost:3000
-   API_URL=http://127.0.0.1:8000
+   NEXT_PUBLIC_API_URL=<Your API URL>
+   API_URL=<Your API URL>
+   NODE_ENV=development
+   NEXT_TELEMETRY_DISABLED=1
+   RAPIDAPI_KEY=<Your RapidAPI key>
    ```
 
 4. Start the development server:
@@ -120,10 +124,9 @@ src/
 │   │   ├── Header.test.tsx
 │   │   ├── Header.tsx
 │   │   └── RenderSidebarGroup.tsx
-│   ├── config/
-│   │   └── routes.ts
 │   ├── hooks/
-│   │   └── useDynamicBreadcrumb.ts
+│   │   ├── useDynamicBreadcrumb.ts
+│   │   └── useRoutes.ts
 │   ├── providers/
 │   │   │── ClientProvidersWrapper.tsx
 │   │   └── ThemeProvider.tsx
@@ -147,7 +150,9 @@ src/
 │   │   │   └── useProfile.ts
 │   │   └── lib/
 │   │       │── queryKeys.ts
-│   │       └── zod.ts
+│   │       │── zod.ts
+│   │       │── zodClient.ts
+│   │       └── zodServer.ts
 │   ├── services/
 │   │   ├── client.ts
 │   │   └── server.ts
@@ -157,24 +162,34 @@ src/
 │   │   ├── profile.d.ts
 │   │   └── response.d.ts
 │   └── index.ts
-├── locales/
-│   ├── config/
-│   │   ├── locales.ts
-│   │   ├── request.ts
+├── i18n/
+│   ├── generated/ - automatically generated folder
+│   │   ├── namespaces.ts
+│   │   └── types.d.ts
+│   ├── lib/
+│   │   ├── client.ts
+│   │   ├── config.ts
+│   │   ├── createTypedT.ts
 │   │   ├── server.ts
-│   │   ├── translation.js
-│   │   └── translation-i18n.d.ts
-│   └── messages/
-│       ├── en.json
-│       ├── kk.json
-│       └── ru.json
+│   │   ├── settings.js
+│   │   └── utils.ts
+│   ├── locales/ - automatically generated folder
+│   │   ├── en/
+│   │   │   └── [namespace].json
+│   │   ├── kk/
+│   │   │   └── [namespace].json
+│   │   └── ru/
+│   │       └── [namespace].json
+│   ├── types/
+│   │   └── i18n.d.ts
+│   └── index.ts
 ├── shared/
 │   └── components/
 │   │   ├── svg/
 │   │   │   └── Loading.tsx
 │   │   ├── ui/ - shadcn ui components
 │   │   │   ├── accordion.tsx
-│   │   │   ├── ...............
+│   │   │   ├── ............... 
 │   │   │   └── tooltip.tsx
 │   │   ├── app-sidebar.tsx
 │   │   ├── Checkbox.tsx
@@ -196,25 +211,24 @@ src/
 │   ├── hooks/ shadcn hooks + custom shared hooks
 │   │   ├── use-mobile.ts
 │   │   └── use-toast.ts
-│   │── lib/
+│   ├── lib/
 │   │   ├── case.ts
 │   │   ├── settings.ts
 │   │   ├── query.ts
 │   │   ├── tokenService.ts
 │   │   └── utils.ts
-│   │── services/
+│   ├── services/
 │   │   ├── api.ts
 │   │   ├── client.ts
 │   │   └── server.ts
 │   └── types/
 │       ├── api.d.ts
 │       ├── next-auth.d.ts
-│       └── next-intl.d.ts
 ├── tests/
 │   ├── e2e/ - all e2e tests folder
 │   └── setup.ts
 ├── auth.ts
-└── middleware.ts 
+└── middleware.ts
 ```
 
 </details>
@@ -225,25 +239,25 @@ src/
 
 ### Authentication
 
-- **Sign Up**: Use the `/register` page to create a new account. The backend API handles user registration and returns
-  access and refresh tokens.
-- **Log In**: Access `/login` to authenticate users. Tokens are stored securely, and JWT is decoded for user details.
+* **Sign Up**: Use the `register` modal to create a new account. The backend API handles user registration and returns access and refresh tokens.
+* **Log In**: Use the `login` modal to authenticate users. Tokens are stored securely, and JWT is decoded for user details.
 
 ### Localization
 
-- The project uses `next-intl` for localization.
-- Languages supported: `Kazakh`, `English`, and `Russian`.
-- The language can be changed using the dropdown in the header.
+* The project uses `i18next` for localization. See [i18next](https://www.i18next.com/) for more details.
+* The localization process is fully automated. See [Automation](./docs/automation.md) for more details.
+* Supported languages: `Kazakh`, `English`, and `Russian`.
+* Language can be changed using the dropdown in the header.
 
 ### Toast Notifications
 
-- Feedback is provided using `react-toastify`.
-- Example: Error messages during authentication or form validation feedback.
+* Feedback is provided using `react-toastify`.
+* Example: Error messages during authentication or form validation feedback.
 
 ### Zod Validation
 
-- Zod is used for client-side schema validation for forms.
-- Errors are displayed with translations based on the current locale.
+* Zod is used for client-side schema validation for forms.
+* Errors are displayed with translations based on the current locale.
 
 ---
 
@@ -251,15 +265,30 @@ src/
 
 ### Add New Languages
 
-1. Create a new JSON file in the `locales/messages/` directory, e.g., `fr.json` for French.
-2. Add translations for the keys in the JSON file.
-3. Update the `locales` array in `locales/config/locales.ts`:
+1. **Add the new language key in `i18n/lib/config.ts`:**
+   To add French (`fr`), update the `languages` array as follows:
 
    ```typescript
-   export const locales = ['en', 'ru', 'kk', 'fr'];
+   export const languages = ["kk", "ru", "en", "fr"] as const;
    ```
 
-4. The language will automatically be added to the selector.
+2. **Generate language files for the new locale:**
+   Run `gulp` or `yarn g` command to generate the template language files for the newly added language (`fr` in this case).
+
+3. **Translate the new language files:**
+   To translate the language files using RapidAPI, run the following command:
+
+   ```bash
+   gulp generate-translations -l fr
+   ```
+
+   Or use the alias:
+
+   ```bash
+   yarn g:trs -l fr
+   ```
+
+   That's it! Your new language should now be added to the system.
 
 ### Add New Pages
 
@@ -272,10 +301,11 @@ src/
 ## 📚 Tech Stack
 
 | Technology                                                      | Description                                           |
-|-----------------------------------------------------------------|-------------------------------------------------------|
+| --------------------------------------------------------------- | ----------------------------------------------------- |
 | **[Next.js](https://nextjs.org/)**                              | React framework with server-side rendering            |
 | **[Next-Auth](https://authjs.dev/)**                            | Authentication system for Next.js apps                |
-| **[Next-Intl](https://next-intl-docs.vercel.app/)**             | Localization and translation management               |
+| **[i18next](https://www.i18next.com/)**                         | Localization and translation management               |
+| **[gulp](https://gulpjs.com/)**                                 | A toolkit to automate & enhance your workflow         |
 | **[Tailwind CSS](https://tailwindcss.com/)**                    | Utility-first CSS framework                           |
 | **[shadcn/ui](https://ui.shadcn.com/)**                         | Beautiful prebuilt components                         |
 | **[TypeScript](https://www.typescriptlang.org/)**               | Static typing for scalable applications               |
@@ -290,8 +320,7 @@ src/
 
 ## 🚀 Running Tests
 
-This project includes a robust testing setup to ensure code quality and application reliability. Below are the details
-for running different types of tests:
+This project includes a robust testing setup to ensure code quality and application reliability. Below are the details for running different types of tests:
 
 ### 1. **Unit and Integration Tests**
 
@@ -335,21 +364,21 @@ yarn test:e2e --ui
 
 ### Notes:
 
-- Ensure the application is running locally before starting E2E tests.
-- Configure environment variables in `.env.test` for test-specific setups.
+* Ensure the application is running locally before starting E2E tests.
+* Configure environment variables in `.env.test` for test-specific setups.
 
 ---
 
 ### 3. **Test Setup**
 
-- **Unit Testing Framework**: [Vitest](https://vitest.dev/)
-- **E2E Testing Framework**: [Playwright](https://playwright.dev/)
-- **Component Testing**: [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+* **Unit Testing Framework**: [Vitest](https://vitest.dev/)
+* **E2E Testing Framework**: [Playwright](https://playwright.dev/)
+* **Component Testing**: [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
 #### Test Directory Structure
 
-- Unit tests: `src/` (next to each component)
-- E2E tests: `src/tests/e2e/`
+* Unit tests: `src/` (next to each component)
+* E2E tests: `src/tests/e2e/`
 
 ---
 
@@ -364,7 +393,7 @@ yarn test:e2e  # Runs all E2E tests
 
 ## License
 
-This project is licensed under the **GNU General Public License v3.0**.  
+This project is licensed under the **GNU General Public License v3.0**.
 See the [LICENSE](LICENSE) file for details.
 This project is licensed under the terms of the [GNU GPL v3](LICENSE).
 
@@ -372,7 +401,7 @@ This project is licensed under the terms of the [GNU GPL v3](LICENSE).
 
 ## Author
 
-Made with 💜 by [Sayat Raykul (ZIZ INC)](https://github.com/Sayyat)
+Made with 💜 by [Sayat Raykul](https://github.com/Sayyat)
 
-If you like this project, please ⭐️ star it on GitHub!  
+If you like this project, please ⭐️ star it on GitHub!
 It helps me continue building great open-source tools.
