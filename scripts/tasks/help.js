@@ -17,7 +17,7 @@ export default function helpTask(gulp) {
     console.log(chalk.green("  gulp"));
     console.log("    Run the default task sequence");
     console.log(
-      "    generate-namespaces -> generate-templates -> generate-types",
+      `    ${chalk.yellow("generate-namespaces")} -> ${chalk.yellow("generate-templates")} -> ${chalk.yellow("generate-types")}`,
     );
 
     console.log(chalk.green("\n  gulp generate-namespaces"));
@@ -45,13 +45,13 @@ export default function helpTask(gulp) {
       "    Translates only missing keys using 'Deep Translate' on 'Rapid api'",
     );
     console.log(
-      "    You must provide your RAPIDAPI_KEY variable in .env file (See .demo-env)",
+      `    You must provide your ${chalk.yellow("RAPIDAPI_KEY")} variable in ${chalk.yellow(".env")} file (See .demo-env)`,
     );
     console.log("    Parameters:");
     console.log(
       "      " +
         chalk.yellow("-l, --lang") +
-        " - Specific language to translate (default: all)",
+        " - Specific language to translate. (Default: all)",
     );
     console.log("    Examples:");
     console.log(
@@ -68,7 +68,7 @@ export default function helpTask(gulp) {
     // gulp generate-types
     console.log(chalk.green("\n  gulp watch"));
     console.log(
-      "    Runs generate-namespaces -> generate-templates -> generate-types on file changes",
+      `    Runs ${chalk.yellow("generate-namespaces")} -> ${chalk.yellow("generate-templates")} -> ${chalk.yellow("generate-types")} on file changes`,
     );
 
     // gulp create-feature
@@ -87,7 +87,7 @@ export default function helpTask(gulp) {
     console.log(
       "      " +
         chalk.yellow("    --js  ") +
-        " - Generate JavaScript/JSX instead of TypeScript/TSX",
+        " - Generate JavaScript/JSX instead of TypeScript/TSX. (Default: false)",
     );
 
     console.log("    Examples:");
