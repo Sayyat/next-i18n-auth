@@ -6,7 +6,6 @@
 
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
-import { Search } from "lucide-react";
 import { TAuthModal } from "@/core/types/header";
 
 import { Skeleton } from "@/shared/components/ui/skeleton";
@@ -18,7 +17,6 @@ import {
   EmailSentDialog,
   LoginDialog,
   ProfileDialog,
-  ProfileImageIcon,
   RegisterDialog,
   ResetDialog,
   useProfile,
