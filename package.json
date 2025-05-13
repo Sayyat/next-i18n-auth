@@ -147,6 +147,7 @@
     "@types/node": "^22.15.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "2.1.9",
     "dotenv": "^16.5.0",
     "eol": "^0.10.0",
     "eslint": "^9",
