@@ -19,7 +19,9 @@ The **Next-i18n-auth** system is a multi-functional internationalization (i18n) 
 
 ### 3. **Dynamic Translation Generation**
 
-* Missing translations are detected and fetched using the **Deep Translate API** from **RapidAPI**. This ensures that even new translations are automatically populated without manual intervention.
+![next-i18n-auth Preview](../public/assets/deep-translate.png)
+* Missing translations are detected and fetched using the **[Deep Translate API](https://rapidapi.com/gatzuma/api/deep-translate1)** from **[RapidAPI](https://rapidapi.com/)**. This ensures that even new translations are automatically populated without manual intervention.
+
 
 ### 4. **TypeScript Integration**
 
@@ -56,15 +58,15 @@ The **Next-i18n-auth** system is a multi-functional internationalization (i18n) 
 * Generates TypeScript types for your translations.
 * **Output**: `src/i18n/generated/types.d.ts`
 
-### 5. **`gulp generate-translations [--l=<language>]`**
+### 5. **`gulp generate-translations [-l, --lang <language>]`**
 
 * Translates only the missing keys using the Deep Translate API from RapidAPI.
 * **Parameters**:
 
-   * `--l=<language>`: Specify the language to translate (default is all languages).
+   * `-l, --lang`: language to translate. (Default: all).
 * Example:
 
-   * `gulp generate-translations --l=kk` - Translates only the Kazakh language.
+   * `gulp generate-translations -l kk` - Translates only the Kazakh language.
 
 ### 6. **`gulp watch`**
 
@@ -78,17 +80,17 @@ The **Next-i18n-auth** system is a multi-functional internationalization (i18n) 
    * Source files (e.g., JSX/TSX files in the codebase).
    * Translation files in `src/i18n/locales`.
 
-### 7. **`gulp create-feature [--name=<feature-name>] [--js]`**
+### 7. **`gulp create-feature [-n, --name <feature-name>] [--js]`**
 
 * Generates boilerplate for a new feature in your application.
 * **Parameters**:
 
-   * `--name=<feature-name>`: The name of the new feature (in camelCase or kebab-case).
-   * `--js`: Optionally generate JavaScript/JSX files instead of TypeScript/TSX.
+   * `-n, --name`: The name of the new feature (in camelCase or kebab-case). [required]
+   * `--js`: Optionally generate JavaScript/JSX files instead of TypeScript/TSX. (Default: false)
 * Example:
 
-   * `gulp create-feature --name=my-feature` - Generates a new feature with TypeScript/TSX files.
-   * `gulp create-feature --name=my-feature --js` - Generates the feature with JavaScript/JSX files.
+   * `gulp create-feature -n my-feature` - Generates a new feature with TypeScript/TSX files.
+   * `gulp create-feature -n my-feature --js` - Generates the feature with JavaScript/JSX files.
 
 ### 8. **`gulp help`**
 
@@ -116,12 +118,19 @@ Example `i18next.config.json`:
 
 ```json
 {
+  // config file in your project.
   "configFilePath": "src/i18n/lib/config.ts",
+  // location where all translation files are.
   "localesDirectory": "src/i18n/locales",
+  // namespaces for whole project.
   "generatedNamespacesPath": "src/i18n/generated/namespaces.ts",
+  // types for all translations.
   "generatedTypesPath": "src/i18n/generated/types.d.ts",
+  // if true, old keys are preserved on translation file updates.
+  // if false, old keys are removed on translation file updates.
   "keepUnusedKeys": true,
-  "includePatterns": [
+  // parser looks for these files.
+  "includePatterns": [ 
     "src/app/**/*.{jsx,tsx}",
     "src/core/components/**/*.{js,jsx,ts,tsx}",
     "src/core/hooks/**/*.{js,jsx,ts,tsx}",
@@ -132,6 +141,7 @@ Example `i18next.config.json`:
     "src/features/*/hooks/**/*.{js,jsx,ts,tsx}",
     "src/features/*/lib/zod.{js,ts}"
   ],
+  // parser skips these files.
   "excludePatterns": [
     "src/**/*.d.ts",
     "**/node_modules/**",
