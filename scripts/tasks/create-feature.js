@@ -16,6 +16,7 @@ export default function createFeatureTask(gulp) {
         type: "string",
         demandOption: true,
         describe: "Feature name (in camelCase or kebab-case)",
+        alias: "n",
       })
       .option("js", {
         type: "boolean",

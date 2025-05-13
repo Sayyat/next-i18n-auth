@@ -39,7 +39,7 @@ export default function helpTask(gulp) {
     // gulp generate-translations
     console.log(
       chalk.green("\n  gulp generate-translations") +
-        chalk.yellow(" [--l=<language>]"),
+        chalk.yellow(" [-l, --lang <language>]"),
     );
     console.log(
       "    Translates only missing keys using 'Deep Translate' on 'Rapid api'",
@@ -50,7 +50,7 @@ export default function helpTask(gulp) {
     console.log("    Parameters:");
     console.log(
       "      " +
-        chalk.yellow("--l=<language>") +
+        chalk.yellow("-l, --lang") +
         " - Specific language to translate (default: all)",
     );
     console.log("    Examples:");
@@ -61,7 +61,7 @@ export default function helpTask(gulp) {
     );
     console.log(
       "      " +
-        chalk.green("gulp generate-translations --l=kk") +
+        chalk.green("gulp generate-translations -l kk") +
         " - Translate only Kazakh",
     );
 
@@ -74,31 +74,29 @@ export default function helpTask(gulp) {
     // gulp create-feature
     console.log(
       chalk.green("\n  gulp create-feature") +
-        chalk.yellow(" [--name=<feature-name>]") +
+        chalk.yellow(" [-n, --name <feature-name>]") +
         chalk.yellow(" [--js]"),
     );
     console.log("    Generates boilerplate for a new feature");
     console.log("    Parameters:");
     console.log(
       "      " +
-        chalk.yellow("--name=<feature-name>") +
+        chalk.yellow("-n, --name") +
         " - Name for new feature (in camelCase or kebab-case)",
     );
     console.log(
       "      " +
-        chalk.yellow("--js") +
+        chalk.yellow("    --js  ") +
         " - Generate JavaScript/JSX instead of TypeScript/TSX",
     );
 
     console.log("    Examples:");
-    console.log(
-      "      " + chalk.green("gulp create-feature --name=my-feature"),
-    );
+    console.log("      " + chalk.green("gulp create-feature -n my-feature"));
     console.log(
       "      - Generates feature named 'my-feature' with TypeScript/TSX files",
     );
     console.log(
-      "      " + chalk.green("gulp create-feature --name=my-feature --js"),
+      "      " + chalk.green("gulp create-feature -n my-feature --js"),
     );
     console.log(
       "      - Generates feature named 'my-feature' with JavaScript/JSX files",
