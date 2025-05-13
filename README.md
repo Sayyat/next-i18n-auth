@@ -10,8 +10,8 @@
 [![Built With Next.js](https://img.shields.io/badge/Built%20with-Next.js-000?logo=nextdotjs)](https://nextjs.org/)
 [![GitHub Stars](https://img.shields.io/github/stars/Sayyat/next-i18n-auth?style=social)](https://github.com/Sayyat/next-i18n-auth/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/Sayyat/next-i18n-auth?style=social)](https://github.com/Sayyat/next-i18n-auth/network/members)
-[![GitHub Issues](https://img.shields.io/github/issues/Sayyat/next-i18n-auth)](https://github.com/Sayyat/next-i18n-auth/issues)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/Sayyat/next-i18n-auth)](https://github.com/Sayyat/next-i18n-auth/commits/main)
+[![GitHub Issues](https://img.shields.io/github/issues/Sayyat/next-i18n-auth/issues)](https://github.com/Sayyat/next-i18n-auth/issues)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/Sayyat/next-i18n-auth/main)](https://github.com/Sayyat/next-i18n-auth/commits/main)
 
 ---
 
