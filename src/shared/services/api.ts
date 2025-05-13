@@ -13,8 +13,10 @@ import { getTranslation } from "@/i18n/lib/server";
 async function extractErrorMessage(error: unknown): Promise<string> {
   const { t } = await getTranslation("shared.services.api");
 
-  // these keys are only for i18next-scanner to be translated
-  // add your backend errors here and run `gulp` command
+  // Static error keys to be translated automatically by i18next-scanner
+  // These are predefined error codes, and i18next-scanner will automatically generate their translations
+  // Make sure to add dynamic backend-specific error codes here manually (as they are context-dependent).
+  // After adding new error codes, run the `gulp` task to update translations.
   const errorsForI18nextScanner = [
     t("ERR_FR_TOO_MANY_REDIRECTS"),
     t("ERR_BAD_OPTION_VALUE"),
@@ -28,6 +30,7 @@ async function extractErrorMessage(error: unknown): Promise<string> {
     t("ERR_CANCELED"),
     t("ECONNABORTED"),
     t("ETIMEDOUT"),
+    // Add more dynamic backend error codes as needed
   ];
 
   if (axios.isAxiosError(error) && error.response?.data) {

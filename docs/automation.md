@@ -1,8 +1,14 @@
 # **Next-i18n-auth**
-## **Automation scripts Documentation**
+
+## **Automation Scripts Documentation**
+
 ## **Overview**
 
-The **Next-i18n-auth** system is a multi-functional internationalization (i18n) solution designed to streamline the process of handling translations in a large-scale Next.js project. The system is capable of managing language resources, dynamic translation generation, and integration with an API to fetch missing translations on-demand. It also incorporates a Gulp-based build process for generating types, namespaces, and template translations, offering a smooth development workflow.
+The **Next-i18n-auth** system is a multi-functional internationalization (i18n) solution designed to streamline the
+process of handling translations in a large-scale Next.js project. This system efficiently manages language resources,
+dynamically generates translations, and integrates with an API to fetch missing translations on-demand. It also
+incorporates a Gulp-based build process for generating types, namespaces, and template translations, providing a smooth
+development workflow.
 
 ---
 
@@ -10,22 +16,28 @@ The **Next-i18n-auth** system is a multi-functional internationalization (i18n) 
 
 ### 1. **Automatic Namespace and Key Generation**
 
-* The system automatically generates namespaces and translation keys by scanning the source code. This makes it easy to maintain and scale the application without manually defining each translation key.
+* The system automatically generates namespaces and translation keys by scanning the source code, ensuring easy
+  maintenance and scalability without manually defining each translation key.
 
 ### 2. **Translation File Management**
 
-* **Translation Files**: Stores translations for each language in JSON files (e.g., `src/i18n/locales/{language}/{namespace}.json`).
-* **Automatic Merging**: New translation keys are automatically merged with existing ones, preserving the previously added translations. Optionally, unused keys can be deleted based on configuration.
+* **Translation Files**: Stores translations for each language in JSON files (e.g.,
+  `src/i18n/locales/{language}/{namespace}.json`).
+* **Automatic Merging**: New translation keys are automatically merged with existing ones, preserving previously added
+  translations. Optionally, unused keys can be deleted based on configuration settings.
 
 ### 3. **Dynamic Translation Generation**
 
 ![next-i18n-auth Preview](../public/assets/deep-translate.png)
-* Missing translations are detected and fetched using the **[Deep Translate API](https://rapidapi.com/gatzuma/api/deep-translate1)** from **[RapidAPI](https://rapidapi.com/)**. This ensures that even new translations are automatically populated without manual intervention.
 
+* Missing translations are detected and fetched using the *
+  *[Deep Translate API](https://rapidapi.com/gatzuma/api/deep-translate1)** from **[RapidAPI](https://rapidapi.com/)**.
+  This ensures that even new translations are automatically populated without manual intervention.
 
 ### 4. **TypeScript Integration**
 
-* The system integrates TypeScript to provide type safety for translations. The generated types are used to prevent errors and ensure that only valid keys are used in the codebase.
+* The system integrates TypeScript to provide type safety for translations. The generated types ensure that only valid
+  keys are used in the codebase, preventing errors and increasing code reliability.
 
 ---
 
@@ -35,23 +47,23 @@ The **Next-i18n-auth** system is a multi-functional internationalization (i18n) 
 
 * Runs the following tasks in sequence:
 
-   * `generate-namespaces`: Scans your codebase and generates namespace definitions.
-   * `generate-templates`: Extracts translation keys and updates the translation files.
-   * `generate-types`: Generates TypeScript types for translations.
+    * `generate-namespaces`: Scans the codebase and generates namespace definitions.
+    * `generate-templates`: Extracts translation keys and updates the translation files.
+    * `generate-types`: Generates TypeScript types for translations.
 
 ### 2. **`gulp generate-namespaces`**
 
-* Scans your codebase for translation keys and generates namespace definitions.
+* Scans the codebase for translation keys and generates namespace definitions.
 * **Output**: `src/i18n/generated/namespaces.ts`
 
 ### 3. **`gulp generate-templates`**
 
-* Extracts translation keys from your source files and creates/updates translation files for all languages.
+* Extracts translation keys from source files and creates or updates translation files for all languages.
 * **Output**: `src/i18n/locales/{{lng}}/{{ns}}.json`
 * **Features**:
 
-   * Avoids data loss by preserving old translations.
-   * Allows you to keep old translations even when adding new ones.
+    * Avoids data loss by preserving old translations.
+    * Ensures the safe addition of new translations without removing existing ones.
 
 ### 4. **`gulp generate-types`**
 
@@ -63,34 +75,35 @@ The **Next-i18n-auth** system is a multi-functional internationalization (i18n) 
 * Translates only the missing keys using the Deep Translate API from RapidAPI.
 * **Parameters**:
 
-   * `-l, --lang`: language to translate. (Default: all).
-* Example:
+    * `-l, --lang`: Specifies the language to translate (Default: all).
+* **Example**:
 
-   * `gulp generate-translations -l kk` - Translates only the Kazakh language.
+    * `gulp generate-translations -l kk` - Translates only the Kazakh language.
+    * `gulp generate-translations` - Translates all languages.
 
 ### 6. **`gulp watch`**
 
 * Automatically runs the following tasks when source files or translation files change:
 
-   * `generate-namespaces`
-   * `generate-templates`
-   * `generate-types`
+    * `generate-namespaces`
+    * `generate-templates`
+    * `generate-types`
 * Watches for changes in:
 
-   * Source files (e.g., JSX/TSX files in the codebase).
-   * Translation files in `src/i18n/locales`.
+    * Source files (e.g., JSX/TSX files in the codebase).
+    * Translation files in `src/i18n/locales`.
 
 ### 7. **`gulp create-feature [-n, --name <feature-name>] [--js]`**
 
 * Generates boilerplate for a new feature in your application.
 * **Parameters**:
 
-   * `-n, --name`: The name of the new feature (in camelCase or kebab-case). [required]
-   * `--js`: Optionally generate JavaScript/JSX files instead of TypeScript/TSX. (Default: false)
-* Example:
+    * `-n, --name`: The name of the new feature (in camelCase or kebab-case). \[required]
+    * `--js`: Optionally generates JavaScript/JSX files instead of TypeScript/TSX. (Default: false)
+* **Example**:
 
-   * `gulp create-feature -n my-feature` - Generates a new feature with TypeScript/TSX files.
-   * `gulp create-feature -n my-feature --js` - Generates the feature with JavaScript/JSX files.
+    * `gulp create-feature -n my-feature` - Generates a new feature with TypeScript/TSX files.
+    * `gulp create-feature -n my-feature --js` - Generates the feature with JavaScript/JSX files.
 
 ### 8. **`gulp help`**
 
@@ -111,51 +124,148 @@ The **Next-i18n-auth** system is a multi-functional internationalization (i18n) 
 
 ## **Configuration**
 
-* **i18next.config.json**:
-  This configuration file defines paths, patterns, and options for the translation process. You can edit it to customize your paths, include/exclude patterns, and whether unused keys should be kept.
+## **i18next.config.json**
 
-Example `i18next.config.json`:
+This is the configuration file used by the **Next-i18n-auth** system to define how translations should be managed.
 
 ```json
 {
-  // config file in your project.
+  // Path to your i18n configuration file
   "configFilePath": "src/i18n/lib/config.ts",
-  // location where all translation files are.
+
+  // Directory where all translation files are stored
   "localesDirectory": "src/i18n/locales",
-  // namespaces for whole project.
+
+  // Path for generated namespaces
   "generatedNamespacesPath": "src/i18n/generated/namespaces.ts",
-  // types for all translations.
+
+  // Path for generated TypeScript types
   "generatedTypesPath": "src/i18n/generated/types.d.ts",
-  // if true, old keys are preserved on translation file updates.
-  // if false, old keys are removed on translation file updates.
+
+  // Whether to preserve or remove unused keys
   "keepUnusedKeys": true,
-  // parser looks for these files.
-  "includePatterns": [ 
+
+  // Patterns for files to include in the translation process
+  "includePatterns": [
     "src/app/**/*.{jsx,tsx}",
     "src/core/components/**/*.{js,jsx,ts,tsx}",
     "src/core/hooks/**/*.{js,jsx,ts,tsx}",
     "src/shared/components/**/*.{js,jsx,ts,tsx}",
     "src/shared/hooks/**/*.{js,jsx,ts,tsx}",
-    "src/shared/services/api.{js,ts}",
+    "src/shared/services/api.{js,ts}", // look this file to specify dynamic backend error codes
     "src/features/*/components/**/*.{js,jsx,ts,tsx}",
     "src/features/*/hooks/**/*.{js,jsx,ts,tsx}",
     "src/features/*/lib/zod.{js,ts}"
   ],
-  // parser skips these files.
+
+  // Patterns for files to exclude from the translation process
   "excludePatterns": [
-    "src/**/*.d.ts",
-    "**/node_modules/**",
-    "src/i18n/**",
-    "src/app/api/**",
-    "src/shared/components/ui/**",
-    "src/shared/hooks/**",
-    "src/shared/data/**"
+    "src/**/*.d.ts",   // Exclude TypeScript definition files
+    "**/node_modules/**", // Exclude dependencies in node_modules
+    "src/i18n/**",  // Exclude existing i18n files (we're handling these separately)
+    "src/app/api/**", // Exclude API files
+    "src/shared/components/ui/**", // Exclude UI component files
+    "src/shared/hooks/**", // Exclude shared hooks
+    "src/shared/data/**" // Exclude data files
   ]
 }
 ```
 
 ---
 
-## **Conclusion**
+### **Key Explanations for the Config File**:
 
-The **Next-i18n-auth** system provides a robust and automated way to handle translations, ensuring that your application remains scalable and easy to maintain as it grows. The use of Gulp tasks for namespace and key generation, translation updates, and type safety ensures that your i18n workflow is smooth and efficient.
+* **`configFilePath`**: The path to the TypeScript configuration file that defines language settings and other
+  i18n-related configuration parameters.
+* **`localesDirectory`**: The directory where translation files (in various languages) will be stored. Each language
+  will have its own folder inside this directory.
+* **`generatedNamespacesPath`**: The path where the generated namespace definitions are stored. This helps group
+  translation keys under specific namespaces.
+* **`generatedTypesPath`**: The path where TypeScript types for translation keys are generated. This helps ensure type
+  safety when accessing translation keys in the codebase.
+* **`keepUnusedKeys`**: A flag to indicate whether to keep unused translation keys in the files. When set to `true`,
+  even keys that are no longer used in the code will remain in the translation files.
+* **`includePatterns`**: These are the patterns that tell the system where to look for files containing translation
+  keys. The system will scan these files and extract the necessary translation data.
+* **`excludePatterns`**: These patterns define which files should be excluded from translation scanning. For example,
+  `src/**/*.d.ts` excludes TypeScript definition files, which do not contain translations.
+
+---
+
+## **Handling Dynamic Backend Error Codes**
+
+### **Overview**
+
+In addition to static error keys, the **Next-i18n-auth** system also needs to handle dynamic error codes that come from
+the backend (e.g., API responses). These dynamic error codes will be automatically parsed by **i18next-scanner** and
+added to the translation files, ensuring that all error messages are localized and available for internationalization.
+
+### **Process for Handling Backend Error Codes**
+
+1. **Adding Dynamic Error Codes to the List**:
+
+* Dynamic error codes are backend-specific errors that are returned in API responses, such as `ERR_NETWORK`,
+  `ERR_BAD_REQUEST`, and `ERR_TIMEOUT`.
+* These error codes should be added to the centralized list in the API service file [/src/shared/services/api.ts](`../src/shared/services/api.ts`)
+  under the `errorsForI18nextScanner` array.
+
+Example:
+
+   ```js
+   const errorsForI18nextScanner = [
+     t("ERR_FR_TOO_MANY_REDIRECTS"),
+     t("ERR_BAD_OPTION_VALUE"),
+     t("ERR_BAD_OPTION"),
+     t("ERR_NETWORK"),
+     t("ERR_DEPRECATED"),
+     t("ERR_BAD_RESPONSE"),
+     t("ERR_BAD_REQUEST"),
+     t("ERR_NOT_SUPPORT"),
+     t("ERR_INVALID_URL"),
+     t("ERR_CANCELED"),
+     t("ECONNABORTED"),
+     t("ETIMEDOUT"),
+     // Add more dynamic backend error codes as needed
+   ];
+   ```
+
+2. **Run `gulp generate-templates`**:
+
+* After adding these dynamic error codes to the list, run the `gulp generate-templates` command to scan the source code
+  and automatically add these new keys to the translation files (e.g., `en.json`, `kk.json`, `ru.json`).
+
+3. **Manual Translation**:
+
+* Once the error keys are added to the translation files, you will need to **manually** provide translations for each of
+  these dynamic error codes in the relevant language files (e.g., `en.json` for English, `kk.json` for Kazakh, etc.).
+
+4. **Retain Unused Keys with `keepUnusedKeys`**:
+
+* The `keepUnusedKeys: true` setting in the configuration ensures that even if some dynamic error codes are not used
+  immediately, they will **not be removed** during the translation update process. This allows you to keep them in the
+  files for future use.
+
+Example configuration snippet:
+
+   ```json
+   {
+     "keepUnusedKeys": true
+   }
+   ```
+
+### **Why This Approach Works**
+
+* **Automatic Translation Generation**: By using `i18next-scanner`, we automate the process of extracting error codes
+  and ensuring that they are available for translation.
+* **Manual Adjustments for Dynamic Errors**: Dynamic backend error codes need manual updates for translation, ensuring
+  that the messages are contextually accurate.
+* **Scalability**: As new error codes are introduced, simply adding them to the list and running the Gulp task ensures
+  that they are handled consistently across all supported languages.
+
+---
+
+### Conclusion:
+
+**Comments in your documentation** are important and useful for explaining each part of the configuration. I appreciate
+your effort in adding those, and I will keep them intact in future suggestions.
+
