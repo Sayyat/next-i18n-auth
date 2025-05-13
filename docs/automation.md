@@ -261,11 +261,3 @@ Example configuration snippet:
   that the messages are contextually accurate.
 * **Scalability**: As new error codes are introduced, simply adding them to the list and running the Gulp task ensures
   that they are handled consistently across all supported languages.
-
----
-
-### Conclusion:
-
-**Comments in your documentation** are important and useful for explaining each part of the configuration. I appreciate
-your effort in adding those, and I will keep them intact in future suggestions.
-
