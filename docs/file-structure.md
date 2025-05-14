@@ -2,14 +2,16 @@
 
 ## Overview
 
-This document provides an overview of the **project file structure** to help you navigate the codebase more easily. Understanding the file organization is crucial for developers working on the project to locate files quickly and understand the flow of the application.
+This document provides an overview of the **project file structure** to help you navigate the codebase more easily. The file organization follows a modular and feature-sliced architecture, ensuring scalability, maintainability, and ease of understanding for developers working on the project.
+
+The project consists of several key layers, each responsible for a specific part of the application. These layers include **core**, **shared**, **features**, **i18n**, and **app**, and they are designed to encapsulate functionality within each layer to maintain separation of concerns.
 
 ## File Structure
 
 ```plaintext
 src/
 ├── app/
-│   ├── (ui)/
+│   ├── (ui)/               // Pages and Layouts (Next.js App Router)
 │   │   ├── group-1/
 │   │   │   ├── about
 │   │   │   │   └── page.tsx
@@ -24,86 +26,86 @@ src/
 │   │   │   └── page.tsx
 │   │   ├── layout.tsx
 │   │   └── page.tsx
-│   ├── api/
-│   │   └── auth/
+│   ├── api/               // API Routes (Next.js API Routes)
+│   │   └── auth/           // Authentication API routes
 │   │   │   └── [...nextauth]/
 │   │   │       └── route.ts
-│   │   └── proxy/
+│   │   └── proxy/          // Proxy routes
 │   │       └── [...pathname]/
 │   │           └── route.ts
 │   └── layout.tsx
-├── core/
-│   ├── components/
+├── core/                   // Provides foundational structure for pages
+│   ├── components/         // Core components (Header, Footer, Sidebar, etc.)
 │   │   ├── AppSidebar.tsx
 │   │   ├── DynamicBreadcrumb.tsx
 │   │   ├── Footer.tsx
 │   │   ├── Header.test.tsx
 │   │   ├── Header.tsx
 │   │   └── RenderSidebarGroup.tsx
-│   ├── hooks/
+│   ├── hooks/              // Core hooks used across the app
 │   │   ├── useDynamicBreadcrumb.ts
 │   │   └── useRoutes.ts
-│   ├── providers/
-│   │   │── ClientProvidersWrapper.tsx
+│   ├── providers/          // Providers for context and theme
+│   │   ├── ClientProvidersWrapper.tsx
 │   │   └── ThemeProvider.tsx
-│   ├── styles/
+│   ├── styles/             // Global styles (e.g., tailwind configuration)
 │   │   └── globals.css
-│   └── types/
-│       │── header.d.ts
+│   └── types/              // Type definitions for core functionality
+│       ├── header.d.ts
 │       └── routes.d.ts
-├── features/
-│   ├── authentication/
-│   │   │── components/
+├── features/               // Feature-based directories
+│   ├── authentication/     // Authentication feature (login, signup, etc.)
+│   │   ├── components/     // Components for authentication (LoginDialog, etc.)
 │   │   │   │── EmailSentDialog.tsx
 │   │   │   │── LoginDialog.tsx
 │   │   │   │── ProfileDialog.tsx
 │   │   │   │── ProfileImageIcon.tsx
 │   │   │   │── RegisterDialog.tsx
 │   │   │   └── ResetDialog.tsx
-│   │   │── hooks/
-│   │   │   │── useAuth.ts
-│   │   │   │── useCities.ts
+│   │   ├── hooks/          // Hooks for authentication-related logic
+│   │   │   ├── useAuth.ts
+│   │   │   ├── useCities.ts
 │   │   │   └── useProfile.ts
-│   │   └── lib/
-│   │       │── queryKeys.ts
-│   │       │── zod.ts
-│   │       │── zodClient.ts
+│   │   └── lib/            // Helper functions for authentication
+│   │       ├── queryKeys.ts
+│   │       ├── zod.ts
+│   │       ├── zodClient.ts
 │   │       └── zodServer.ts
-│   ├── services/
+│   ├── services/           // Services for handling API calls
 │   │   ├── client.ts
 │   │   └── server.ts
-│   ├── types/
+│   ├── types/              // Type definitions for the feature (e.g., profile, city)
 │   │   ├── city.d.ts
 │   │   ├── payload.d.ts
 │   │   ├── profile.d.ts
 │   │   └── response.d.ts
-│   └── index.ts
-├── i18n/
-│   ├── generated/ - automatically generated folder
+│   └── index.ts            // Exports for the feature (hooks, components, etc.)
+├── i18n/                   // Internationalization (i18n) logic and files
+│   ├── generated/          // Automatically generated files (namespaces, types)
 │   │   ├── namespaces.ts
 │   │   └── types.d.ts
-│   ├── lib/
-│   │   ├── client.ts
-│   │   ├── config.ts
-│   │   ├── createTypedT.ts
-│   │   ├── server.ts
-│   │   ├── settings.js
-│   │   └── utils.ts
-│   ├── locales/ - automatically generated folder
+│   ├── lib/                // i18n-related logic (client-side, server-side)
+│   │   ├── client.ts       // Client-side i18n initialization
+│   │   ├── config.ts       // i18n configuration (languages, fallback language)
+│   │   ├── createTypedT.ts // Type-safe wrapper for translation functions
+│   │   ├── server.ts       // Server-side i18n initialization
+│   │   ├── settings.ts     // i18next initialization options
+│   │   ├── utils.ts        // Utility functions for locale handling
+│   ├── locales/            // Translation files (e.g., en.json, ru.json)
 │   │   ├── en/
 │   │   │   └── [namespace].json
 │   │   ├── kk/
 │   │   │   └── [namespace].json
 │   │   └── ru/
 │   │       └── [namespace].json
-│   ├── types/
+│   ├── types/              // Type definitions related to i18n
 │   │   └── i18n.d.ts
-│   └── index.ts
-├── shared/
-│   └── components/
-│   │   ├── svg/
+│   └── index.ts            // Exports i18n utilities for the project
+├── shared/                 // Shared resources used by multiple features
+│   ├── components/         // Shared UI components (e.g., Button, Input)
+│   │   ├── svg/            // SVG components (e.g., Loading)
 │   │   │   └── Loading.tsx
-│   │   ├── ui/ - shadcn ui components
+│   │   ├── ui/             // UI components from shadcn/ui
 │   │   │   ├── accordion.tsx
 │   │   │   ├── ............... 
 │   │   │   └── tooltip.tsx
@@ -120,31 +122,31 @@ src/
 │   │   ├── nav-user.tsx
 │   │   ├── Select.tsx
 │   │   └── ThemeSelect.tsx
-│   ├── data/
+│   ├── data/               // Data-related utilities (e.g., environment variables)
 │   │   └── env/
-│   │       ├── client.ts
-│   │       └── server.ts
-│   ├── hooks/ shadcn hooks + custom shared hooks
+│   │       ├── client.ts   // Client-side environment variable validation
+│   │       └── server.ts   // Server-side environment variable validation
+│   ├── hooks/              // Shared hooks used across multiple features
 │   │   ├── use-mobile.ts
 │   │   └── use-toast.ts
-│   ├── lib/
+│   ├── lib/                // Shared utility functions
 │   │   ├── case.ts
 │   │   ├── settings.ts
 │   │   ├── query.ts
 │   │   ├── tokenService.ts
 │   │   └── utils.ts
-│   ├── services/
+│   ├── services/           // Shared services used across features
 │   │   ├── api.ts
 │   │   ├── client.ts
 │   │   └── server.ts
-│   └── types/
+│   └── types/              // Type definitions for shared resources
 │       ├── api.d.ts
 │       ├── next-auth.d.ts
-├── tests/
-│   ├── e2e/ - all e2e tests folder
-│   └── setup.ts
-├── auth.ts
-└── middleware.ts
+├── tests/                  // Test files (unit, integration, e2e)
+│   ├── e2e/                // End-to-end tests
+│   └── setup.ts            // Test setup configurations
+├── auth.ts                 // Authentication-related logic
+└── middleware.ts           // Middleware configurations
 ```
 
 ---
@@ -153,51 +155,47 @@ src/
 
 ### **`src/app/`**
 
-Contains the main application pages and UI components grouped by feature or functionality. Each feature or page is modular, and the layout files help with structure.
+The **`app/`** directory is where your main **pages** and **layouts** are defined using the **Next.js App Router**. Each page is grouped into folders (like `group-1`, `group-2`), and layouts are defined in `layout.tsx` files.
 
-* **Group-based structure**: Features are organized in groups (`group-1`, `group-2`, etc.).
-* **Each page**: Contains its own folder with a `page.tsx` file.
+* **Pages**: Organized under their respective groups (e.g., `about`, `profile`, `dashboard`).
+* **API Routes**: Defines API routes for authentication and proxy.
 
 ### **`src/core/`**
 
-Contains the foundational components, hooks, types, and utilities that are used globally across the application.
+The **`core/`** directory provides foundational support for pages and components but does not share components across the app. It houses the building blocks of the app's layout, context providers, and essential hooks.
 
-* **Components**: Includes the basic layout components such as `Header`, `Footer`, `Sidebar`.
-* **Hooks**: Includes shared hooks like `useTheme`, `useMobile`.
-* **Types**: Global types (e.g., route types).
+* **Components**: Core layout components like `Header`, `Footer`, `Sidebar`.
+* **Hooks**: Custom hooks like `useDynamicBreadcrumb` and `useRoutes`.
+* **Styles**: Global styles (e.g., Tailwind CSS and Shadcn configuration) stored in `globals.css`.
 
 ### **`src/features/`**
 
-This is where specific feature-related logic and components are placed. Each feature can contain components, hooks, and services.
+Each feature of the app is contained within its own folder under the **`features/`** directory. Features are organized with their respective components, hooks, and services.
 
-* **Authentication**: Contains logic related to user authentication (e.g., login, signup).
-* **Services**: Includes the API service handling logic for fetching data.
+* **Authentication**: All authentication logic (login, profile management) is housed here.
+* **Services**: API services related to features are contained in this folder.
 
 ### **`src/i18n/`**
 
-Contains all files related to internationalization (i18n). The files are well-structured to manage the translations for different languages.
-
-* **`generated/`**: Contains automatically generated files like `namespaces.ts` and types.
-* **`lib/`**: Contains the client- and server-side logic for loading translations.
-* **`locales/`**: Contains the translation files in JSON format for each supported language (`en.json`, `kk.json`, `ru.json`).
+The **`i18n/`** directory contains everything related to **internationalization** (i18n). It includes language files, configurations, and logic for handling translations across both client and server sides. See [i18n-structure](./i18n-structure.md) for more information.
+* **Generated Files**: Automatically generated files like `namespaces.ts` and translation types.
+* **Config**: Contains the main configuration for language settings and fallback language.
+* **Locales**: Translation files for each language (e.g., `en.json`, `kk.json`, `ru.json`).
 
 ### **`src/shared/`**
 
-Contains shared components, hooks, and utilities that can be reused across the application.
+Contains **shared resources** used across multiple features of the application, including **UI components**, **hooks**, **utilities**, and **data** like environment configurations.
 
-* **Components**: Reusable components like `Button`, `Checkbox`, `Input`.
-* **Hooks**: Shared hooks like `useToast`.
+* **UI Components**: Reusable UI components (e.g., buttons, inputs).
+* **Hooks**: Shared hooks like `useToast` for toast notifications.
+* **Data**: Environment variables (validation for both client and server-side).
 
----
+### **`tests/`**
 
-## File Naming Conventions
-
-* **Component Files**: Component files are named using **PascalCase** (e.g., `Header.tsx`, `LoginDialog.tsx`).
-* **Translation Files**: Translation keys are organized into **language-specific JSON files** inside the `src/i18n/locales/` directory. File names are language codes (e.g., `en.json`, `kk.json`).
-* **Utility Files**: Helper files and shared utilities use **camelCase** naming (e.g., `format.ts`, `utils.ts`).
+Contains test files, including **unit tests**, **integration tests**, and **end-to-end (e2e) tests**. The tests are organized by type and serve to ensure the quality and stability of the application.
 
 ---
 
-## Conclusion
+### **Conclusion**
 
-This document explains the project’s file structure, helping developers to quickly locate files and understand the organization of features. Keeping the project structure modular and well-organized ensures that the application can scale easily and remain maintainable as it grows.
+This file structure is designed to keep your project modular and easy to scale. By organizing features, shared resources, and i18n-related files into separate directories, the project remains clean and maintainable as it grows. Each layer has a specific responsibility, allowing for clear separation of concerns and making it easier to navigate and extend the codebase.
