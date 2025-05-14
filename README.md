@@ -1,12 +1,13 @@
 # Next i18n Auth Boilerplate
 
-> A complete, production-grade Next.js starter with internationalization, authentication, UI components, testing, and more.
+> A complete, production-grade Next.js starter with internationalization, authentication, UI components, testing, and
+> more.
 > Production-ready Next.js boilerplate for authentication, i18n, theming, and testing.
 
 ---
 
 [![Vercel](https://vercelbadge.vercel.app/api/Sayyat/next-i18n-auth)](https://next-i18n-auth.vercel.app/)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Built With Next.js](https://img.shields.io/badge/Built%20with-Next.js-000?logo=nextdotjs)](https://nextjs.org/)
 [![GitHub Stars](https://img.shields.io/github/stars/Sayyat/next-i18n-auth?style=social)](https://github.com/Sayyat/next-i18n-auth/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/Sayyat/next-i18n-auth?style=social)](https://github.com/Sayyat/next-i18n-auth/network/members)
@@ -94,8 +95,10 @@ You can find the file structure of the project in the [File Structure](./docs/fi
 
 ### Authentication
 
-* **Sign Up**: Use the `register` modal to create a new account. The backend API handles user registration and returns access and refresh tokens.
-* **Log In**: Use the `login` modal to authenticate users. Tokens are stored securely, and JWT is decoded for user details.
+* **Sign Up**: Use the `register` modal to create a new account. The backend API handles user registration and returns
+  access and refresh tokens.
+* **Log In**: Use the `login` modal to authenticate users. Tokens are stored securely, and JWT is decoded for user
+  details.
 
 ### Localization
 
@@ -128,7 +131,8 @@ You can find the file structure of the project in the [File Structure](./docs/fi
    ```
 
 2. **Generate language files for the new locale:**
-   Run `gulp` or `yarn g` command to generate the template language files for the newly added language (`fr` in this case).
+   Run `gulp` or `yarn g` command to generate the template language files for the newly added language (`fr` in this
+   case).
 
 3. **Translate the new language files:**
    To translate the language files using RapidAPI, run the following command:
@@ -158,7 +162,7 @@ You can find the file structure of the project in the [File Structure](./docs/fi
 ## 📚 Tech Stack
 
 | Technology                                                      | Description                                           |
-| --------------------------------------------------------------- | ----------------------------------------------------- |
+|-----------------------------------------------------------------|-------------------------------------------------------|
 | **[Next.js](https://nextjs.org/)**                              | React framework with server-side rendering            |
 | **[Next-Auth](https://authjs.dev/)**                            | Authentication system for Next.js apps                |
 | **[i18next](https://www.i18next.com/)**                         | Localization and translation management               |
@@ -169,15 +173,16 @@ You can find the file structure of the project in the [File Structure](./docs/fi
 | **[Zod](https://zod.dev/)**                                     | Type-safe schema validation                           |
 | **[@tanstack/react-query](https://tanstack.com/query/latest)**  | Powerful data fetching library                        |
 | **[Vitest](https://vitest.dev/)**                               | Fast unit testing framework                           |
-| **[Playwright](https://playwright.dev/)**                       | Type-safe environment variable management for Next.js |
-| **[@t3-oss/env-nextjs](https://github.com/t3-oss/t3-env)**      | End-to-end browser testing framework                  |
+| **[Playwright](https://playwright.dev/)**                       | End-to-end browser testing framework                  |
+| **[@t3-oss/env-nextjs](https://github.com/t3-oss/t3-env)**      | Type-safe environment variable management for Next.js |
 | **[React-Toastify](https://fkhadra.github.io/react-toastify/)** | Toast notifications                                   |
 
 ---
 
 ## 🚀 Running Tests
 
-This project includes a robust testing setup to ensure code quality and application reliability. Below are the details for running different types of tests:
+This project includes a robust testing setup to ensure code quality and application reliability. Below are the details
+for running different types of tests:
 
 ### 1. **Unit and Integration Tests**
 
@@ -247,6 +252,7 @@ yarn test:e2e  # Runs all E2E tests
 ```
 
 ---
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
