@@ -12,6 +12,12 @@ development workflow.
 
 ---
 
+### **How to Use the Gulp Tasks**
+
+> **Note:** See [Gulp scripts file structure](./gulp.md) for more information about the Gulp scripts.
+
+---
+
 ## **Key Features**
 
 ### 1. **Automatic Namespace and Key Generation**
