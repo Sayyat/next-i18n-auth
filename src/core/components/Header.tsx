@@ -4,7 +4,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { TAuthModal } from "@/core/types/header";
 
@@ -24,58 +24,108 @@ import {
 import { useTranslation } from "@/i18n";
 import { SidebarTrigger } from "@/shared/components/ui/sidebar";
 import { DynamicBreadcrumb } from "@/core/components/DynamicBreadcrumb";
+import { motion, useAnimation } from "framer-motion";
 
 export function Header() {
   const { status } = useSession();
-  const { t } = useTranslation("core.components.Header");
+  const { t, i18n } = useTranslation("core.components.Header");
   const [currentModal, setCurrentModal] = useState<TAuthModal>();
   const { data: profile } = useProfile();
+
+  const controls = useAnimation(); // Animation controls
+
+  // Trigger animation when the language changes
+  useEffect(() => {
+    controls.set({ opacity: 0, scale: 0 });
+    controls.start({ opacity: 1, scale: 1 });
+  }, [i18n.language]); // Re-run the effect on language change
 
   return (
     <header className="bg-sidebar flex items-center justify-between gap-2">
       {/* Title */}
-      <div className="gap-4 h-10 w-full flex justify-between items-center">
-        <div className="flex items-center">
-          <SidebarTrigger size="icon" className="" />
+      <div className="gap-0 h-12 w-full grid grid-cols-[1fr_1fr] items-center">
+        <div className="flex items-center gap-2">
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileTap={{ scale: 0.8 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="rounded-xl"
+          >
+            <SidebarTrigger
+              variant="outline"
+              size="icon"
+              className="bg-background rounded-xl p-0 size-9"
+            />
+          </motion.div>
           <div className="w-px h-5 bg-primary" />
           <DynamicBreadcrumb />
         </div>
-        <div className="flex items-center gap-4">
-          <div className="flex flex-row">
+        <div className="flex items-center justify-end gap-2">
+          <div className="flex flex-row gap-2">
             <LanguageSelect />
             <ThemeSelect />
           </div>
-          <div className="flex flex-col items-start justify-between">
+          <div className="w-px h-5 bg-primary" />
+          <div className="flex h-9 items-center justify-end">
             {status === "loading" && (
-              <Skeleton className="w-20 h-full bg-background flex items-center">
+              <Skeleton className="w-fit h-full bg-background flex items-center px-2 rounded-xl font-medium">
                 {t("Loading")}
               </Skeleton>
             )}
             {status === "unauthenticated" && (
-              <div className="flex ">
-                <Button
-                  className="w-20 flex justify-start text-start text-button-accent underline p-0 text-lg"
-                  variant="link"
-                  onClick={() => setCurrentModal("login")}
+              <div className="flex h-full items-center gap-2">
+                <motion.div
+                  initial={{ opacity: 1, scale: 1 }}
+                  animate={controls} // Use the controlled animation
+                  whileTap={{ scale: 0.8 }}
+                  transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                  className="rounded-xl"
                 >
-                  <span>{t("Log in")}</span>
-                </Button>
-                <Button
-                  className="w-20 flex justify-start text-start text-button-accent underline p-0 text-lg"
-                  variant="link"
-                  onClick={() => setCurrentModal("register")}
+                  <Button
+                    // key={i18n.language}
+                    className="w-fit h-9 flex justify-end border rounded-xl shadow-xl text-end bg-background p-2"
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setCurrentModal("login")}
+                  >
+                    <span>{t("Log in")}</span>
+                  </Button>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 1, scale: 1 }}
+                  animate={controls} // Use the controlled animation
+                  whileTap={{ scale: 0.8 }}
+                  transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                  className="rounded-xl"
                 >
-                  <span>{t("Sign up")}</span>
-                </Button>
+                  <Button
+                    // key={i18n.language}
+                    className="w-fit h-9 flex justify-end border rounded-xl shadow-xl text-end bg-background p-2"
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setCurrentModal("register")}
+                  >
+                    <span>{t("Sign up")}</span>
+                  </Button>
+                </motion.div>
               </div>
             )}
             {status === "authenticated" && (
               <div
-                className="flex flex-col text-lg cursor-pointer"
+                className="h-full flex cursor-pointer"
                 onClick={() => setCurrentModal("profile")}
               >
-                <span>{profile?.firstname}</span>
-                <span>{profile?.lastname}</span>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  whileTap={{ scale: 0.8 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="rounded-xl"
+                >
+                  <span>{profile?.firstname}</span>
+                  <span>{profile?.lastname}</span>
+                </motion.div>
               </div>
             )}
           </div>

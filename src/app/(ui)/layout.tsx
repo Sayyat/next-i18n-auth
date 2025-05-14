@@ -16,7 +16,7 @@ export default async function UILayout({
   return (
     <SidebarProvider className="h-full bg-sidebar">
       <AppSidebar />
-      <div className="relative flex w-full flex-1 flex-col mx-4 pt-2">
+      <div className="relative flex w-full flex-1 flex-col mx-4">
         <Header />
 
         <SidebarInset className="h-full rounded-xl overflow-auto border-b-none">

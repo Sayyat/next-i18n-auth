@@ -52,23 +52,23 @@ export function ThemeSelect() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          key={theme}
-          variant="outline"
-          size="icon"
-          className="bg-background rounded-xl p-2"
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileTap={{ scale: 0.8 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="rounded-xl"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            whileTap={{ scale: 0.8 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-background rounded-xl border border-input"
+          <Button
+            key={theme}
+            variant="outline"
+            size="icon"
+            className="bg-background rounded-xl p-0 size-9"
           >
             <CurrentIcon className="size-4 text-foreground" />
-          </motion.div>
-          <span className="sr-only">{t("Theme")}</span>
-        </Button>
+            <span className="sr-only">{t("Theme")}</span>
+          </Button>
+        </motion.div>
       </PopoverTrigger>
 
       <PopoverContent

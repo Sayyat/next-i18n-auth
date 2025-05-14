@@ -79,27 +79,27 @@ export function LanguageSelect() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          key={currentLocale}
-          variant="outline"
-          size="icon"
-          className="bg-background rounded-xl p-2"
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileTap={{ scale: 0.8 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="rounded-xl"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            whileTap={{ scale: 0.85 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-background rounded-xl border border-input"
+          <Button
+            key={currentLocale}
+            variant="outline"
+            size="icon"
+            className="bg-background rounded-xl p-0 size-9"
           >
             {isPreloading || isPending ? (
               <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
             ) : (
-              <CurrentFlagIcon className="w-6 h-4 object-cover rounded-sm" />
+              <CurrentFlagIcon className="w-6 h-4 object-cover rounded-xl" />
             )}
-          </motion.div>
-          <span className="sr-only">{t("Language")}</span>
-        </Button>
+            <span className="sr-only">{t("Language")}</span>
+          </Button>
+        </motion.div>
       </PopoverTrigger>
 
       <PopoverContent

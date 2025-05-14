@@ -19,12 +19,12 @@ export function DynamicBreadcrumb() {
   const breadcrumbItems = useDynamicBreadcrumb();
   // console.log({ breadcrumbItems });
   return (
-    <Breadcrumb className="p-2">
-      <BreadcrumbList>
+    <Breadcrumb className="p-0">
+      <BreadcrumbList className="gap-1">
         {breadcrumbItems?.map((item, index) => (
           <React.Fragment key={index}>
             <BreadcrumbItem>
-              <BreadcrumbPage className="flex items-center gap-2">
+              <BreadcrumbPage className="flex items-center gap-1">
                 {item.icon && <item.icon className="w-4 h-4" />}
                 {item.name}
               </BreadcrumbPage>
