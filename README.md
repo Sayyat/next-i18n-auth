@@ -12,7 +12,6 @@
 [![GitHub Forks](https://img.shields.io/github/forks/Sayyat/next-i18n-auth?style=social)](https://github.com/Sayyat/next-i18n-auth/network/members)
 [![GitHub Issues](https://img.shields.io/github/issues/Sayyat/next-i18n-auth/issues)](https://github.com/Sayyat/next-i18n-auth/issues)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/Sayyat/next-i18n-auth/main)](https://github.com/Sayyat/next-i18n-auth/commits/main)
-
 ---
 
 ## 🔥 Preview
@@ -87,151 +86,7 @@ Make sure you have the following installed:
 
 ## File Structure
 
-<details>
-<summary>Click to expand the file structure</summary>
-
-```plaintext
-src/
-├── app/
-│   ├── (ui)/
-│   │   ├── group-1/
-│   │   │   ├── about
-│   │   │   │   └── page.tsx
-│   │   │   └── profile
-│   │   │       └── page.tsx
-│   │   ├── group-2/
-│   │   │   ├── analytics
-│   │   │   │   └── page.tsx
-│   │   │   └── dashboard
-│   │   │       └── page.tsx
-│   │   ├── settings
-│   │   │   └── page.tsx
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   ├── api/
-│   │   └── auth/
-│   │   │   └── [...nextauth]/
-│   │   │       └── route.ts
-│   │   └── proxy/
-│   │       └── [...pathname]/
-│   │           └── route.ts
-│   └── layout.tsx
-├── core/
-│   ├── components/
-│   │   ├── AppSidebar.tsx
-│   │   ├── DynamicBreadcrumb.tsx
-│   │   ├── Footer.tsx
-│   │   ├── Header.test.tsx
-│   │   ├── Header.tsx
-│   │   └── RenderSidebarGroup.tsx
-│   ├── hooks/
-│   │   ├── useDynamicBreadcrumb.ts
-│   │   └── useRoutes.ts
-│   ├── providers/
-│   │   │── ClientProvidersWrapper.tsx
-│   │   └── ThemeProvider.tsx
-│   ├── styles/
-│   │   └── globals.css
-│   └── types/
-│       │── header.d.ts
-│       └── routes.d.ts
-├── features/
-│   ├── authentication/
-│   │   │── components/
-│   │   │   │── EmailSentDialog.tsx
-│   │   │   │── LoginDialog.tsx
-│   │   │   │── ProfileDialog.tsx
-│   │   │   │── ProfileImageIcon.tsx
-│   │   │   │── RegisterDialog.tsx
-│   │   │   └── ResetDialog.tsx
-│   │   │── hooks/
-│   │   │   │── useAuth.ts
-│   │   │   │── useCities.ts
-│   │   │   └── useProfile.ts
-│   │   └── lib/
-│   │       │── queryKeys.ts
-│   │       │── zod.ts
-│   │       │── zodClient.ts
-│   │       └── zodServer.ts
-│   ├── services/
-│   │   ├── client.ts
-│   │   └── server.ts
-│   ├── types/
-│   │   ├── city.d.ts
-│   │   ├── payload.d.ts
-│   │   ├── profile.d.ts
-│   │   └── response.d.ts
-│   └── index.ts
-├── i18n/
-│   ├── generated/ - automatically generated folder
-│   │   ├── namespaces.ts
-│   │   └── types.d.ts
-│   ├── lib/
-│   │   ├── client.ts
-│   │   ├── config.ts
-│   │   ├── createTypedT.ts
-│   │   ├── server.ts
-│   │   ├── settings.js
-│   │   └── utils.ts
-│   ├── locales/ - automatically generated folder
-│   │   ├── en/
-│   │   │   └── [namespace].json
-│   │   ├── kk/
-│   │   │   └── [namespace].json
-│   │   └── ru/
-│   │       └── [namespace].json
-│   ├── types/
-│   │   └── i18n.d.ts
-│   └── index.ts
-├── shared/
-│   └── components/
-│   │   ├── svg/
-│   │   │   └── Loading.tsx
-│   │   ├── ui/ - shadcn ui components
-│   │   │   ├── accordion.tsx
-│   │   │   ├── ............... 
-│   │   │   └── tooltip.tsx
-│   │   ├── app-sidebar.tsx
-│   │   ├── Checkbox.tsx
-│   │   ├── FloatingLabelInput.tsx
-│   │   ├── FloatingLabelPasswordInput.tsx
-│   │   ├── FloatingLabelPhoneInput.tsx
-│   │   ├── Input.tsx
-│   │   ├── LanguageSelect.tsx
-│   │   ├── nav-main.tsx
-│   │   ├── nav-projects.tsx
-│   │   ├── nav-secondary.tsx
-│   │   ├── nav-user.tsx
-│   │   ├── Select.tsx
-│   │   └── ThemeSelect.tsx
-│   ├── data/
-│   │   └── env/
-│   │       ├── client.ts
-│   │       └── server.ts
-│   ├── hooks/ shadcn hooks + custom shared hooks
-│   │   ├── use-mobile.ts
-│   │   └── use-toast.ts
-│   ├── lib/
-│   │   ├── case.ts
-│   │   ├── settings.ts
-│   │   ├── query.ts
-│   │   ├── tokenService.ts
-│   │   └── utils.ts
-│   ├── services/
-│   │   ├── api.ts
-│   │   ├── client.ts
-│   │   └── server.ts
-│   └── types/
-│       ├── api.d.ts
-│       ├── next-auth.d.ts
-├── tests/
-│   ├── e2e/ - all e2e tests folder
-│   └── setup.ts
-├── auth.ts
-└── middleware.ts
-```
-
-</details>
+You can find the file structure of the project in the [File Structure](./docs/file-structure.md) document.
 
 ---
 
@@ -289,6 +144,8 @@ src/
    ```
 
    That's it! Your new language should now be added to the system.
+
+> **Note:** See [Automation](./docs/automation.md) for more details..
 
 ### Add New Pages
 

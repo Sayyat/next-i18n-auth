@@ -65,6 +65,8 @@ development workflow.
     * Avoids data loss by preserving old translations.
     * Ensures the safe addition of new translations without removing existing ones.
 
+> **Note**: See [translation](./translation.md) section for more information about the translation keys and organization.
+
 ### 4. **`gulp generate-types`**
 
 * Generates TypeScript types for your translations.

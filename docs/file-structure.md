@@ -2,9 +2,14 @@
 
 ## Overview
 
-This document provides an overview of the **project file structure** to help you navigate the codebase more easily. The file organization follows a modular and feature-sliced architecture, ensuring scalability, maintainability, and ease of understanding for developers working on the project.
+This document provides an overview of the **project file structure** to help you navigate the codebase more easily. The
+file organization follows a **customized version of Feature Sliced Design (FSD)**, which focuses on modularity,
+scalability, and maintainability. Key differences from classic FSD include:
 
-The project consists of several key layers, each responsible for a specific part of the application. These layers include **core**, **shared**, **features**, **i18n**, and **app**, and they are designed to encapsulate functionality within each layer to maintain separation of concerns.
+* **Shared components** are housed in `/shared/components` instead of a dedicated **widgets** layer.
+* **Types** are defined directly within each feature under a **types** slice, replacing the **entities** layer.
+
+---
 
 ## File Structure
 
@@ -104,7 +109,6 @@ src/
 ├── shared/                 // Shared resources used by multiple features
 │   ├── components/         // Shared UI components (e.g., Button, Input)
 │   │   ├── svg/            // SVG components (e.g., Loading)
-│   │   │   └── Loading.tsx
 │   │   ├── ui/             // UI components from shadcn/ui
 │   │   │   ├── accordion.tsx
 │   │   │   ├── ............... 
@@ -155,47 +159,59 @@ src/
 
 ### **`src/app/`**
 
-The **`app/`** directory is where your main **pages** and **layouts** are defined using the **Next.js App Router**. Each page is grouped into folders (like `group-1`, `group-2`), and layouts are defined in `layout.tsx` files.
+The **`app/`** directory is used to organize **pages** and **layouts** using the **Next.js App Router**. It follows a
+modular approach, grouping pages and components into feature slices under their respective folders (e.g., `group-1`,
+`group-2`). Each page is represented by a `page.tsx` file, and layouts are defined in `layout.tsx`.
 
 * **Pages**: Organized under their respective groups (e.g., `about`, `profile`, `dashboard`).
 * **API Routes**: Defines API routes for authentication and proxy.
 
 ### **`src/core/`**
 
-The **`core/`** directory provides foundational support for pages and components but does not share components across the app. It houses the building blocks of the app's layout, context providers, and essential hooks.
+The **`core/`** directory provides the foundational **structure for pages** but does not share components. It
+encapsulates essential components, hooks, types, and utilities needed for building the pages.
 
-* **Components**: Core layout components like `Header`, `Footer`, `Sidebar`.
+* **Components**: Core layout components like `Header`, `Footer`, and `Sidebar`.
 * **Hooks**: Custom hooks like `useDynamicBreadcrumb` and `useRoutes`.
 * **Styles**: Global styles (e.g., Tailwind CSS and Shadcn configuration) stored in `globals.css`.
 
 ### **`src/features/`**
 
-Each feature of the app is contained within its own folder under the **`features/`** directory. Features are organized with their respective components, hooks, and services.
+Each feature of the app is contained within its own folder under the **`features/`** directory. Features are organized
+with their respective components, hooks, services, and types.
 
-* **Authentication**: All authentication logic (login, profile management) is housed here.
-* **Services**: API services related to features are contained in this folder.
+* **Authentication**: Logic related to user login, registration, and profile management.
+* **Services**: API services for handling requests related to the features.
+* **Types**: Type definitions specific to each feature.
 
 ### **`src/i18n/`**
 
-The **`i18n/`** directory contains everything related to **internationalization** (i18n). It includes language files, configurations, and logic for handling translations across both client and server sides. See [i18n-structure](./i18n-structure.md) for more information.
+The **`i18n/`** directory contains everything related to **internationalization** (i18n). It includes translation files,
+configurations, and logic for handling translations across both client and server sides. See [i18n-structure](./i18n-structure.md) for more information.
+
 * **Generated Files**: Automatically generated files like `namespaces.ts` and translation types.
 * **Config**: Contains the main configuration for language settings and fallback language.
 * **Locales**: Translation files for each language (e.g., `en.json`, `kk.json`, `ru.json`).
 
 ### **`src/shared/`**
 
-Contains **shared resources** used across multiple features of the application, including **UI components**, **hooks**, **utilities**, and **data** like environment configurations.
+Contains **shared resources** used across multiple features of the application, including **UI components**, **hooks**,
+**utilities**, and **data** like environment configurations.
 
-* **UI Components**: Reusable UI components (e.g., buttons, inputs).
+* **UI Components**: Reusable UI components like `Button`, `Checkbox`, `Input`.
 * **Hooks**: Shared hooks like `useToast` for toast notifications.
 * **Data**: Environment variables (validation for both client and server-side).
 
-### **`tests/`**
+### **`src/tests/`**
 
-Contains test files, including **unit tests**, **integration tests**, and **end-to-end (e2e) tests**. The tests are organized by type and serve to ensure the quality and stability of the application.
+Contains **test files**, including **unit tests**, **integration tests**, and **end-to-end (e2e) tests**. The tests are
+organized by type and ensure the quality and stability of the application.
 
 ---
 
-### **Conclusion**
+## Conclusion
 
-This file structure is designed to keep your project modular and easy to scale. By organizing features, shared resources, and i18n-related files into separate directories, the project remains clean and maintainable as it grows. Each layer has a specific responsibility, allowing for clear separation of concerns and making it easier to navigate and extend the codebase.
+This documentation explains the project’s file structure, focusing on the **customized FSD** approach used in the app.
+By organizing features, shared resources, and i18n-related files into separate directories, the project remains clean,
+maintainable, and scalable as it grows. The modular approach ensures each layer of the app has a clear responsibility,
+reducing complexity.
