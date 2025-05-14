@@ -191,19 +191,19 @@ We use **Vitest** with **React Testing Library** to write and run unit and integ
 #### Run Unit/Integration Tests:
 
 ```bash
-yarn test
+  yarn test
 ```
 
 #### Watch Tests:
 
 ```bash
-yarn test:watch
+  yarn test:watch
 ```
 
 #### Coverage Report:
 
 ```bash
-yarn coverage
+   yarn coverage
 ```
 
 ---
@@ -215,13 +215,13 @@ We use **Playwright** for writing end-to-end tests.
 #### Run E2E Tests:
 
 ```bash
-yarn test:e2e
+  yarn test:e2e
 ```
 
 #### Playwright Test Runner UI:
 
 ```bash
-yarn test:e2e --ui
+  yarn test:e2e --ui
 ```
 
 ### Notes:
@@ -247,8 +247,8 @@ yarn test:e2e --ui
 ### Example Test Command:
 
 ```bash
-yarn test  # Runs all unit and integration tests
-yarn test:e2e  # Runs all E2E tests
+  yarn test  # Runs all unit and integration tests
+  yarn test:e2e  # Runs all E2E tests
 ```
 
 ---
