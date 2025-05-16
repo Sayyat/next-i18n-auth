@@ -1,8 +1,14 @@
 # Next i18n Auth Boilerplate
 
-> A complete, production-grade Next.js starter with internationalization, authentication, UI components, testing, and
-> more.
-> Production-ready Next.js boilerplate for authentication, i18n, theming, and testing.
+> A complete, production-grade Next.js starter with internationalization, authentication, UI components, testing, and more.
+>
+> * Are you tired of manually managing translation files in your projects?  
+> * Do you want to streamline your internationalization workflow with fully automated tooling?  
+> * Are you looking for a robust, scalable architecture that combines authentication, localization, theming, and type safety — all in one place?  
+> * Would you benefit from a modern stack with built-in support for testing, reusable UI components, and strict typing from end to end?  
+> * Do you want to future-proof your application with a maintainable and extensible codebase?
+>
+> If so, this boilerplate is for you. Fork it, customize it, and accelerate your development with a solid foundation that eliminates repetitive work and allows you to focus on what really matters — building great products.
 
 ---
 
@@ -13,6 +19,7 @@
 [![GitHub Forks](https://img.shields.io/github/forks/Sayyat/next-i18n-auth?style=social)](https://github.com/Sayyat/next-i18n-auth/network/members)
 [![GitHub Issues](https://img.shields.io/github/issues/Sayyat/next-i18n-auth/issues)](https://github.com/Sayyat/next-i18n-auth/issues)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/Sayyat/next-i18n-auth/main)](https://github.com/Sayyat/next-i18n-auth/commits/main)
+
 ---
 
 ## 🔥 Preview
@@ -101,11 +108,14 @@ You can find the file structure of the project in the [File Structure](./docs/fi
   details.
 
 ### Localization
-
 * The project uses `i18next` for localization. See [i18next](https://www.i18next.com/) for more details.
 * The localization process is fully automated. See [Automation](./docs/automation.md) for more details.
+![Translation process](./public/assets/translation.png)
+* Full autocomplete for namespaces and translation keys thanks to auto type generation
+![i18n Autocomplete Preview](./public/assets/autocomplete.png)
 * Supported languages: `Kazakh`, `English`, and `Russian`.
 * Language can be changed using the dropdown in the header.
+![Language dropdown](./public/assets/language-dropdown.png)
 
 ### Toast Notifications
 
@@ -148,7 +158,6 @@ You can find the file structure of the project in the [File Structure](./docs/fi
    ```
 
    That's it! Your new language should now be added to the system.
-
 > **Note:** See [Automation](./docs/automation.md) for more details..
 
 ### Add New Pages
