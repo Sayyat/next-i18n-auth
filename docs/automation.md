@@ -4,11 +4,7 @@
 
 ## **Overview**
 
-The **Next-i18n-auth** system is a multi-functional internationalization (i18n) solution designed to streamline the
-process of handling translations in a large-scale Next.js project. This system efficiently manages language resources,
-dynamically generates translations, and integrates with an API to fetch missing translations on-demand. It also
-incorporates a Gulp-based build process for generating types, namespaces, and template translations, providing a smooth
-development workflow.
+The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit that streamlines translation management in large-scale Next.js applications. It automates namespace generation, key extraction, translation updates, and TypeScript typing — all powered by a Gulp-based workflow.
 
 ---
 
@@ -29,8 +25,8 @@ development workflow.
 
 * **Translation Files**: Stores translations for each language in JSON files (e.g.,
   `src/i18n/locales/{language}/{namespace}.json`).
-* **Automatic Merging**: New translation keys are automatically merged with existing ones, preserving previously added
-  translations. Optionally, unused keys can be deleted based on configuration settings.
+* **Automatic Merging**: New translation keys are automatically merged with existing ones, preserving previously added translations.
+* **Configurable Cleanup**: By default, unused keys are removed during scanning. To retain explicitly declared but unused keys — such as backend error messages — set `"keepUnusedKeys": true` in the config.
 
 ### 3. **Dynamic Translation Generation**
 
@@ -269,3 +265,6 @@ Example configuration snippet:
   that the messages are contextually accurate.
 * **Scalability**: As new error codes are introduced, simply adding them to the list and running the Gulp task ensures
   that they are handled consistently across all supported languages.
+
+For detailed principles behind translation key structure, see [Translation Keys and Organization.](./translation.md)
+

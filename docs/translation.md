@@ -25,6 +25,12 @@ For example, instead of writing:
 
 Which would generate a dynamic key like `Welcome, John`, we prefer using **static translation keys** with placeholders.
 
+| Pattern                              | Valid? | Reason                                           |
+| ------------------------------------ | ------ | ------------------------------------------------ |
+| `t("Welcome, {{username}}")`         | ✅ Yes  | Static key with placeholder                      |
+| `t("Welcome, " + username)`          | ❌ No   | Dynamic key; cannot be extracted or translated   |
+| `t(user.isAdmin ? "Admin" : "User")` | ❌ No   | Dynamic branching; not scannable for translation |
+
 ### 2. **Valid Static Keys with Placeholders**:
 
 For a key to be valid in **i18next**, it can contain **placeholders** (like `{{username}}`), which will later be replaced dynamically with values at runtime.
@@ -60,7 +66,7 @@ For example:
 * **Key**: `"Welcome, {{username}}"`
 * **Fallback message**: `"Welcome, John"` (if `data.firstname` is "John").
 
-The fallback message is just for displaying while the translation is being loaded, and the **actual translation** will replace the dynamic placeholder (`{{username}}`).
+The fallback message is displayed temporarily while the translation is being loaded, and the **actual translation** will replace the dynamic placeholder (`{{username}}`).
 
 ### 4. **Translation Files Format**:
 
@@ -72,7 +78,7 @@ Translation files are stored in **JSON format** instead of the typical `.po`/`.m
 {
   "Welcome, {{username}}": "Welcome, {{username}}",
   "Logout": "Logout",
-  "Error Occurred": "An error occurred. Please try again later."
+  "An error occurred. Please try again later.": "An error occurred. Please try again later."
 }
 ```
 
@@ -82,11 +88,13 @@ Translation files are stored in **JSON format** instead of the typical `.po`/`.m
 {
   "Welcome, {{username}}": "Привет, {{username}}",
   "Logout": "Выход",
-  "Error Occurred": "Произошла ошибка. Пожалуйста, попробуйте снова."
+  "An error occurred. Please try again later.": "Произошла ошибка. Пожалуйста, попробуйте снова."
 }
 ```
+Here's the updated section with your note about keeping dynamic error keys via `keepUnusedKeys: true`, written clearly and integrated naturally:
 
-### 5. **Handling Dynamic Backend Error Codes**:
+
+### 5. **Handling Dynamic Backend Error Codes**
 
 For dynamic backend error codes (such as `ERR_NETWORK`, `ERR_BAD_REQUEST`, etc.), we follow a specific pattern. We maintain a list of **static error keys** for backend errors and run them through **i18next-scanner** to automatically generate the translations.
 
@@ -104,7 +112,8 @@ const errorsForI18nextScanner = [
 
 These error keys are added to the translation files during the **automatic generation process** using `gulp`, and they can be translated like any other key with placeholders.
 
----
+> To ensure that these explicitly declared but dynamically referenced error keys are not removed during the scanning process, we enable the `keepUnusedKeys: true` option in the i18next.config.json file. This prevents accidental cleanup of valid keys that may not be directly used in component JSX but are still required at runtime.
+
 
 ## Why This Structure Works
 
@@ -120,3 +129,5 @@ These error keys are added to the translation files during the **automatic gener
 By following this structure, we ensure that the translation process remains clean, efficient, and easy to manage across multiple languages. The **static translation keys** and **placeholders** system offers the flexibility required for dynamic content while maintaining the consistency and scalability of translations.
 
 This method inspired by **Django’s gettext philosophy** allows for a smooth localization process that can scale with the application's growth.
+
+For details on how these keys are generated and maintained automatically, see [Automation Scripts Documentation.](./automation.md)
