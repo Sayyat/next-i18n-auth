@@ -8,7 +8,8 @@ import "@/core/styles/globals.css";
 import { ToastContainer } from "react-toastify";
 import { ClientProvidersWrapper } from "@/core/providers/ClientProvidersWrapper";
 import { ReactNode } from "react";
-import "@/i18n/lib/client"; // 👈 Важно: импортируем для инициализации
+import "@/i18n/lib/client";
+import { getUserLocale } from "@/i18n/lib/utils"; // 👈 Важно: импортируем для инициализации
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -85,8 +86,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const lang = await getUserLocale();
+
   return (
-    <html>
+    <html lang={lang}>
       <head>
         <title>Next i18n Auth</title>
       </head>
