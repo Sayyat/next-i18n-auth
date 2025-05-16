@@ -24,5 +24,10 @@
   "middle_name is min": "әкесінің аты - мин",
   "phone is invalid": "телефон жарамсыз",
   "phone is max": "телефон макс",
-  "phone is min": "телефон мин"
+  "phone is min": "телефон мин",
+  "Address is required": "Мекенжай қажет",
+  "Enter 11 symbols at least": "Кем дегенде 11 таңбаны енгізіңіз",
+  "Enter 15 symbols at most": "Ең көбі 15 таңба енгізіңіз",
+  "Invalid phone number": "Жарамсыз телефон нөмірі",
+  "Middle name is required": "Әкесінің аты қажет"
 }

@@ -144,7 +144,12 @@ export type TNamespaceTranslationKeys = {
     | "middle_name is min"
     | "phone is invalid"
     | "phone is max"
-    | "phone is min";
+    | "phone is min"
+    | "Address is required"
+    | "Enter 11 symbols at least"
+    | "Enter 15 symbols at most"
+    | "Invalid phone number"
+    | "Middle name is required";
   "shared.components.LanguageSelect": 
     | "English"
     | "Kazakh"
@@ -275,6 +280,11 @@ export type TAllTranslationKeys =
   | "features.authentication.lib.zod.phone is invalid"
   | "features.authentication.lib.zod.phone is max"
   | "features.authentication.lib.zod.phone is min"
+  | "features.authentication.lib.zod.Address is required"
+  | "features.authentication.lib.zod.Enter 11 symbols at least"
+  | "features.authentication.lib.zod.Enter 15 symbols at most"
+  | "features.authentication.lib.zod.Invalid phone number"
+  | "features.authentication.lib.zod.Middle name is required"
   | "shared.components.LanguageSelect.English"
   | "shared.components.LanguageSelect.Kazakh"
   | "shared.components.LanguageSelect.Language"

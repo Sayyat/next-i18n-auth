@@ -24,5 +24,10 @@
   "middle_name is min": "middle_name - это мин.",
   "phone is invalid": "телефон недействителен",
   "phone is max": "телефон макс.",
-  "phone is min": "телефон мин."
+  "phone is min": "телефон мин.",
+  "Address is required": "Адрес обязателен",
+  "Enter 11 symbols at least": "Введите не менее 11 символов",
+  "Enter 15 symbols at most": "Введите максимум 15 символов.",
+  "Invalid phone number": "Неверный номер телефона",
+  "Middle name is required": "Требуется отчество"
 }

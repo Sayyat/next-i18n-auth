@@ -24,5 +24,10 @@
   "middle_name is min": "middle_name is min",
   "phone is invalid": "phone is invalid",
   "phone is max": "phone is max",
-  "phone is min": "phone is min"
+  "phone is min": "phone is min",
+  "Address is required": "Address is required",
+  "Enter 11 symbols at least": "Enter 11 symbols at least",
+  "Enter 15 symbols at most": "Enter 15 symbols at most",
+  "Invalid phone number": "Invalid phone number",
+  "Middle name is required": "Middle name is required"
 }
