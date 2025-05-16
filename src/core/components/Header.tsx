@@ -43,7 +43,7 @@ export function Header() {
   return (
     <header className="bg-sidebar flex items-center justify-between gap-2">
       {/* Title */}
-      <div className="gap-0 h-12 w-full grid grid-cols-[1fr_1fr] items-center">
+      <div className="gap-0 h-9 w-full grid grid-cols-[1fr_1fr] items-center">
         <div className="flex items-center gap-2">
           <motion.div
             initial={{ opacity: 0, scale: 0 }}

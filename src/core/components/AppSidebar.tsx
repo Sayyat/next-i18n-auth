@@ -21,14 +21,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { COMMON_ROUTES, MANAGER_ROUTES } = useRoutes();
 
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar variant="inset" className="gap-2" {...props}>
       {/* Header с логотипом */}
-      <SidebarHeader className="h-18 flex-row p-0 items-center">
+      <SidebarHeader className="h-9 flex-row p-0 mb-2 items-center">
         <Image
           src="/assets/logo-transparent.png"
           alt="logo"
-          width={64}
-          height={64}
+          width={36}
+          height={36}
         />
         <span className="text-xl font-bold">Next i18n Auth</span>
       </SidebarHeader>

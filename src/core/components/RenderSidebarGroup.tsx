@@ -28,13 +28,13 @@ const RenderMenuItem = memo(function RenderMenuItem({
         <Link
           href={route.url}
           className={clsx(
-            "flex items-center rounded-lg transition-all",
+            "flex items-center rounded-xl transition-all",
             pathname === route.url
               ? "text-sidebar-accent-foreground font-semibold bg-sidebar-accent"
               : "text-sidebar-foreground",
           )}
         >
-          {route.icon && <route.icon style={{ width: 24, height: 24 }} />}
+          {route.icon && <route.icon />}
           <span className="text-sm">{route.title}</span>
         </Link>
       </SidebarMenuButton>
@@ -50,9 +50,9 @@ const RenderRouteGroup = memo(function RenderRouteGroup({
   routes: IAppRoute[];
 }) {
   return (
-    <SidebarGroup className="gap-1 px-0 py-1">
+    <SidebarGroup className="gap-2 p-0">
       <SidebarGroupContent>
-        <SidebarMenu className="gap-1">
+        <SidebarMenu className="gap-2">
           {routes.map((route) =>
             route.subRoutes ? (
               <Fragment key={route.url}>
