@@ -29,8 +29,9 @@ import { ProfileImageIcon } from "@/features/authentication/components/ProfileIm
 import { useProfile } from "@/features/authentication/hooks/useProfile";
 import { signOut } from "next-auth/react";
 import { FloatingLabelInput } from "@/shared/components/FloatingLabelInput";
-import { useTranslation } from "@/i18n";
 import { useEditProfileSchema } from "../lib/zodClient";
+import { z } from "zod";
+import { useTranslation } from "@/i18n";
 
 interface IProfileDialogProps {
   open: boolean;
@@ -53,10 +54,13 @@ export const ProfileDialog: React.FC<IProfileDialogProps> = ({
   const [isEditing, setIsEditing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const editProfileSchema = useEditProfileSchema();
+  type TEditProfileForm = z.infer<typeof editProfileSchema>;
+
   // console.log({profile, cities})
   // ✅ Define the form schema and hook form
-  const form = useForm({
-    resolver: zodResolver(useEditProfileSchema()),
+  const form = useForm<TEditProfileForm>({
+    resolver: zodResolver(editProfileSchema),
     defaultValues: {
       email: profile?.email || "",
       firstname: profile?.firstname || "",

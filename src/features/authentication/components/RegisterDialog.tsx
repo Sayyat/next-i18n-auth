@@ -3,12 +3,10 @@
  */
 
 import React, { useState } from "react";
-import { toast } from "react-toastify";
 import { X } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Trans, useTranslation } from "react-i18next";
-import { z } from "zod";
+import { Trans } from "react-i18next";
 import { Checkbox } from "@/shared/components/Checkbox";
 import { Button } from "@/shared/components/ui/button";
 
@@ -39,6 +37,8 @@ import { Loading } from "@/shared/components/svg/Loading";
 import { useAuth } from "@/features/authentication/hooks/useAuth";
 import { ICity } from "@/features/authentication/types/city";
 import { useRegisterSchema } from "@/features/authentication/lib/zodClient";
+import { z } from "zod";
+import { useTranslation } from "@/i18n";
 
 interface IRegisterDialogProps {
   open: boolean;
