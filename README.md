@@ -110,7 +110,7 @@ You can find the file structure of the project in the [File Structure](./docs/fi
 ### Localization
 * The project uses `i18next` for localization. See [i18next](https://www.i18next.com/) for more details.
 * The localization process is fully automated. See [Automation](./docs/automation.md) for more details.
-![Translation process](./public/assets/translation.png)
+![Translation process](public/assets/generate-translations-log.png)
 * Full autocomplete for namespaces and translation keys thanks to auto type generation
 ![i18n Autocomplete Preview](./public/assets/autocomplete.png)
 * Supported languages: `Kazakh`, `English`, and `Russian`.

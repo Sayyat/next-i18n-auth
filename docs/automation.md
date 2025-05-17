@@ -47,7 +47,7 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
 
 ### 1. **`gulp` (default task)**
 
-* Runs the following tasks in sequence:
+* Runs the following tasks **in order**:
 
     * `generate-namespaces`: Scans the codebase and generates namespace definitions.
     * `generate-templates`: Extracts translation keys and updates the translation files.
@@ -57,11 +57,16 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
 
 * Scans the codebase for translation keys and generates namespace definitions.
 * **Output**: `src/i18n/generated/namespaces.ts`
+> ![Generate namespaces log](../public/assets/generate-namespaces-log.png)
 
 ### 3. **`gulp generate-templates`**
 
 * Extracts translation keys from source files and creates or updates translation files for all languages.
 * **Output**: `src/i18n/locales/{{lng}}/{{ns}}.json`
+
+> ![Generate templates log-1](../public/assets/generate-templates-log-1.png)
+> ![Generate templates log-2](../public/assets/generate-templates-log-2.png)
+
 * **Features**:
 
     * Avoids data loss by preserving old translations.
@@ -73,6 +78,7 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
 
 * Generates TypeScript types for your translations.
 * **Output**: `src/i18n/generated/types.d.ts`
+> ![Generate types log](../public/assets/generate-types-log.png)
 
 ### 5. **`gulp generate-translations [-l, --lang <language>]`**
 
@@ -84,6 +90,9 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
 
     * `gulp generate-translations -l kk` - Translates only the Kazakh language.
     * `gulp generate-translations` - Translates all languages.
+
+> ![Translation process](../public/assets/generate-translations-log.png)
+
 
 ### 6. **`gulp watch`**
 
@@ -97,6 +106,8 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
     * Source files (e.g., JSX/TSX files in the codebase).
     * Translation files in `src/i18n/locales`.
 
+> ![Watch](../public/assets/watch-log.png)
+
 ### 7. **`gulp create-feature [-n, --name <feature-name>] [--js]`**
 
 * Generates boilerplate for a new feature in your application.
@@ -106,14 +117,20 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
     * `--js`: Optionally generates JavaScript/JSX files instead of TypeScript/TSX. (Default: false)
 * **Example**:
 
-    * `gulp create-feature -n my-feature` - Generates a new feature with TypeScript/TSX files.
-    * `gulp create-feature -n my-feature --js` - Generates the feature with JavaScript/JSX files.
+    * `gulp create-feature -n new-feature` - Generates a new feature with TypeScript/TSX files.
+    * `gulp create-feature -n new-feature --js` - Generates the feature with JavaScript/JSX files.
+
+> ![Create feature task output](../public/assets/create-feature-log.png)
 
 ### 8. **`gulp help`**
 
 * Displays the available tasks and their descriptions.
 
+> ![Help](../public/assets/help-log.png)
+
 ---
+
+> 💡 **Tip**: It's recommended to run `gulp` (default task) before each deployment to ensure that your namespaces, templates, and types are fully synced.
 
 ## **Workflow**
 
