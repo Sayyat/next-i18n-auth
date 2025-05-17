@@ -3,7 +3,7 @@
 ## Overview
 
 This document provides an overview of the **project file structure** to help you navigate the codebase more easily. The
-file organization follows a **customized version of Feature Sliced Design (FSD)**, which focuses on modularity,
+file organization follows a **customized version of Feature Sliced Design (FSD)[^1]**, which focuses on modularity,
 scalability, and maintainability. Key differences from classic FSD include:
 
 * **Shared components** are housed in `/shared/components` instead of a dedicated **widgets** layer.
@@ -215,3 +215,7 @@ This documentation explains the project’s file structure, focusing on the **cu
 By organizing features, shared resources, and i18n-related files into separate directories, the project remains clean,
 maintainable, and scalable as it grows. The modular approach ensures each layer of the app has a clear responsibility,
 reducing complexity.
+
+---
+
+[^1]: [Feature-Sliced Design](https://feature-sliced.github.io/documentation/) — Official documentation for Feature Sliced Design methodology.

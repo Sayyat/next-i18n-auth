@@ -6,9 +6,14 @@ In the **Next-i18n-auth** system, we’ve replaced the `useTranslation` hook fro
 
 ### **How It Works**
 
-* **Strictly Typed Translation Functions**: Both `useTranslation` (for client-side components) and `getTranslation` (for server-side code) are **strictly typed**. This means that when you access translation keys, the IDE will suggest the available namespaces and translation keys, ensuring you don’t make mistakes while referencing them.
+* **Strictly Typed Translation Functions**: Both `useTranslation` (for client-side components) and `getTranslation` (for server-side code) are **strictly typed wrappers** around i18next's core translation functions. This means that when you access translation keys, the IDE will suggest the available namespaces and translation keys, ensuring you don’t make mistakes while referencing them.
 
 * **Autocompletion for Translation Keys and Namespaces**: When you use the `t()` function inside `useTranslation` or `getTranslation`, your IDE will offer autocompletion for namespaces and translation keys. This reduces the chance of runtime errors due to missing or incorrect keys.
+
+> ⚙️ **Tip**: Types are automatically generated from your translation templates during the `gulp generate-types` step. See the [Automation Docs](./automation.md) for details.
+
+---
+
 
 Example usage in **React**:
 
@@ -16,24 +21,38 @@ Example usage in **React**:
 import { useTranslation } from "@/i18n";
 
 const MyComponent = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("app.(ui).page");
+  // The namespace passed here must match one from your generated `namespaces.ts` file.
 
   return <h1>{t("Welcome, {{username}}", { username: "John" })}</h1>;
 };
 ```
 
-* The IDE will suggest available namespaces like `app`, `auth`, etc.
-* When typing `t("`, the available keys within the `auth` namespace will be suggested automatically.
+* The IDE will suggest available namespaces like `features.authentication.components.LoginDialog`, `features.authentication.components.RegisterDialog`, etc.
+> ![Namespace autocomplete](../public/assets/namespace-autocomplete.png)
+* When typing `t("`, the available keys within the `features.authentication.components.RegisterDialog` namespace will be suggested automatically.
+> ![Translation autocomplete](../public/assets/translation-autocomplete.png)
+
+
+---
 
 Example usage in **server-side code**:
 
 ```ts
 import { getTranslation } from "@/i18n";
 
-const errorMessage = await getTranslation("auth.errors.invalidLogin");
+const { t } = await getTranslation("shared.services.api");
+
+const errorMessage = t("ERR_NETWORK");
+
 ```
 
-* The IDE will automatically suggest the available namespaces (like `auth`, `shared`, etc.) and the keys within those namespaces.
+* The IDE will suggest available namespaces like `shared.services.api`, `app.(ui).group-1.about.page`, etc.
+> ![Server-side Namespace autocomplete](../public/assets/server-namespace-autocomplete.png)
+
+* When typing `t("`, the available keys within the `shared.services.api` namespace will be suggested automatically.
+> ![Server-side Translation autocomplete](../public/assets/server-translation-autocomplete.png)
+
 
 ### **Advantages**
 
