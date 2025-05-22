@@ -59,3 +59,10 @@ const errorMessage = t("ERR_NETWORK");
 * **Enhanced Developer Experience**: With autocompletion, you don’t have to memorize the exact translation keys or namespaces. The IDE takes care of suggesting the correct options as you type.
 * **Strict Type Safety**: By defining the translation functions with **strict types**, you ensure that only valid namespaces and keys are used in the application, preventing runtime issues caused by typos or missing translations.
 * **Consistency Across the Project**: The strictly typed functions ensure consistency in how translation keys are used across both client-side and server-side code.
+
+---
+
+## 📚 Related Projects
+
+* [`@sayyyat/smart-i18n`](https://www.npmjs.com/package/@sayyyat/smart-i18n) — The core CLI engine that provides scanning, merging, and type generation.
+* [`@sayyyat/smart-i18n-react`](https://www.npmjs.com/package/@sayyyat/smart-i18n-react) — Feature-scaffolding CLI tool that integrates smart-i18n into React/Next.js projects with zero configs.

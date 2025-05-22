@@ -148,13 +148,13 @@ You can find the file structure of the project in the [File Structure](./docs/fi
    To translate the language files using RapidAPI, run the following command:
 
    ```bash
-   gulp generate-translations -l fr
+   smart-i18n generate-translations -l fr
    ```
 
    Or use the alias:
 
    ```bash
-   yarn g:trs -l fr
+   yarn si:trs -l fr
    ```
 
    That's it! Your new language should now be added to the system.
@@ -274,3 +274,10 @@ Made with 💜 by [Sayat Raykul](https://github.com/Sayyat)
 
 If you like this project, please ⭐️ star it on GitHub!
 It helps me continue building great open-source tools.
+
+---
+
+## 📚 Related Projects
+
+* [`@sayyyat/smart-i18n`](https://www.npmjs.com/package/@sayyyat/smart-i18n) — The core CLI engine that provides scanning, merging, and type generation.
+* [`@sayyyat/smart-i18n-react`](https://www.npmjs.com/package/@sayyyat/smart-i18n-react) — Feature-scaffolding CLI tool that integrates smart-i18n into React/Next.js projects with zero configs.

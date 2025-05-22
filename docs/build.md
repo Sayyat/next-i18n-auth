@@ -131,3 +131,11 @@ This file contains the configuration for running the Next.js application in the 
 With Docker Compose, managing different environments for your Next.js application is made simple. You can easily switch between the development and production environments by using the respective `docker-compose.yml` files and their associated configurations. Docker ensures a consistent environment for your application across different stages of development and production.
 
 If you have any questions or need further clarification, feel free to reach out!
+
+
+---
+
+## 📚 Related Projects
+
+* [`@sayyyat/smart-i18n`](https://www.npmjs.com/package/@sayyyat/smart-i18n) — The core CLI engine that provides scanning, merging, and type generation.
+* [`@sayyyat/smart-i18n-react`](https://www.npmjs.com/package/@sayyyat/smart-i18n-react) — Feature-scaffolding CLI tool that integrates smart-i18n into React/Next.js projects with zero configs.

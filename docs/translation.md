@@ -131,3 +131,10 @@ By following this structure, we ensure that the translation process remains clea
 This method inspired by **Django’s gettext philosophy** allows for a smooth localization process that can scale with the application's growth.
 
 For details on how these keys are generated and maintained automatically, see [Automation Scripts Documentation.](./automation.md)
+
+---
+
+## 📚 Related Projects
+
+* [`@sayyyat/smart-i18n`](https://www.npmjs.com/package/@sayyyat/smart-i18n) — The core CLI engine that provides scanning, merging, and type generation.
+* [`@sayyyat/smart-i18n-react`](https://www.npmjs.com/package/@sayyyat/smart-i18n-react) — Feature-scaffolding CLI tool that integrates smart-i18n into React/Next.js projects with zero configs.

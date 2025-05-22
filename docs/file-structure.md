@@ -218,4 +218,11 @@ reducing complexity.
 
 ---
 
+## 📚 Related Projects
+
+* [`@sayyyat/smart-i18n`](https://www.npmjs.com/package/@sayyyat/smart-i18n) — The core CLI engine that provides scanning, merging, and type generation.
+* [`@sayyyat/smart-i18n-react`](https://www.npmjs.com/package/@sayyyat/smart-i18n-react) — Feature-scaffolding CLI tool that integrates smart-i18n into React/Next.js projects with zero configs.
+
+---
+
 [^1]: [Feature-Sliced Design](https://feature-sliced.github.io/documentation/) — Official documentation for Feature Sliced Design methodology.

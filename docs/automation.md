@@ -10,7 +10,9 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
 
 ### **How to Use the Gulp Tasks**
 
-> **Note:** See [Gulp scripts file structure](./gulp.md) for more information about the Gulp scripts.
+> **Note:** See the following libraries for more information about the Gulp scripts.
+> * [`@sayyyat/smart-i18n`](https://www.npmjs.com/package/@sayyyat/smart-i18n) — The core CLI engine that provides scanning, merging, and type generation.
+> * [`@sayyyat/smart-i18n-react`](https://www.npmjs.com/package/@sayyyat/smart-i18n-react) — Feature-scaffolding CLI tool that integrates smart-i18n into React/Next.js projects with zero configs.
 
 ---
 
@@ -45,21 +47,21 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
 
 ## **Available Gulp Tasks**
 
-### 1. **`gulp` (default task)**
+### 1. **`smart-i18n` (default task)**
 
 * Runs the following tasks **in order**:
 
-    * `generate-namespaces`: Scans the codebase and generates namespace definitions.
-    * `generate-templates`: Extracts translation keys and updates the translation files.
-    * `generate-types`: Generates TypeScript types for translations.
+    * `smart-i18n generate-namespaces`: Scans the codebase and generates namespace definitions.
+    * `smart-i18n generate-templates`: Extracts translation keys and updates the translation files.
+    * `smart-i18n generate-types`: Generates TypeScript types for translations.
 
-### 2. **`gulp generate-namespaces`**
+### 2. **`smart-i18n generate-namespaces`**
 
 * Scans the codebase for translation keys and generates namespace definitions.
 * **Output**: `src/i18n/generated/namespaces.ts`
 > ![Generate namespaces log](../public/assets/generate-namespaces-log.png)
 
-### 3. **`gulp generate-templates`**
+### 3. **`smart-i18n generate-templates`**
 
 * Extracts translation keys from source files and creates or updates translation files for all languages.
 * **Output**: `src/i18n/locales/{{lng}}/{{ns}}.json`
@@ -74,13 +76,13 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
 
 > **Note**: See [translation](./translation.md) section for more information about the translation keys and organization.
 
-### 4. **`gulp generate-types`**
+### 4. **`smart-i18n generate-types`**
 
 * Generates TypeScript types for your translations.
 * **Output**: `src/i18n/generated/types.d.ts`
 > ![Generate types log](../public/assets/generate-types-log.png)
 
-### 5. **`gulp generate-translations [-l, --lang <language>]`**
+### 5. **`smart-i18n generate-translations [-l, --lang <language>]`**
 
 * Translates only the missing keys using the Deep Translate API from RapidAPI.
 * **Parameters**:
@@ -88,19 +90,19 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
     * `-l, --lang`: Specifies the language to translate (Default: all).
 * **Example**:
 
-    * `gulp generate-translations -l kk` - Translates only the Kazakh language.
-    * `gulp generate-translations` - Translates all languages.
+    * `smart-i18n generate-translations -l kk` - Translates only the Kazakh language.
+    * `smart-i18n generate-translations` - Translates all languages.
 
 > ![Translation process](../public/assets/generate-translations-log.png)
 
 
-### 6. **`gulp watch`**
+### 6. **`smart-i18n watch`**
 
 * Automatically runs the following tasks when source files or translation files change:
 
-    * `generate-namespaces`
-    * `generate-templates`
-    * `generate-types`
+    * `smart-i18n generate-namespaces`
+    * `smart-i18n generate-templates`
+    * `smart-i18n generate-types`
 * Watches for changes in:
 
     * Source files (e.g., JSX/TSX files in the codebase).
@@ -108,7 +110,7 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
 
 > ![Watch](../public/assets/watch-log.png)
 
-### 7. **`gulp create-feature [-n, --name <feature-name>] [--js]`**
+### 7. **`smart-i18n-react create-feature [-n, --name <feature-name>] [--js]`**
 
 * Generates boilerplate for a new feature in your application.
 * **Parameters**:
@@ -117,29 +119,43 @@ The Next-i18n-auth system is a comprehensive internationalization (i18n) toolkit
     * `--js`: Optionally generates JavaScript/JSX files instead of TypeScript/TSX. (Default: false)
 * **Example**:
 
-    * `gulp create-feature -n new-feature` - Generates a new feature with TypeScript/TSX files.
-    * `gulp create-feature -n new-feature --js` - Generates the feature with JavaScript/JSX files.
+    * `smart-i18n-react create-feature -n new-feature` - Generates a new feature with TypeScript/TSX files.
+    * `smart-i18n-react create-feature -n new-feature --js` - Generates the feature with JavaScript/JSX files.
 
 > ![Create feature task output](../public/assets/create-feature-log.png)
 
-### 8. **`gulp help`**
+### 8. **`smart-i18n help`**
 
-* Displays the available tasks and their descriptions.
+* Displays the available tasks and their descriptions via `smart-i18n`.
 
-> ![Help](../public/assets/help-log.png)
+> ![Help](../public/assets/smart-i18n-help-log-1.png)
+> ![Help](../public/assets/smart-i18n-help-log-2.png)
 
 ---
 
-> 💡 **Tip**: It's recommended to run `gulp` (default task) before each deployment to ensure that your namespaces, templates, and types are fully synced.
+### 9. **`smart-i18n-react help`**
+
+* Displays the available tasks and their descriptions via `smart-i18n-react`.
+
+> ![Help](../public/assets/smart-i18n-react-help-log.png)
+
+---
+
+> 💡 **Tip**: It's recommended to run `smart-i18n` (default task) before each deployment to ensure that your namespaces, templates, and types are fully synced.
 
 ## **Workflow**
 
-1. **Namespace Generation**: Run `gulp generate-namespaces` to scan your codebase and update namespace definitions.
-2. **Key Extraction**: Run `gulp generate-templates` to extract new translation keys from your codebase.
-3. **Type Generation**: Run `gulp generate-types` to generate TypeScript types for the translations.
-4. **Translation**: Run `gulp generate-translations` to automatically translate missing keys.
-5. **Watching**: Use `gulp watch` to monitor file changes and regenerate namespaces, templates, and types automatically.
-6. **Feature Creation**: Use `gulp create-feature` to create a new feature with the necessary boilerplate.
+1. **Namespace Generation**: Run `smart-i18n generate-namespaces` to scan your codebase and update namespace definitions.
+2. **Key Extraction**: Run `smart-i18n generate-templates` to extract new translation keys from your codebase.
+3. **Type Generation**: Run `smart-i18n generate-types` to generate TypeScript types for the translations.
+4. **Translation**: Run `smart-i18n generate-translations` to automatically translate missing keys.
+5. **Watching**: Use `smart-i18n watch` to monitor file changes and regenerate namespaces, templates, and types automatically.
+6. **Feature Creation**: Use `smart-i18n-react create-feature` to create a new feature with the necessary boilerplate.
+
+---
+
+> **Note** See Script aliases to see mapped shortcuts.
+> ![Script Mappings](../public/assets/scripts-map.png)
 
 ---
 
@@ -250,9 +266,9 @@ Example:
    ];
    ```
 
-2. **Run `gulp generate-templates`**:
+2. **Run `smart-i18n generate-templates`**:
 
-* After adding these dynamic error codes to the list, run the `gulp generate-templates` command to scan the source code
+* After adding these dynamic error codes to the list, run the `smart-i18n generate-templates` command to scan the source code
   and automatically add these new keys to the translation files (e.g., `en.json`, `kk.json`, `ru.json`).
 
 3. **Manual Translation**:
@@ -285,3 +301,9 @@ Example configuration snippet:
 
 For detailed principles behind translation key structure, see [Translation Keys and Organization.](./translation.md)
 
+---
+
+## 📚 Related Projects
+
+* [`@sayyyat/smart-i18n`](https://www.npmjs.com/package/@sayyyat/smart-i18n) — The core CLI engine that provides scanning, merging, and type generation.
+* [`@sayyyat/smart-i18n-react`](https://www.npmjs.com/package/@sayyyat/smart-i18n-react) — Feature-scaffolding CLI tool that integrates smart-i18n into React/Next.js projects with zero configs.

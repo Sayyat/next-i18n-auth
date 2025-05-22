@@ -190,3 +190,10 @@ This ensures that developers only use valid translation keys and namespaces, fur
 ## Conclusion
 
 The **i18n system** in this project is designed to be scalable, maintainable, and type-safe. With **i18next**, **TypeScript**, and custom utilities like `createStrictT`, the system provides a powerful and developer-friendly environment for managing translations. The modular approach, with a dedicated focus on static translation keys and placeholders, ensures that translations remain consistent across languages and easy to maintain as the project grows. See [types](./types.md) for more details about how generated types are used in the project.
+
+---
+
+## 📚 Related Projects
+
+* [`@sayyyat/smart-i18n`](https://www.npmjs.com/package/@sayyyat/smart-i18n) — The core CLI engine that provides scanning, merging, and type generation.
+* [`@sayyyat/smart-i18n-react`](https://www.npmjs.com/package/@sayyyat/smart-i18n-react) — Feature-scaffolding CLI tool that integrates smart-i18n into React/Next.js projects with zero configs.
