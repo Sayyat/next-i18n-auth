@@ -10,7 +10,7 @@ In the **Next-i18n-auth** system, we’ve replaced the `useTranslation` hook fro
 
 * **Autocompletion for Translation Keys and Namespaces**: When you use the `t()` function inside `useTranslation` or `getTranslation`, your IDE will offer autocompletion for namespaces and translation keys. This reduces the chance of runtime errors due to missing or incorrect keys.
 
-> ⚙️ **Tip**: Types are automatically generated from your translation templates during the `gulp generate-types` step. See the [Automation Docs](./automation.md) for details.
+> ⚙️ **Tip**: Types are automatically generated from your translation templates during the `smart-i18n generate-types` step. See the [Automation Docs](./automation.md) for details.
 
 ---
 

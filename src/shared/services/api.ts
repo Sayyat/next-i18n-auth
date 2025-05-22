@@ -16,7 +16,7 @@ async function extractErrorMessage(error: unknown): Promise<string> {
   // Static error keys to be translated automatically by i18next-scanner
   // These are predefined error codes, and i18next-scanner will automatically generate their translations
   // Make sure to add dynamic backend-specific error codes here manually (as they are context-dependent).
-  // After adding new error codes, run the `gulp` task to update translations.
+  // After adding new error codes, run the `smart-i18n` task to update translations.
   const errorsForI18nextScanner = [
     t("ERR_FR_TOO_MANY_REDIRECTS"),
     t("ERR_BAD_OPTION_VALUE"),

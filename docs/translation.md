@@ -110,7 +110,7 @@ const errorsForI18nextScanner = [
 ];
 ```
 
-These error keys are added to the translation files during the **automatic generation process** using `gulp`, and they can be translated like any other key with placeholders.
+These error keys are added to the translation files during the **automatic generation process** using `smart-i18n`, and they can be translated like any other key with placeholders.
 
 > To ensure that these explicitly declared but dynamically referenced error keys are not removed during the scanning process, we enable the `keepUnusedKeys: true` option in the i18next.config.json file. This prevents accidental cleanup of valid keys that may not be directly used in component JSX but are still required at runtime.
 

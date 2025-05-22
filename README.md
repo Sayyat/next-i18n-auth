@@ -141,7 +141,7 @@ You can find the file structure of the project in the [File Structure](./docs/fi
    ```
 
 2. **Generate language files for the new locale:**
-   Run `gulp` or `yarn g` command to generate the template language files for the newly added language (`fr` in this
+   Run `smart-i18n` or `yarn si` command to generate the template language files for the newly added language (`fr` in this
    case).
 
 3. **Translate the new language files:**
