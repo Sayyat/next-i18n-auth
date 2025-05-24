@@ -20,7 +20,7 @@ export const useDynamicBreadcrumb = () => {
   // Flatten all routes including subRoutes
 
   // Split pathname into segments
-  const segments = pathname.split("/").filter(Boolean);
+  const segments = (pathname || "").split("/").filter(Boolean);
   // console.log({ segments });
   if (segments.length === 0) {
     return [
