@@ -40,15 +40,23 @@ src/
 │   │           └── route.ts
 │   └── layout.tsx
 ├── core/                   // Provides foundational structure for pages
-│   ├── components/         // Core components (Header, Footer, Sidebar, etc.)
+│   ├── components/         // Core components with tests next to them (Header, Footer, Sidebar, etc.)
+│   │   ├── AppSidebar.test.tsx
 │   │   ├── AppSidebar.tsx
+│   │   ├── DynamicBreadcrumb.test.tsx
 │   │   ├── DynamicBreadcrumb.tsx
+│   │   ├── Footer.test.tsx
 │   │   ├── Footer.tsx
+│   │   ├── Header.test.test.tsx
+│   │   ├── Header.test.tsx
 │   │   ├── Header.test.tsx
 │   │   ├── Header.tsx
+│   │   └── RenderSidebarGroup.test.tsx
 │   │   └── RenderSidebarGroup.tsx
-│   ├── hooks/              // Core hooks used across the app
+│   ├── hooks/              // Core hooks with their tests
+│   │   ├── useDynamicBreadcrumb.test.ts
 │   │   ├── useDynamicBreadcrumb.ts
+│   │   └── useRoutes.test.ts
 │   │   └── useRoutes.ts
 │   ├── providers/          // Providers for context and theme
 │   │   ├── ClientProvidersWrapper.tsx
@@ -147,8 +155,8 @@ src/
 │       ├── api.d.ts
 │       ├── next-auth.d.ts
 ├── tests/                  // Test files (unit, integration, e2e)
-│   ├── e2e/                // End-to-end tests
-│   └── setup.ts            // Test setup configurations
+│   ├── e2e/                // End-to-end tests with playwright
+│   └── vitest-setup.ts     // Unit-test setup configurations for vitest
 ├── auth.ts                 // Authentication-related logic
 └── middleware.ts           // Middleware configurations
 ```
