@@ -54,16 +54,15 @@
     "next-env.d.ts",
     "src/**/*.d.ts",
     ".next/types/**/*.ts"
-    //    "gulpfile.mjs",
     // If you need type checking in .next, uncomment if necessary
-    //    ".next/types/**/*.ts"
+    //    ".next/types/**/*.ts",
   ],
   "exclude": [
     "dist",
     "build",
     ".next",
     "node_modules",
-    "**/*.test.ts"
+//    "**/*.test.ts"
   ],
   "ts-node": {
     "esm": true,

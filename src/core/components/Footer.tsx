@@ -10,9 +10,9 @@ export function Footer() {
   return (
     <div className="flex items-center justify-center gap-2 h-8">
       <span>{t("Created with ❤️")}</span>
-      <div className="w-px h-4 bg-primary"></div>
+      <div role="separator" className="w-px h-4 bg-primary"></div>
       <span>{t("Sayat Raykul")}</span>
-      <div className="w-px h-4 bg-primary"></div>
+      <div role="separator" className="w-px h-4 bg-primary"></div>
       <span>{new Date().getFullYear()}</span>
     </div>
   );

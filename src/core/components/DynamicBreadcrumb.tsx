@@ -19,7 +19,7 @@ export function DynamicBreadcrumb() {
   const breadcrumbItems = useDynamicBreadcrumb();
   // console.log({ breadcrumbItems });
   return (
-    <Breadcrumb className="p-0">
+    <Breadcrumb data-testid="dynamic-breadcrumb" className="p-0">
       <BreadcrumbList className="gap-1">
         {breadcrumbItems?.map((item, index) => (
           <React.Fragment key={index}>
