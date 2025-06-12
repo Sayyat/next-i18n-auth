@@ -100,10 +100,10 @@ src/
 │   ├── lib/                // i18n-related logic (client-side, server-side)
 │   │   ├── client.ts       // Client-side i18n initialization
 │   │   ├── config.ts       // i18n configuration (languages, fallback language)
-│   │   ├── createTypedT.ts // Type-safe wrapper for translation functions
+│   │   ├── safety.ts       // Type-safe wrapper for translation functions
 │   │   ├── server.ts       // Server-side i18n initialization
 │   │   ├── settings.ts     // i18next initialization options
-│   │   ├── utils.ts        // Utility functions for locale handling
+│   │   ├── cookies.ts      // Utility functions for locale handling
 │   ├── locales/            // Translation files (e.g., en.json, ru.json)
 │   │   ├── en/
 │   │   │   └── [namespace].json
@@ -146,7 +146,7 @@ src/
 │   │   ├── settings.ts
 │   │   ├── query.ts
 │   │   ├── tokenService.ts
-│   │   └── utils.ts
+│   │   └── cookies.ts
 │   ├── services/           // Shared services used across features
 │   │   ├── api.ts
 │   │   ├── client.ts

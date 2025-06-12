@@ -22,10 +22,10 @@ src/
 │   ├── lib/
 │   │   ├── client.ts       // Client-side i18next initialization
 │   │   ├── config.ts       // Configuration file for languages and fallback
-│   │   ├── createTypedT.ts // Type-safe wrapper for translation functions
+│   │   ├── safety.ts // Type-safe wrapper for translation functions
 │   │   ├── server.ts       // Server-side i18next initialization
 │   │   ├── settings.ts     // i18next initialization options
-│   │   └── utils.ts        // Utility functions for locale handling
+│   │   └── cookies.ts      // Utility functions for locale handling
 │   ├── locales/            // Translation files per language (JSON)
 │   ├── types/
 │   │   └── i18n.d.ts       // Type definitions for translation functions
@@ -133,7 +133,7 @@ export const COOKIE_NAME = "NEXT_LANGUAGE";
 
 ---
 
-### **6. `i18n/lib/utils.ts`**
+### **6. `i18n/lib/cookies.ts`**
 
 This file contains utility functions used for handling **user locale** detection and setting:
 
