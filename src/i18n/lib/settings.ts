@@ -3,20 +3,22 @@
  */
 
 import { InitOptions } from "i18next";
-import { NAMESPACES } from "@/i18n/generated/namespaces";
-import { FALLBACK_LANGUAGE, languages } from "@/i18n/lib/config";
+import { languages } from "@/i18n";
 
 export const defaultNS = "translation";
 
 export const baseInitOptions: InitOptions = {
-  fallbackLng: FALLBACK_LANGUAGE,
-  supportedLngs: languages,
-  ns: NAMESPACES,
-  defaultNS,
-  fallbackNS: defaultNS,
+  parseMissingKeyHandler: (key) => key,
   interpolation: {
     escapeValue: false,
-    prefix: "{{",
-    suffix: "}}",
+    maxReplaces: 1,
+    skipOnVariables: true,
   },
+  returnNull: false,
+  returnEmptyString: true,
+  returnObjects: false,
+  nsSeparator: ".",
+  keySeparator: ".",
+  load: "languageOnly",
+  preload: languages,
 };

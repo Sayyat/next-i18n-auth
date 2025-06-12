@@ -11,10 +11,11 @@ import {
 } from "react-i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
-import { baseInitOptions } from "./settings";
+import { baseInitOptions, defaultNS } from "./settings";
 import { TNamespace, TNamespaceTranslationKeys } from "@/i18n/generated/types";
-import { createStrictT } from "./createTypedT";
-import { COOKIE_NAME } from "./config";
+import { safeT } from "./safety";
+import { COOKIE_NAME, FALLBACK_LANGUAGE, languages } from "./config";
+import { NAMESPACES } from "@/i18n";
 
 // Initialize i18next for client-side
 i18next
@@ -29,12 +30,19 @@ i18next
   )
   .init({
     ...baseInitOptions,
+    fallbackLng: FALLBACK_LANGUAGE,
+    supportedLngs: languages,
+    ns: NAMESPACES,
+    defaultNS,
+    fallbackNS: defaultNS,
     detection: {
       order: ["cookie", "htmlTag", "navigator"],
       caches: ["cookie"],
       lookupCookie: COOKIE_NAME, // optional, defaults to 'i18next'
     },
-    load: "currentOnly",
+    react: {
+      useSuspense: false,
+    },
   });
 
 export default i18next;
@@ -54,7 +62,10 @@ export function useTranslation<N extends TNamespace>(
   ready: boolean;
 } {
   const { t: rawT, i18n, ready } = useI18nTranslation(namespace);
-  const t = createStrictT(rawT, namespace); // ← типобезопасная обёртка
+  // const t =
+  //   (rawT as any)._isStrictT === true ? rawT : createStrictT(rawT, namespace);
+  const t = safeT(rawT);
+  console.log("after safeT");
 
   return { t, i18n, ready };
 }
