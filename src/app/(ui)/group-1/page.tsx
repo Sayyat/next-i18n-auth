@@ -13,7 +13,7 @@ export default function Page() {
     <div className="flex flex-col h-full items-center justify-center w-full">
       <span>
         {t("Welcome, {{username}}", {
-          username: data?.firstname ?? "",
+          username: data?.firstname ?? "User",
         })}
       </span>
     </div>
