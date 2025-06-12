@@ -8,16 +8,19 @@ import { IPaginatedResponse, IPaginationParams, IResponse } from "@/shared";
 import { DEFAULT_PAGINATION_PARAMS } from "@/shared/lib/constants";
 import { buildQueryParams } from "@/shared/lib/query";
 import { getTranslation } from "@/i18n/lib/server";
+import chalk from "chalk";
+import { TFunction } from "@/i18n";
+import { TNamespaceTranslationKeys } from "@/i18n/generated/types";
 
-// Centralized error extraction
-async function extractErrorMessage(error: unknown): Promise<string> {
-  const { t } = await getTranslation("shared.services.api");
-
+export async function dummyTranslationsForScanner(
+  t: TFunction<"shared.services.api">,
+) {
   // Static error keys to be translated automatically by i18next-scanner
   // These are predefined error codes, and i18next-scanner will automatically generate their translations
   // Make sure to add dynamic backend-specific error codes here manually (as they are context-dependent).
   // After adding new error codes, run the `smart-i18n` task to update translations.
-  const errorsForI18nextScanner = [
+  return [
+    // Axios-specific codes
     t("ERR_FR_TOO_MANY_REDIRECTS"),
     t("ERR_BAD_OPTION_VALUE"),
     t("ERR_BAD_OPTION"),
@@ -28,22 +31,56 @@ async function extractErrorMessage(error: unknown): Promise<string> {
     t("ERR_NOT_SUPPORT"),
     t("ERR_INVALID_URL"),
     t("ERR_CANCELED"),
-    t("ECONNABORTED"),
+
+    // Node.js low-level network errors
+    t("ECONNREFUSED"),
+    t("ECONNRESET"),
     t("ETIMEDOUT"),
-    // Add more dynamic backend error codes as needed
+    t("EHOSTUNREACH"),
+    t("ENETUNREACH"),
+    t("EAI_AGAIN"),
+    t("ENOTFOUND"),
+    t("EPIPE"),
+    t("EACCES"),
+    t("ECONNABORTED"),
   ];
+}
 
-  if (axios.isAxiosError(error) && error.response?.data) {
-    const { code, message } = error.response.data;
-    // console.log({ code, message });
+// Centralized error extraction
+async function extractErrorMessage(error: unknown): Promise<string> {
+  console.log(chalk.yellow("extractErrorMessage"));
+  const { t } = await getTranslation("shared.services.api");
+  console.log(chalk.yellow(error));
 
-    if (!code && !message) {
+  if (axios.isAxiosError(error)) {
+    const { response, code, message } = error;
+    console.log({ response, code, message });
+    // Обработка сетевых ошибок, без response
+    if (!response) {
+      const translated = t(
+        code as TNamespaceTranslationKeys["shared.services.api"],
+        {},
+      );
+      console.log("🧪 Translating key:", code, "→", translated);
+      return translated !== code ? translated : t("Unknown Error");
+    }
+
+    // Обработка серверных ошибок с code/message
+    const { code: resCode, message: resMessage } = response.data || {};
+
+    if (!resCode && !resMessage) {
       return t("Server error");
     }
-    // ✅ Try to translate error code, otherwise return `message`
-    const translatedMessage = t(code, { defaultValue: message });
-    return translatedMessage !== code ? translatedMessage : message;
+
+    const translated = resCode
+      ? t(resCode as TNamespaceTranslationKeys["shared.services.api"])
+      : "";
+
+    return translated !== resCode
+      ? translated
+      : resMessage || t("Unknown Error");
   }
+
   return t("Unknown Error");
 }
 
