@@ -51,14 +51,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       async authorize(credentials) {
-        const { t } = await getTranslation("shared.services.api");
+        // const { t } = await getTranslation("shared.services.api");
         // 1. Validate login input
         const registerSchema = await getRegisterSchema();
         const { success, data, error } =
           await registerSchema.safeParseAsync(credentials);
         if (!success) {
           throw new InvalidLoginError(
-            error.errors[0]?.message || t("unknownError"),
+            // error.errors[0]?.message || t("unknownError"),
+            error.errors[0]?.message || "Unknown error",
           );
         }
 
@@ -80,15 +81,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       async authorize(credentials, _) {
-        const { t } = await getTranslation("shared.services.api");
-
+        const { t, i18n } = await getTranslation("shared.services.api");
+        // console.log({ t, i18n: JSON.stringify(i18n, null, 2) });
         // Обернём его строго типизированной переменной, но вызов оставим оригинальный
         const loginSchema = await getLoginSchema();
         const { success, data, error } =
           await loginSchema.safeParseAsync(credentials);
         if (!success) {
           throw new InvalidLoginError(
-            error.errors[0]?.message || t("unknownError"),
+            error.errors[0]?.message || t("Unknown Error"),
+            // error.errors[0]?.message || "Unknown Error",
           );
         }
 
