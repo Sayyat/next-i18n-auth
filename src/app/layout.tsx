@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 import { ClientProvidersWrapper } from "@/core/providers/ClientProvidersWrapper";
 import { ReactNode } from "react";
 import "@/i18n/lib/client";
-import { getUserLocale } from "@/i18n/lib/utils"; // 👈 Важно: импортируем для инициализации
+import { getUserLocale } from "@/i18n/lib/cookies"; // 👈 Важно: импортируем для инициализации
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
