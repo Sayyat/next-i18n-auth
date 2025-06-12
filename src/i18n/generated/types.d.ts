@@ -176,7 +176,15 @@ export type TNamespaceTranslationKeys = {
     | "ERR_INVALID_URL"
     | "ERR_NETWORK"
     | "ERR_NOT_SUPPORT"
-    | "ETIMEDOUT";
+    | "ETIMEDOUT"
+    | "ECONNREFUSED"
+    | "EACCES"
+    | "EAI_AGAIN"
+    | "ECONNRESET"
+    | "EHOSTUNREACH"
+    | "ENETUNREACH"
+    | "ENOTFOUND"
+    | "EPIPE";
 };
 
 export type TAllTranslationKeys = 
@@ -308,4 +316,12 @@ export type TAllTranslationKeys =
   | "shared.services.api.ERR_INVALID_URL"
   | "shared.services.api.ERR_NETWORK"
   | "shared.services.api.ERR_NOT_SUPPORT"
-  | "shared.services.api.ETIMEDOUT";
+  | "shared.services.api.ETIMEDOUT"
+  | "shared.services.api.ECONNREFUSED"
+  | "shared.services.api.EACCES"
+  | "shared.services.api.EAI_AGAIN"
+  | "shared.services.api.ECONNRESET"
+  | "shared.services.api.EHOSTUNREACH"
+  | "shared.services.api.ENETUNREACH"
+  | "shared.services.api.ENOTFOUND"
+  | "shared.services.api.EPIPE";

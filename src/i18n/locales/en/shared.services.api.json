@@ -1,6 +1,4 @@
 {
-  "serverError": "Server error",
-  "unknownError": "Unknown error",
   "Server error": "Server error",
   "Unknown Error": "Unknown Error",
   "ECONNABORTED": "Connection was aborted",
@@ -14,5 +12,13 @@
   "ERR_INVALID_URL": "Invalid URL",
   "ERR_NETWORK": "Network error",
   "ERR_NOT_SUPPORT": "Feature not supported",
-  "ETIMEDOUT": "Request timed out"
+  "ETIMEDOUT": "Request timed out",
+  "ECONNREFUSED": "Connection refused",
+  "EACCES": "Permission denied",
+  "EAI_AGAIN": "DNS temporarily unavailable",
+  "ECONNRESET": "Connection reset",
+  "EHOSTUNREACH": "Host unreachable",
+  "ENETUNREACH": "Network unreachable",
+  "ENOTFOUND": "Host not found",
+  "EPIPE": "Broken pipe"
 }

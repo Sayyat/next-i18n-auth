@@ -11,7 +11,7 @@
   "Password and Confirm mismatch": "Құпия сөз және сәйкессіздікті растау",
   "Password is min": "Құпия сөз - мин",
   "Password is weak": "Құпия сөз әлсіз",
-  "Password must be at least {{symbols}} symbols": "Құпия сөз кем дегенде {{ символдар }} таңбадан тұруы керек",
+  "Password must be at least {{symbols}} symbols": "Құпия сөз кем дегенде {{symbols}} таңбадан тұруы керек",
   "Phone is invalid": "Телефон жарамсыз",
   "Phone is max": "Телефон максимум",
   "Phone is min": "Телефон мин",
