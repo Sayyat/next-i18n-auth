@@ -15,6 +15,10 @@ scalability, and maintainability. Key differences from classic FSD include:
 
 ```plaintext
 src/
+├── __tests__/              // Test files (unit, integration, e2e)
+│   ├── core/               // unit tests for src/core
+│   ├── e2e/                // End-to-end tests with playwright
+│   └── vitest-setup.ts     // Unit-test setup configurations for vitest
 ├── app/
 │   ├── (ui)/               // Pages and Layouts (Next.js App Router)
 │   │   ├── group-1/
@@ -154,9 +158,6 @@ src/
 │   └── types/              // Type definitions for shared resources
 │       ├── api.d.ts
 │       ├── next-auth.d.ts
-├── tests/                  // Test files (unit, integration, e2e)
-│   ├── e2e/                // End-to-end tests with playwright
-│   └── vitest-setup.ts     // Unit-test setup configurations for vitest
 ├── auth.ts                 // Authentication-related logic
 └── middleware.ts           // Middleware configurations
 ```
@@ -210,7 +211,7 @@ Contains **shared resources** used across multiple features of the application, 
 * **Hooks**: Shared hooks like `useToast` for toast notifications.
 * **Data**: Environment variables (validation for both client and server-side).
 
-### **`src/tests/`**
+### **`src/__tests__/`**
 
 Contains **test files**, including **unit tests**, **integration tests**, and **end-to-end (e2e) tests**. The tests are
 organized by type and ensure the quality and stability of the application.

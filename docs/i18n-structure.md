@@ -22,10 +22,11 @@ src/
 │   ├── lib/
 │   │   ├── client.ts       // Client-side i18next initialization
 │   │   ├── config.ts       // Configuration file for languages and fallback
-│   │   ├── safety.ts // Type-safe wrapper for translation functions
+│   │   ├── cookies.ts      // Utility functions for locale handling
 │   │   ├── server.ts       // Server-side i18next initialization
-│   │   ├── settings.ts     // i18next initialization options
-│   │   └── cookies.ts      // Utility functions for locale handling
+│   │   ├── loader.ts       // Server-side i18next initialization
+│   │   ├── safety.ts       // Type-safe wrapper for translation functions
+│   │   └── server.ts       // Server-side i18next initialization
 │   ├── locales/            // Translation files per language (JSON)
 │   ├── types/
 │   │   └── i18n.d.ts       // Type definitions for translation functions
@@ -66,14 +67,14 @@ This file is responsible for initializing **i18next** on the **client-side**. It
 
 ```ts
 i18next
-  .use(initReactI18next)
-  .use(LanguageDetector)
-  .use(
-    resourcesToBackend((language: string, namespace: string) => {
-      return import(`@/i18n/locales/${language}/${namespace}.json`);
-    })
-  )
-  .init(baseInitOptions);
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    .use(
+        resourcesToBackend((language: string, namespace: string) => {
+            return import(`@/i18n/locales/${language}/${namespace}.json`);
+        })
+    )
+    .init(baseInitOptions);
 ```
 
 The **`useTranslation`** function is typed to ensure that developers can only access the correct translation keys for the given namespace, avoiding errors from invalid keys.
@@ -90,26 +91,26 @@ This file is responsible for initializing **i18next** on the **server-side**. It
 **Key Code Example**:
 
 ```ts
-const i18nextInstance = await initI18next();
-const language = await getUserLocale();
+const i18nextInstance = await initI18nextOnce(language, ns);
 const rawT = i18nextInstance.getFixedT(language, ns);
+const t = safeT(rawT);
 ```
 
 This ensures that the server-side code can retrieve translations in a type-safe manner, using the `TNamespace` types to guarantee the correctness of the keys.
 
 ---
 
-### **4. Translation Function Wrapping (`createStrictT`)**
+### **4. Translation Function Wrapping (`safeT`)**
 
-The **`createStrictT`** function is used to create a **type-safe translation function**. It ensures that when calling `t()` inside components or server-side code, the translation keys are validated and suggestions are available in your IDE.
+The **`safeT`** function is used to create a **type-safe translation function**. It ensures that when calling `t()` inside components or server-side code, the translation keys are validated and suggestions are available in your IDE.
 
 **Key Code Example**:
 
 ```ts
-export function createStrictT<T extends TNamespace>(rawT: any, namespace: T) {
-  return (key: TNamespaceTranslationKeys[T], options?: Record<string, unknown>) => {
-    return rawT(key, options); // Ensure strict typing on key
-  };
+export function safeT<T extends TNamespace>(rawT: any, namespace: T) {
+    return (key: TNamespaceTranslationKeys[T], options?: Record<string, unknown>) => {
+        return rawT(key, options); // Ensure strict typing on key
+    };
 }
 ```
 
@@ -127,8 +128,10 @@ This file contains basic configuration related to **languages** and **fallback l
 
 ```ts
 export const languages = ["kk", "ru", "en"] as const;
-export const FALLBACK_LANGUAGE: TLanguage = "en";
+export type TLanguage = (typeof languages)[number];
+export const FALLBACK_LANGUAGE: TLanguage = "en"; // Переименовали переменную
 export const COOKIE_NAME = "NEXT_LANGUAGE";
+export const defaultNS = "translation";
 ```
 
 ---
@@ -142,10 +145,10 @@ This file contains utility functions used for handling **user locale** detection
 
 ```ts
 export async function getUserLocale(): Promise<TLanguage> {
-  return (
-    ((await cookies()).get(COOKIE_NAME)?.value as TLanguage) ||
-    FALLBACK_LANGUAGE
-  );
+    return (
+        ((await cookies()).get(COOKIE_NAME)?.value as TLanguage) ||
+        FALLBACK_LANGUAGE
+    );
 }
 ```
 
@@ -179,7 +182,7 @@ The translation keys and namespaces are generated using **Gulp** scripts. The **
 
 ```ts
 export type TFunction<N extends TNamespace> = <
-  K extends TNamespaceTranslationKeys[N]
+    K extends TNamespaceTranslationKeys[N]
 >(key: K, options?: Record<string, unknown>) => string;
 ```
 
