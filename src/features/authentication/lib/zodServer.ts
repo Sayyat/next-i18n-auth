@@ -2,11 +2,13 @@
  * Copyright (c) 2025. Sayat Raykul
  */
 
-import { getTranslation } from "@/i18n";
+"use server";
+
+import { getTranslation } from "@/i18n/lib/server";
 import {
-  createRegisterSchema,
-  createLoginSchema,
   createEditProfileSchema,
+  createLoginSchema,
+  createRegisterSchema,
   createResetSchema,
 } from "./zod";
 
