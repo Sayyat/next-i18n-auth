@@ -161,8 +161,6 @@ export type TNamespaceTranslationKeys = {
     | "System"
     | "Theme";
   "shared.services.api": 
-    | "serverError"
-    | "unknownError"
     | "Server error"
     | "Unknown Error"
     | "ECONNABORTED"
@@ -301,8 +299,6 @@ export type TAllTranslationKeys =
   | "shared.components.ThemeSelect.Light"
   | "shared.components.ThemeSelect.System"
   | "shared.components.ThemeSelect.Theme"
-  | "shared.services.api.serverError"
-  | "shared.services.api.unknownError"
   | "shared.services.api.Server error"
   | "shared.services.api.Unknown Error"
   | "shared.services.api.ECONNABORTED"

@@ -11,11 +11,10 @@ import {
 } from "react-i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
-import { baseInitOptions, defaultNS } from "./settings";
 import { TNamespace, TNamespaceTranslationKeys } from "@/i18n/generated/types";
 import { safeT } from "./safety";
-import { COOKIE_NAME, FALLBACK_LANGUAGE, languages } from "./config";
-import { NAMESPACES } from "@/i18n";
+import { COOKIE_NAME, FALLBACK_LANGUAGE, languages, defaultNS } from "./config";
+import { NAMESPACES } from "@/i18n/generated/namespaces";
 
 // Initialize i18next for client-side
 i18next
@@ -29,12 +28,22 @@ i18next
     }),
   )
   .init({
-    ...baseInitOptions,
     fallbackLng: FALLBACK_LANGUAGE,
     supportedLngs: languages,
     ns: NAMESPACES,
     defaultNS,
     fallbackNS: defaultNS,
+    interpolation: {
+      escapeValue: false,
+      maxReplaces: 1,
+      skipOnVariables: true,
+    },
+    returnNull: false,
+    returnEmptyString: true,
+    returnObjects: false,
+    nsSeparator: ".",
+    keySeparator: ".",
+    load: "languageOnly",
     detection: {
       order: ["cookie", "htmlTag", "navigator"],
       caches: ["cookie"],
@@ -62,8 +71,6 @@ export function useTranslation<N extends TNamespace>(
   ready: boolean;
 } {
   const { t: rawT, i18n, ready } = useI18nTranslation(namespace);
-  // const t =
-  //   (rawT as any)._isStrictT === true ? rawT : createStrictT(rawT, namespace);
   const t = safeT(rawT);
   console.log("after safeT");
 
