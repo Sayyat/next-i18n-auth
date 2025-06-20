@@ -6,13 +6,13 @@
 import { cookies } from "next/headers";
 import { COOKIE_NAME, FALLBACK_LANGUAGE, TLanguage } from "./config";
 
-export async function getUserLocale(): Promise<TLanguage> {
+export async function getUserLanguage(): Promise<TLanguage> {
   return (
     ((await cookies()).get(COOKIE_NAME)?.value as TLanguage) ||
     FALLBACK_LANGUAGE
   );
 }
 
-export async function setUserLocale(locale: TLanguage) {
+export async function setUserLanguage(locale: TLanguage) {
   (await cookies()).set(COOKIE_NAME, locale);
 }

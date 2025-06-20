@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 import { ClientProvidersWrapper } from "@/core/providers/ClientProvidersWrapper";
 import { ReactNode } from "react";
 import "@/i18n/lib/client";
-import { getUserLocale } from "@/i18n/lib/cookies"; // 👈 Важно: импортируем для инициализации
+import { getUserLanguage } from "@/i18n/lib/cookies";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,7 +86,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const lang = await getUserLocale();
+  const lang = await getUserLanguage();
 
   return (
     <html lang={lang}>
