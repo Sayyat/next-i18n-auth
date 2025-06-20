@@ -18,9 +18,9 @@ import {
 import { getTranslation } from "@/i18n";
 
 class InvalidLoginError extends CredentialsSignin {
+  static type = "InvalidLoginError";
   constructor(message: string) {
     super(message);
-    this.name = "InvalidLoginError";
     this.code = message; // Custom error code if needed
   }
 }
