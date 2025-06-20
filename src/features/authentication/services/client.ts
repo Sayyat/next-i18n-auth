@@ -3,8 +3,7 @@
  */
 
 import { IPaginatedResponse, IResponse } from "@/shared";
-import { createApiService } from "@/shared/services/api";
-import { apiClient } from "@/shared/services/client";
+import { useCentralApi } from "@/shared/services/client";
 import { IProfile } from "@/features/authentication/types/profile";
 import { ICity } from "@/features/authentication/types/city";
 import {
@@ -12,46 +11,52 @@ import {
   IResetResponse,
 } from "@/features/authentication/types/payload";
 
-const api = createApiService(apiClient);
+export interface IAuthenticationApi {
+  resetPassword: (payload: IResetPayload) => Promise<IResponse<IResetResponse>>;
+  getCities: () => Promise<IResponse<IPaginatedResponse<ICity>>>;
+  getProfile: () => Promise<IResponse<IProfile>>;
+  updateProfile: (data: Partial<IProfile>) => Promise<IResponse<IProfile>>;
+  updateProfileImage: (file: File) => Promise<IResponse<IProfile>>;
+}
 
-/**
- * Reset Password
- */
-export const resetPassword = async (
-  payload: IResetPayload,
-): Promise<IResponse<IResetResponse>> => {
-  return api.postWithHandle<IResetResponse>("/api/password-reset/", {
-    email: payload.email,
-  });
-};
+export const useAuthenticationApi = (): IAuthenticationApi => {
+  const api = useCentralApi();
 
-/**
- * Get Cities list
- */
-export const getCities = (): Promise<IResponse<IPaginatedResponse<ICity>>> =>
-  api.getWithHandle<IPaginatedResponse<ICity>>("/api/cities/");
+  const resetPassword = async (
+    payload: IResetPayload,
+  ): Promise<IResponse<IResetResponse>> => {
+    return api.postWithHandle<IResetResponse>("/api/password-reset/", {
+      email: payload.email,
+    });
+  };
 
-/**
- * Get User Profile
- */
-export const getProfile = (): Promise<IResponse<IProfile>> =>
-  api.getWithHandle<IProfile>("/api/user/profile/");
+  const getCities = (): Promise<IResponse<IPaginatedResponse<ICity>>> =>
+    api.getWithHandle<IPaginatedResponse<ICity>>("/api/cities/");
 
-/**
- * Update Profile (without Image)
- */
-export const updateProfile = (
-  data: Partial<IProfile>,
-): Promise<IResponse<IProfile>> =>
-  api.patchWithHandle<IProfile>("/api/user/profile/", data);
+  const getProfile = (): Promise<IResponse<IProfile>> =>
+    api.getWithHandle<IProfile>("/api/user/profile/");
 
-/**
- * Update Profile Image
- */
-export const updateProfileImage = (
-  imageFile: File,
-): Promise<IResponse<IProfile>> => {
-  const formData = new FormData();
-  formData.append("file", imageFile);
-  return api.postFormWithHandle<IProfile>("/api/user/profile/photo/", formData);
+  const updateProfile = (
+    data: Partial<IProfile>,
+  ): Promise<IResponse<IProfile>> =>
+    api.patchWithHandle<IProfile>("/api/user/profile/", data);
+
+  const updateProfileImage = (
+    imageFile: File,
+  ): Promise<IResponse<IProfile>> => {
+    const formData = new FormData();
+    formData.append("file", imageFile);
+    return api.postFormWithHandle<IProfile>(
+      "/api/user/profile/photo/",
+      formData,
+    );
+  };
+
+  return {
+    resetPassword,
+    getCities,
+    getProfile,
+    updateProfile,
+    updateProfileImage,
+  };
 };

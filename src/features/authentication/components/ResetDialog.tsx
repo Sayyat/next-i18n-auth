@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { resetPassword } from "@/features/authentication/services/client";
+import { useAuthenticationApi } from "@/features/authentication/services/client";
 
 import { Loading } from "@/shared/components/svg/Loading";
 import { Button } from "@/shared/components/ui/button";
@@ -48,6 +48,7 @@ export const ResetDialog: React.FC<IResetDialogProps> = ({
   const { t } = useTranslation(
     "features.authentication.components.ResetDialog",
   );
+  const { resetPassword } = useAuthenticationApi();
 
   const [loading, setLoading] = useState(false);
 

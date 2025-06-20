@@ -81,9 +81,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       async authorize(credentials, _) {
-        const { t, i18n } = await getTranslation("shared.services.api");
-        // console.log({ t, i18n: JSON.stringify(i18n, null, 2) });
-        // Обернём его строго типизированной переменной, но вызов оставим оригинальный
+        const { t } = await getTranslation("shared.services.api");
         const loginSchema = await getLoginSchema();
         const { success, data, error } =
           await loginSchema.safeParseAsync(credentials);
