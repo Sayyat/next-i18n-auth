@@ -19,6 +19,7 @@ import { getTranslation } from "@/i18n";
 
 class InvalidLoginError extends CredentialsSignin {
   static type = "InvalidLoginError";
+
   constructor(message: string) {
     super(message);
     this.code = message; // Custom error code if needed
@@ -81,20 +82,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       async authorize(credentials, _) {
-        const { t } = await getTranslation("shared.services.api");
+        // const { t } = await getTranslation("shared.services.api");
+        // console.log({ t });
         const loginSchema = await getLoginSchema();
         const { success, data, error } =
           await loginSchema.safeParseAsync(credentials);
         if (!success) {
           throw new InvalidLoginError(
-            error.errors[0]?.message || t("Unknown Error"),
-            // error.errors[0]?.message || "Unknown Error",
+            // error.errors[0]?.message || t("Unknown Error"),
+            error.errors[0]?.message || "Unknown Error",
           );
         }
 
         // 2. Attempt to login user
         const result = await loginUser(data);
-
+        console.log({ result });
         if (!result.success) {
           throw new InvalidLoginError(result.error);
         }
