@@ -60,16 +60,18 @@ const mockUseRoutes = vi.fn(() => ({
 }));
 
 // Мокаем модули перед импортом
-vi.mock("../../i18n", () => ({
+vi.mock("@/i18n", () => ({
   useTranslation: mockUseTranslation,
 }));
 
-vi.mock("./useRoutes", () => ({
+vi.mock("@/core/hooks/useRoutes", () => ({
   useRoutes: mockUseRoutes,
 }));
 
 // Импортируем хук после настройки моков
-const { useDynamicBreadcrumb } = await import("./useDynamicBreadcrumb");
+const { useDynamicBreadcrumb } = await import(
+  "@/core/hooks/useDynamicBreadcrumb"
+);
 
 describe("useDynamicBreadcrumb", () => {
   beforeEach(() => {

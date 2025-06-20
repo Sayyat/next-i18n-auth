@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { renderHook } from "@testing-library/react";
-import { useRoutes } from "./useRoutes";
-import type { IAppRoute } from "../types/routes";
+import { useRoutes } from "@/core/hooks/useRoutes";
+import type { IAppRoute } from "@/core/types/routes";
 
 // Mock the translation hook
 vi.mock("../../i18n", () => ({

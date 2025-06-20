@@ -6,7 +6,7 @@ import {
   waitFor,
   cleanup,
 } from "@testing-library/react";
-import * as framerMotion from "framer-motion"; // 👈 импортируем в начале файла
+import * as framerMotion from "framer-motion";
 
 const mockUseSession = vi.fn();
 const mockT = vi.fn((key: string) => key);
@@ -133,7 +133,7 @@ vi.mock("framer-motion", () => ({
   useAnimation: vi.fn(() => mockControls),
 }));
 
-let Header: typeof import("./Header").Header;
+let Header: typeof import("@/core/components/Header").Header;
 
 describe("Header", () => {
   beforeEach(async () => {
@@ -145,7 +145,7 @@ describe("Header", () => {
       t: mockT,
       i18n: mockI18n,
     });
-    Header = (await import("./Header")).Header;
+    Header = (await import("@/core/components/Header")).Header;
   });
 
   afterEach(() => {

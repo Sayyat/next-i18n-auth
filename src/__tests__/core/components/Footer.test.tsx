@@ -12,13 +12,13 @@ vi.mock("@/i18n", () => ({
   useTranslation: mockUseTranslation,
 }));
 
-let Footer: typeof import("./Footer").Footer;
+let Footer: typeof import("@/core/components/Footer").Footer;
 
 describe("Footer", () => {
   beforeEach(async () => {
     vi.clearAllMocks();
     mockT.mockImplementation((key) => key); // default passthrough
-    Footer = (await import("./Footer")).Footer;
+    Footer = (await import("@/core/components/Footer")).Footer;
   });
 
   afterEach(() => {

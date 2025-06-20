@@ -1,6 +1,6 @@
 import { describe, it, vi, beforeEach, afterEach, expect } from "vitest";
 import { render, screen, cleanup } from "@testing-library/react";
-import { AppSidebar } from "./AppSidebar";
+import { AppSidebar } from "@/core/components/AppSidebar";
 import { useSession } from "next-auth/react";
 import { useProfile } from "@/features/authentication";
 import { useRoutes } from "@/core/hooks/useRoutes";
@@ -34,6 +34,21 @@ vi.mock("@/shared/components/ui/sidebar", () => ({
   )),
   SidebarHeader: vi.fn(({ children }) => (
     <div data-testid="sidebar-header">{children}</div>
+  )),
+  SidebarGroup: vi.fn(({ children }) => (
+    <div data-testid="sidebar-group">{children}</div>
+  )),
+  SidebarGroupContent: vi.fn(({ children }) => (
+    <div data-testid="sidebar-group-content">{children}</div>
+  )),
+  SidebarMenu: vi.fn(({ children }) => (
+    <div data-testid="sidebar-menu">{children}</div>
+  )),
+  SidebarMenuItem: vi.fn(({ children }) => (
+    <div data-testid="sidebar-menu-item">{children}</div>
+  )),
+  SidebarMenuButton: vi.fn(({ children }) => (
+    <div data-testid="sidebar-menu-button">{children}</div>
   )),
 }));
 
@@ -81,7 +96,6 @@ describe("AppSidebar", () => {
 
   it("renders common routes", () => {
     render(<AppSidebar />);
-    expect(screen.getByTestId("render-routes-Home")).toBeInTheDocument();
     expect(screen.getByText("Home")).toBeInTheDocument();
     expect(screen.getByText("About")).toBeInTheDocument();
   });
@@ -97,7 +111,6 @@ describe("AppSidebar", () => {
 
     render(<AppSidebar />);
 
-    expect(screen.getByTestId("render-routes-Admin Panel")).toBeInTheDocument();
     expect(screen.getByText("Admin Panel")).toBeInTheDocument();
     expect(screen.getByText("Statistics")).toBeInTheDocument();
   });

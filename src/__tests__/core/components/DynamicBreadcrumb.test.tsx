@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 import { render, screen, cleanup } from "@testing-library/react";
-import { DynamicBreadcrumb } from "./DynamicBreadcrumb";
+import { DynamicBreadcrumb } from "@/core/components/DynamicBreadcrumb";
 import { useDynamicBreadcrumb } from "@/core/hooks/useDynamicBreadcrumb";
 import { LucideProps } from "lucide-react";
 

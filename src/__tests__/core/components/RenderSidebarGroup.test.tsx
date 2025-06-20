@@ -1,10 +1,13 @@
-import { describe, it, expect, vi, beforeEach, afterEach, Mock } from "vitest";
-import { render, screen, cleanup } from "@testing-library/react";
-import { RenderMenuItem, RenderRouteGroup } from "./RenderSidebarGroup";
+import { afterEach, beforeEach, describe, expect, it, Mock, vi } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import {
+  RenderMenuItem,
+  RenderRouteGroup,
+} from "@/core/components/RenderSidebarGroup";
 import { IAppRoute } from "@/core/types/routes";
 import { usePathname } from "next/navigation";
 import { SidebarProvider } from "@/shared/components/ui/sidebar";
-import { LucideIcon, LucideProps } from "lucide-react";
+import { LucideProps } from "lucide-react";
 import { forwardRef } from "react";
 
 // Мокаем window.matchMedia
