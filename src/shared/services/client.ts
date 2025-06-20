@@ -6,9 +6,15 @@ import axios from "axios";
 import { env } from "@/shared/data/env/client";
 import { getSession } from "next-auth/react";
 import { tokenStore } from "@/shared/lib/tokenStore";
+import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
+import { IPaginatedResponse, IPaginationParams, IResponse } from "@/shared";
+import { DEFAULT_PAGINATION_PARAMS } from "@/shared/lib/constants";
+import { buildQueryParams } from "@/shared/lib/query";
+import { extractErrorMessage } from "@/shared/services/api";
 
-// Create an Axios instance for server-side requests
-export const apiClient = axios.create({
+// Create an Axios instance for client-side requests
+const apiClient = axios.create({
   baseURL: env.NEXT_PUBLIC_API_URL, // Replace with your API URL
   headers: { "Content-Type": "application/json" },
 });
@@ -47,3 +53,53 @@ apiClient.interceptors.response.use(
     return Promise.reject(error); // Pass the error to the calling function
   },
 );
+
+function useHandleResponse() {
+  const { t } = useTranslation("shared.services.api");
+
+  return async function handleResponse<T>(
+    request: Promise<any>,
+  ): Promise<IResponse<T>> {
+    try {
+      const response = await request;
+      return { success: true, data: response.data as T };
+    } catch (error) {
+      const extracted = await extractErrorMessage(error, t);
+      return { success: false, error: extracted };
+    }
+  };
+}
+
+export function useCentralApi() {
+  const handleResponse = useHandleResponse();
+
+  return useMemo(
+    () => ({
+      getWithHandle: <T>(url: string) => handleResponse<T>(apiClient.get(url)),
+
+      postWithHandle: <T>(url: string, payload: unknown) =>
+        handleResponse<T>(apiClient.post(url, payload)),
+
+      patchWithHandle: <T>(url: string, payload: unknown) =>
+        handleResponse<T>(apiClient.patch(url, payload)),
+
+      postFormWithHandle: <T>(url: string, formData: FormData) =>
+        handleResponse<T>(
+          apiClient.post(url, formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+          }),
+        ),
+
+      getPaginatedWithHandle: <T>(
+        url: string,
+        params: IPaginationParams = DEFAULT_PAGINATION_PARAMS,
+      ) => {
+        const query = buildQueryParams(params);
+        return handleResponse<IPaginatedResponse<T>>(
+          apiClient.get(`${url}${query}`),
+        );
+      },
+    }),
+    [apiClient, handleResponse],
+  );
+}

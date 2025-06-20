@@ -1,16 +1,47 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
-
-import axios, { AxiosInstance } from "axios";
-import { IPaginatedResponse, IPaginationParams, IResponse } from "@/shared";
-
-import { DEFAULT_PAGINATION_PARAMS } from "@/shared/lib/constants";
-import { buildQueryParams } from "@/shared/lib/query";
-import { getTranslation } from "@/i18n/lib/server";
+// Centralized error extraction
 import chalk from "chalk";
 import { TFunction } from "@/i18n";
+import axios from "axios";
 import { TNamespaceTranslationKeys } from "@/i18n/generated/types";
+
+export async function extractErrorMessage(
+  error: unknown,
+  t: TFunction<"shared.services.api">,
+): Promise<string> {
+  console.log(chalk.yellow("extractErrorMessage"));
+  console.log(chalk.yellow(error));
+
+  if (axios.isAxiosError(error)) {
+    const { response, code, message } = error;
+    console.log({ response, code, message });
+    // handle network errors without response
+    if (!response) {
+      const translated = t(
+        code as TNamespaceTranslationKeys["shared.services.api"],
+        {},
+      );
+      console.log("🧪 Translating key:", code, "→", translated);
+      return translated !== code ? translated : t("Unknown Error");
+    }
+
+    // handle server errors with code/message
+    const { code: resCode, message: resMessage } = response.data || {};
+
+    if (!resCode && !resMessage) {
+      return t("Server error");
+    }
+
+    const translated = resCode
+      ? t(resCode as TNamespaceTranslationKeys["shared.services.api"])
+      : "";
+
+    return translated !== resCode
+      ? translated
+      : resMessage || t("Unknown Error");
+  }
+
+  return t("Unknown Error");
+}
 
 export async function dummyTranslationsForScanner(
   t: TFunction<"shared.services.api">,
@@ -45,90 +76,3 @@ export async function dummyTranslationsForScanner(
     t("ECONNABORTED"),
   ];
 }
-
-// Centralized error extraction
-async function extractErrorMessage(error: unknown): Promise<string> {
-  console.log(chalk.yellow("extractErrorMessage"));
-  const { t } = await getTranslation("shared.services.api");
-  console.log(chalk.yellow(error));
-
-  if (axios.isAxiosError(error)) {
-    const { response, code, message } = error;
-    console.log({ response, code, message });
-    // Обработка сетевых ошибок, без response
-    if (!response) {
-      const translated = t(
-        code as TNamespaceTranslationKeys["shared.services.api"],
-        {},
-      );
-      console.log("🧪 Translating key:", code, "→", translated);
-      return translated !== code ? translated : t("Unknown Error");
-    }
-
-    // Обработка серверных ошибок с code/message
-    const { code: resCode, message: resMessage } = response.data || {};
-
-    if (!resCode && !resMessage) {
-      return t("Server error");
-    }
-
-    const translated = resCode
-      ? t(resCode as TNamespaceTranslationKeys["shared.services.api"])
-      : "";
-
-    return translated !== resCode
-      ? translated
-      : resMessage || t("Unknown Error");
-  }
-
-  return t("Unknown Error");
-}
-
-// Handle API responses
-export async function handleResponse<T>(
-  request: Promise<any>,
-): Promise<IResponse<T>> {
-  try {
-    const response = await request;
-    return { success: true, data: response.data as T };
-  } catch (error) {
-    const extractedError = await extractErrorMessage(error);
-    return { success: false, error: extractedError };
-  }
-}
-
-export const createApiService = (apiClient: AxiosInstance) => {
-  return {
-    postWithHandle: <T>(url: string, payload: unknown): Promise<IResponse<T>> =>
-      handleResponse<T>(apiClient.post(url, payload)),
-
-    getWithHandle: <T>(url: string): Promise<IResponse<T>> =>
-      handleResponse<T>(apiClient.get(url)),
-
-    getPaginatedWithHandle: <T>(
-      url: string,
-      params: IPaginationParams = DEFAULT_PAGINATION_PARAMS,
-    ): Promise<IResponse<IPaginatedResponse<T>>> => {
-      const query = buildQueryParams(params);
-      return handleResponse<IPaginatedResponse<T>>(
-        apiClient.get(`${url}${query}`),
-      );
-    },
-
-    patchWithHandle: <T>(
-      url: string,
-      payload: unknown,
-    ): Promise<IResponse<T>> =>
-      handleResponse<T>(apiClient.patch(url, payload)),
-
-    postFormWithHandle: <T>(
-      url: string,
-      formData: FormData,
-    ): Promise<IResponse<T>> =>
-      handleResponse<T>(
-        apiClient.post(url, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        }),
-      ),
-  };
-};
