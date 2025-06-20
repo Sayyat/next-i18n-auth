@@ -8,6 +8,6 @@ export default defineConfig({
     // globals: true, // Enable global expect, describe, etc.
     environment: "jsdom", // Simulate browser environment
     include: ["**/*.test.?(c|m)[jt]s?(x)"],
-    setupFiles: ["src/tests/vitest-setup.ts"],
+    setupFiles: ["src/__tests__/vitest-setup.ts"],
   },
 });
