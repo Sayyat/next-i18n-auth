@@ -33,14 +33,6 @@ i18next
     ns: NAMESPACES,
     defaultNS,
     fallbackNS: defaultNS,
-    interpolation: {
-      escapeValue: false,
-      maxReplaces: 1,
-      skipOnVariables: true,
-    },
-    returnNull: false,
-    returnEmptyString: true,
-    returnObjects: false,
     nsSeparator: ".",
     keySeparator: ".",
     load: "languageOnly",
@@ -57,7 +49,7 @@ i18next
 export default i18next;
 
 /*
- * Типобезопасная обёртка для useTranslation
+ * type-safe wrapper around useTranslation
  */
 
 export function useTranslation<N extends TNamespace>(
@@ -73,6 +65,5 @@ export function useTranslation<N extends TNamespace>(
   const { t: rawT, i18n, ready } = useI18nTranslation(namespace);
   const t = safeT(rawT);
   console.log("after safeT");
-
   return { t, i18n, ready };
 }
