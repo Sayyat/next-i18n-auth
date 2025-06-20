@@ -8,19 +8,16 @@ export async function extractErrorMessage(
   error: unknown,
   t: TFunction<"shared.services.api">,
 ): Promise<string> {
-  console.log(chalk.yellow("extractErrorMessage"));
   console.log(chalk.yellow(error));
 
   if (axios.isAxiosError(error)) {
     const { response, code, message } = error;
-    console.log({ response, code, message });
     // handle network errors without response
     if (!response) {
       const translated = t(
         code as TNamespaceTranslationKeys["shared.services.api"],
         {},
       );
-      console.log("🧪 Translating key:", code, "→", translated);
       return translated !== code ? translated : t("Unknown Error");
     }
 
