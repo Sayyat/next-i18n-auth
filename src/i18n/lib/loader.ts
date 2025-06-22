@@ -1,3 +1,5 @@
+import fs from "fs/promises";
+import path from "path";
 import { NAMESPACES } from "@/i18n/generated/namespaces";
 
 export async function loadNamespace(
@@ -10,12 +12,17 @@ export async function loadNamespace(
     );
   }
 
-  const path = `@/i18n/locales/${lng}/${ns}.json`;
-
+  const filePath = path.resolve(
+    process.cwd(),
+    "src/i18n/locales",
+    lng,
+    `${ns}.json`,
+  );
   try {
-    const _module = await import(path);
-    return _module.default ?? _module;
+    const file = await fs.readFile(filePath, "utf-8");
+    return JSON.parse(file);
   } catch (err) {
+    console.error("❌ Failed to load translation file:", filePath, "\n", err);
     return {};
   }
 }
