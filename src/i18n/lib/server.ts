@@ -8,12 +8,11 @@ import { safeT } from "./safety";
 import { TNamespace, TNamespaceTranslationKeys } from "@/i18n/generated/types";
 import { loadNamespace } from "./loader"; // тот что выше
 import { NAMESPACES } from "@/i18n/generated/namespaces";
-import resourcesToBackend from "i18next-resources-to-backend";
 
 // in server
 async function initI18nextOnce(lng: string, ns: (typeof NAMESPACES)[number]) {
   const translations = await loadNamespace(lng, ns);
-  console.log({ translations });
+  // console.log({ translations });
   const instance = createInstance(
     {
       lng,
