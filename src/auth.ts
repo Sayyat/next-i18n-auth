@@ -15,7 +15,7 @@ import {
   getLoginSchema,
   getRegisterSchema,
 } from "@/features/authentication/lib/zodServer";
-import { getTranslation } from "@/i18n";
+// import { skipCSRFCheck } from "@auth/core"; // for local production
 
 class InvalidLoginError extends CredentialsSignin {
   static type = "InvalidLoginError";
@@ -35,6 +35,7 @@ interface IAccessToken {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  // skipCSRFCheck, // for local production
   providers: [
     Credentials({
       id: "register",
@@ -52,16 +53,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       async authorize(credentials) {
-        // const { t } = await getTranslation("shared.services.api");
         // 1. Validate login input
         const registerSchema = await getRegisterSchema();
         const { success, data, error } =
           await registerSchema.safeParseAsync(credentials);
         if (!success) {
-          throw new InvalidLoginError(
-            // error.errors[0]?.message || t("unknownError"),
-            error.errors[0]?.message || "Unknown error",
-          );
+          throw new InvalidLoginError(error.errors[0]?.message || "");
         }
 
         const result = await registerUser(data);
@@ -82,16 +79,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       async authorize(credentials, _) {
-        // const { t } = await getTranslation("shared.services.api");
-        // console.log({ t });
         const loginSchema = await getLoginSchema();
         const { success, data, error } =
           await loginSchema.safeParseAsync(credentials);
         if (!success) {
-          throw new InvalidLoginError(
-            // error.errors[0]?.message || t("Unknown Error"),
-            error.errors[0]?.message || "Unknown Error",
-          );
+          throw new InvalidLoginError(error.errors[0]?.message || "");
         }
 
         // 2. Attempt to login user
