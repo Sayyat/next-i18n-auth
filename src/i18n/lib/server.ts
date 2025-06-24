@@ -66,7 +66,7 @@ async function initI18nextOnce(lng: string, ns: (typeof NAMESPACES)[number]) {
       load: "languageOnly",
     },
     () => {
-      console.log("initI18nextOnce Loaded");
+      // console.log("initI18nextOnce Loaded");
     },
   );
 }

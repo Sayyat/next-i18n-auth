@@ -63,6 +63,6 @@ export function useTranslation<N extends TNamespace>(
 } {
   const { t: rawT, i18n, ready } = useI18nTranslation(namespace);
   const t = safeT(rawT);
-  console.log("after safeT");
+  // console.log("after safeT");
   return { t, i18n, ready };
 }
