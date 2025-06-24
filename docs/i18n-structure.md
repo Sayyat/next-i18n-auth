@@ -22,9 +22,6 @@ src/
 │   ├── lib/
 │   │   ├── client.ts       // Client-side i18next initialization
 │   │   ├── config.ts       // Configuration file for languages and fallback
-│   │   ├── cookies.ts      // Utility functions for locale handling
-│   │   ├── server.ts       // Server-side i18next initialization
-│   │   ├── loader.ts       // Server-side i18next initialization
 │   │   ├── safety.ts       // Type-safe wrapper for translation functions
 │   │   └── server.ts       // Server-side i18next initialization
 │   ├── locales/            // Translation files per language (JSON)
@@ -133,26 +130,6 @@ export const FALLBACK_LANGUAGE: TLanguage = "en"; // Переименовали 
 export const COOKIE_NAME = "NEXT_LANGUAGE";
 export const defaultNS = "translation";
 ```
-
----
-
-### **6. `i18n/lib/cookies.ts`**
-
-This file contains utility functions used for handling **user locale** detection and setting:
-
-* **`getUserLocale`**: Retrieves the user's preferred language from cookies.
-* **`setUserLocale`**: Sets the user's language preference in cookies.
-
-```ts
-export async function getUserLocale(): Promise<TLanguage> {
-    return (
-        ((await cookies()).get(COOKIE_NAME)?.value as TLanguage) ||
-        FALLBACK_LANGUAGE
-    );
-}
-```
-
-These utilities are crucial for ensuring that the correct language is used across both client and server environments.
 
 ---
 
