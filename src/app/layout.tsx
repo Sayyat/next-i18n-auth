@@ -8,8 +8,7 @@ import "@/core/styles/globals.css";
 import { ToastContainer } from "react-toastify";
 import { ClientProvidersWrapper } from "@/core/providers/ClientProvidersWrapper";
 import { ReactNode } from "react";
-import "@/i18n/lib/client";
-import { getUserLanguage } from "@/i18n/lib/cookies";
+import { getUserLanguage } from "@/i18n";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

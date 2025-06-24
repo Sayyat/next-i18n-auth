@@ -3,7 +3,6 @@
  */
 
 "use client";
-
 import i18next, { type i18n } from "i18next";
 import {
   initReactI18next,
@@ -11,10 +10,10 @@ import {
 } from "react-i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
-import { TNamespace, TNamespaceTranslationKeys } from "@/i18n/generated/types";
-import { safeT } from "./safety";
-import { COOKIE_NAME, FALLBACK_LANGUAGE, languages, defaultNS } from "./config";
 import { NAMESPACES } from "@/i18n/generated/namespaces";
+import { TNamespace, TNamespaceTranslationKeys } from "@/i18n/generated/types";
+import { COOKIE_NAME, defaultNS, FALLBACK_LANGUAGE, languages } from "./config";
+import { safeT } from "./safety";
 
 // Initialize i18next for client-side
 i18next

@@ -2,7 +2,6 @@
  * Copyright (c) 2025. Sayat Raykul
  */
 
-// @/i18n/safety.ts
 import { i18n, TFunction } from "i18next";
 
 export function safeT(t: i18n["t"]): TFunction {

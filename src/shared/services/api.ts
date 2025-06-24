@@ -2,7 +2,7 @@
 import chalk from "chalk";
 import { TFunction } from "@/i18n";
 import axios from "axios";
-import { TNamespaceTranslationKeys } from "@/i18n/generated/types";
+import { TNamespaceTranslationKeys } from "@/i18n";
 
 export async function extractErrorMessage(
   error: unknown,
