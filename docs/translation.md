@@ -99,15 +99,40 @@ Here's the updated section with your note about keeping dynamic error keys via `
 For dynamic backend error codes (such as `ERR_NETWORK`, `ERR_BAD_REQUEST`, etc.), we follow a specific pattern. We maintain a list of **static error keys** for backend errors and run them through **i18next-scanner** to automatically generate the translations.
 
 ```js
-const errorsForI18nextScanner = [
-  t("ERR_FR_TOO_MANY_REDIRECTS"),
-  t("ERR_BAD_OPTION_VALUE"),
-  t("ERR_NETWORK"),
-  t("ERR_BAD_REQUEST"),
-  t("ERR_CANCELED"),
-  t("ECONNABORTED"),
-  t("ETIMEDOUT"),
-];
+
+export async function dummyTranslationsForScanner(
+    t: TFunction<"shared.services.api">,
+) {
+    // Static error keys to be translated automatically by i18next-scanner
+    // These are predefined error codes, and i18next-scanner will automatically generate their translations
+    // Make sure to add dynamic backend-specific error codes here manually (as they are context-dependent).
+    // After adding new error codes, run the `smart-i18n` task to update translations.
+    return [
+        // Axios-specific codes
+        t("ERR_FR_TOO_MANY_REDIRECTS"),
+        t("ERR_BAD_OPTION_VALUE"),
+        t("ERR_BAD_OPTION"),
+        t("ERR_NETWORK"),
+        t("ERR_DEPRECATED"),
+        t("ERR_BAD_RESPONSE"),
+        t("ERR_BAD_REQUEST"),
+        t("ERR_NOT_SUPPORT"),
+        t("ERR_INVALID_URL"),
+        t("ERR_CANCELED"),
+
+        // Node.js low-level network errors
+        t("ECONNREFUSED"),
+        t("ECONNRESET"),
+        t("ETIMEDOUT"),
+        t("EHOSTUNREACH"),
+        t("ENETUNREACH"),
+        t("EAI_AGAIN"),
+        t("ENOTFOUND"),
+        t("EPIPE"),
+        t("EACCES"),
+        t("ECONNABORTED"),
+    ];
+}
 ```
 
 These error keys are added to the translation files during the **automatic generation process** using `smart-i18n`, and they can be translated like any other key with placeholders.
