@@ -88,7 +88,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         // 2. Attempt to login user
         const result = await loginUser(data);
-        console.log({ result });
+        // console.log({ result });
         if (!result.success) {
           throw new InvalidLoginError(result.error);
         }
