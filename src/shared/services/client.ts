@@ -2,6 +2,7 @@
  * Copyright (c) 2025. Sayat Raykul
  */
 
+"use client";
 import axios from "axios";
 import { env } from "@/shared/data/env/client";
 import { getSession } from "next-auth/react";
@@ -57,6 +58,7 @@ apiClient.interceptors.response.use(
 function useHandleResponse() {
   const { t } = useTranslation("shared.services.api");
 
+  // handleResponse will handle API responses with proper error translation
   return async function handleResponse<T>(
     request: Promise<any>,
   ): Promise<IResponse<T>> {
@@ -73,22 +75,10 @@ function useHandleResponse() {
 export function useCentralApi() {
   const handleResponse = useHandleResponse();
 
+  // Memoizing the API methods to optimize performance and avoid unnecessary rerenders
   return useMemo(
     () => ({
       getWithHandle: <T>(url: string) => handleResponse<T>(apiClient.get(url)),
-
-      postWithHandle: <T>(url: string, payload: unknown) =>
-        handleResponse<T>(apiClient.post(url, payload)),
-
-      patchWithHandle: <T>(url: string, payload: unknown) =>
-        handleResponse<T>(apiClient.patch(url, payload)),
-
-      postFormWithHandle: <T>(url: string, formData: FormData) =>
-        handleResponse<T>(
-          apiClient.post(url, formData, {
-            headers: { "Content-Type": "multipart/form-data" },
-          }),
-        ),
 
       getPaginatedWithHandle: <T>(
         url: string,
@@ -99,6 +89,25 @@ export function useCentralApi() {
           apiClient.get(`${url}${query}`),
         );
       },
+
+      postWithHandle: <T>(url: string, payload: unknown) =>
+        handleResponse<T>(apiClient.post(url, payload)),
+
+      patchWithHandle: <T>(url: string, payload: unknown) =>
+        handleResponse<T>(apiClient.patch(url, payload)),
+
+      putWithHandle: <T>(url: string, payload: unknown) =>
+        handleResponse<T>(apiClient.put(url, payload)),
+
+      postFormWithHandle: <T>(url: string, formData: FormData) =>
+        handleResponse<T>(
+          apiClient.post(url, formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+          }),
+        ),
+
+      deleteWithHandle: <T>(url: string, payload: unknown) =>
+        handleResponse<T>(apiClient.delete(url)),
     }),
     [apiClient, handleResponse],
   );
