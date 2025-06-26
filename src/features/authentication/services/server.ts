@@ -11,13 +11,17 @@ import {
 } from "@/features/authentication/types/payload";
 import { IToken } from "@/features/authentication/types/response";
 
-export const registerUser = (
+export const registerUser = async (
   payload: IRegisterPayload,
 ): Promise<IResponse<IUser>> =>
-  postWithHandle<IUser>("/api/auth/register/", payload);
+  await postWithHandle<IUser>("/api/auth/register/", payload);
 
-export const loginUser = (payload: ILoginPayload): Promise<IResponse<IUser>> =>
-  postWithHandle<IUser>("/api/auth/login/", payload);
+export const loginUser = async (
+  payload: ILoginPayload,
+): Promise<IResponse<IUser>> =>
+  await postWithHandle<IUser>("/api/auth/login/", payload);
 
-export const refreshToken = (refresh: string): Promise<IResponse<IToken>> =>
-  postWithHandle<IToken>("/api/auth/token/refresh/", { refresh });
+export const refreshToken = async (
+  refresh: string,
+): Promise<IResponse<IToken>> =>
+  await postWithHandle<IToken>("/api/auth/token/refresh/", { refresh });

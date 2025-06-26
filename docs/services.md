@@ -41,14 +41,14 @@ async function handleResponse<T>(request: Promise<any>): Promise<IResponse<T>> {
     }
 }
 
-export const getWithHandle = <T>(url: string): Promise<IResponse<T>> =>
-    handleResponse<T>(apiClient.get(url));
+export const getWithHandle = async <T>(url: string): Promise<IResponse<T>> =>
+    await handleResponse<T>(apiClient.get(url));
 
-export const postWithHandle = <T>(url: string, payload: unknown): Promise<IResponse<T>> =>
-    handleResponse<T>(apiClient.post(url, payload));
+export const postWithHandle = async <T>(url: string, payload: unknown): Promise<IResponse<T>> =>
+    await handleResponse<T>(apiClient.post(url, payload));
 
-export const patchWithHandle = <T>(url: string, payload: unknown): Promise<IResponse<T>> =>
-    handleResponse<T>(apiClient.patch(url, payload));
+export const patchWithHandle = async <T>(url: string, payload: unknown): Promise<IResponse<T>> =>
+    await handleResponse<T>(apiClient.patch(url, payload));
 ```
 
 ### Key Benefits of This Approach:
@@ -130,11 +130,11 @@ export function useCentralApi() {
 export const useAuthenticationApi = (): IAuthenticationApi => {
     const api = useCentralApi();
 
-    const resetPassword = async (payload: IResetPayload): Promise<IResponse<IResetResponse>> => {
+    const resetPassword = (payload: IResetPayload): Promise<IResponse<IResetResponse>> => {
         return api.postWithHandle<IResetResponse>("/api/password-reset/", { email: payload.email });
     };
 
-    const getCities = async (): Promise<IResponse<IPaginatedResponse<ICity>>> =>
+    const getCities = (): Promise<IResponse<IPaginatedResponse<ICity>>> =>
         api.getWithHandle<IPaginatedResponse<ICity>>("/api/cities/");
 
     return {
@@ -148,10 +148,10 @@ export const useAuthenticationApi = (): IAuthenticationApi => {
 
 ```typescript
 export const registerUser = async (payload: IRegisterPayload): Promise<IResponse<IUser>> =>
-    postWithHandle<IUser>("/api/auth/register/", payload);
+    await postWithHandle<IUser>("/api/auth/register/", payload);
 
 export const loginUser = async (payload: ILoginPayload): Promise<IResponse<IUser>> =>
-    postWithHandle<IUser>("/api/auth/login/", payload);
+    await postWithHandle<IUser>("/api/auth/login/", payload);
 ```
 
 ## Elegance in Code
