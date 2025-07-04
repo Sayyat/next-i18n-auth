@@ -1550,20 +1550,20 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.11.0.tgz#75dce8e972f90bba488e2b0cc677fb233aa357ab"
   integrity sha512-zxnHvoMQVqewTJr/W4pKjF0bMGiKJv1WX7bSrkl46Hg0QjESbzBROWK0Wg4RphzSOS5Jiy7eFimmM3UgMrMZbQ==
 
-"@sayyyat/smart-i18n-react@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@sayyyat/smart-i18n-react/-/smart-i18n-react-2.1.1.tgz#463b1c0a30470e245d0d221b483e1f6b2395c0d1"
-  integrity sha512-KhDtyKx0Fvf/ILp01FgNVMKLIdVNcufv8IO0DoxmwQVYfno5e9xYz8mXn+cqcYxWL0mJ2804y3h17+n0WEcMOw==
+"@sayyyat/smart-i18n-react@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@sayyyat/smart-i18n-react/-/smart-i18n-react-2.1.2.tgz#9edb5a9d5889dd927df3361f83739e1f825c6e1b"
+  integrity sha512-xq2YVSG4YatoH7XKNTANSslcbOLOhGrSsdh/jSwlq7ZZZIdRxu1SyldUtaXykn+dI7vGSnAm0tfIa9LVFBi+Lw==
   dependencies:
-    "@sayyyat/smart-i18n" "^2.1.3"
+    "@sayyyat/smart-i18n" "^2.1.4"
     chalk "^5.4.1"
     gulp "^4.0.0"
     yargs "^17.7.2"
 
-"@sayyyat/smart-i18n@^2.1.3":
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/@sayyyat/smart-i18n/-/smart-i18n-2.1.3.tgz#d0919d75d29e4c9b403363bb84496bfa390cb9c8"
-  integrity sha512-zPAkZWd8qYDbxyNDQ8LjbChX1WBttd3CYWua4u0N9XCl+Ku393+Qvo3gwzKat16rpEABtixS7is8x0DZ9QK86A==
+"@sayyyat/smart-i18n@^2.1.4":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@sayyyat/smart-i18n/-/smart-i18n-2.1.4.tgz#e06992b1a7e26089414bf235aa9a6ec836762b75"
+  integrity sha512-x6W9y7tqtjMmwp9NWZFoOYJWVl7iBKXml6/I2N5/ah+zQn29kVzK+g3toL/8jiZxmdSjWs7imVbghffH7wmdRg==
   dependencies:
     chalk "^5.4.1"
     dotenv "^16.5.0"
