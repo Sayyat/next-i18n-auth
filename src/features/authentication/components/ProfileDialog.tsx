@@ -28,7 +28,7 @@ import { TAuthModal } from "@/core/types/header";
 import { ProfileImageIcon } from "@/features/authentication/components/ProfileImageIcon";
 import { useProfile } from "@/features/authentication/hooks/useProfile";
 import { signOut } from "next-auth/react";
-import { FloatingLabelInput } from "@/shared/components/FloatingLabelInput";
+import { FloatingLabelInput } from "@/shared/components/form/FloatingLabelInput";
 import { useEditProfileSchema } from "../lib/zodClient";
 import { z } from "zod";
 import { useTranslation } from "@/i18n";

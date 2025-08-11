@@ -7,7 +7,7 @@ import { X } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Trans } from "react-i18next";
-import { Checkbox } from "@/shared/components/Checkbox";
+import { Checkbox } from "@/shared/components/form/Checkbox";
 import { Button } from "@/shared/components/ui/button";
 
 // ShadCN Form components
@@ -29,10 +29,10 @@ import {
 } from "@/shared/components/ui/dialog";
 import { TAuthModal } from "@/core/types/header";
 import { useCities } from "@/features/authentication/hooks/useCities";
-import { Select } from "@/shared/components/Select";
-import { FloatingLabelPasswordInput } from "@/shared/components/FloatingLabelPasswordInput";
-import { FloatingLabelInput } from "@/shared/components/FloatingLabelInput";
-import { FloatingLabelPhoneInput } from "@/shared/components/FloatingLabelPhoneInput";
+import { Select } from "@/shared/components/form/Select";
+import { FloatingLabelPasswordInput } from "@/shared/components/form/FloatingLabelPasswordInput";
+import { FloatingLabelInput } from "@/shared/components/form/FloatingLabelInput";
+import { FloatingLabelPhoneInput } from "@/shared/components/form/FloatingLabelPhoneInput";
 import { Loading } from "@/shared/components/svg/Loading";
 import { useAuth } from "@/features/authentication/hooks/useAuth";
 import { ICity } from "@/features/authentication/types/city";

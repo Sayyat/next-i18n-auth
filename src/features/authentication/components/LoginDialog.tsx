@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslation } from "@/i18n";
 import { Loading } from "@/shared/components/svg/Loading";
-import { Checkbox } from "@/shared/components/Checkbox";
+import { Checkbox } from "@/shared/components/form/Checkbox";
 import { Button } from "@/shared/components/ui/button";
 import {
   Form,
@@ -28,8 +28,8 @@ import {
   DialogTitle,
 } from "@/shared/components/ui/dialog";
 import { TAuthModal } from "@/core/types/header";
-import { FloatingLabelInput } from "@/shared/components/FloatingLabelInput";
-import { FloatingLabelPasswordInput } from "@/shared/components/FloatingLabelPasswordInput";
+import { FloatingLabelInput } from "@/shared/components/form/FloatingLabelInput";
+import { FloatingLabelPasswordInput } from "@/shared/components/form/FloatingLabelPasswordInput";
 import { useAuth } from "@/features/authentication/hooks/useAuth";
 import { useLoginSchema } from "@/features/authentication/lib/zodClient";
 
