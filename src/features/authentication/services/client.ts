@@ -46,10 +46,11 @@ export const useAuthenticationApi = (): IAuthenticationApi => {
   ): Promise<IResponse<IProfile>> => {
     const formData = new FormData();
     formData.append("file", imageFile);
-    return api.postFormWithHandle<IProfile>(
-      "/api/user/profile/photo/",
-      formData,
-    );
+    return api.postWithHandle<IProfile>("/api/user/profile/photo/", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   };
 
   return {
