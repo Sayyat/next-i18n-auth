@@ -1,8 +1,8 @@
 // Centralized error extraction
 import chalk from "chalk";
-import { TFunction } from "@/i18n";
+import { TFunction, TNamespaceTranslationKeys } from "@/i18n";
 import axios from "axios";
-import { TNamespaceTranslationKeys } from "@/i18n";
+import { IErrorResponse } from "@/shared/types/api";
 
 export async function extractErrorMessage(
   error: unknown,
@@ -10,34 +10,47 @@ export async function extractErrorMessage(
 ): Promise<string> {
   console.log(chalk.yellow(error));
 
-  if (axios.isAxiosError(error)) {
-    const { response, code, message } = error;
-    // handle network errors without response
-    if (!response) {
-      const translated = t(
-        code as TNamespaceTranslationKeys["shared.services.api"],
-        {},
-      );
-      return translated !== code ? translated : t("Unknown Error");
-    }
-
-    // handle server errors with code/message
-    const { code: resCode, message: resMessage } = response.data || {};
-
-    if (!resCode && !resMessage) {
-      return t("Server error");
-    }
-
-    const translated = resCode
-      ? t(resCode as TNamespaceTranslationKeys["shared.services.api"])
-      : "";
-
-    return translated !== resCode
-      ? translated
-      : resMessage || t("Unknown Error");
+  if (!axios.isAxiosError(error)) {
+    return t("Unknown Error");
   }
 
-  return t("Unknown Error");
+  const { response, code, message } = error;
+
+  if (!response) {
+    const translated = t(
+      code as TNamespaceTranslationKeys["shared.services.api"],
+      {},
+    );
+    return translated !== code ? translated : t("Unknown Error");
+  }
+
+  const {
+    code: resCode,
+    message: resMessage,
+    detail,
+  } = (response.data as IErrorResponse) || {};
+
+  let detailMessage = "";
+  if (detail) {
+    if (typeof detail === "string") {
+      detailMessage = detail;
+    } else if (typeof detail === "object") {
+      try {
+        detailMessage = JSON.stringify(detail, null, 2);
+      } catch {
+        detailMessage = String(detail);
+      }
+    }
+  }
+
+  const translated = resCode
+    ? t(resCode as TNamespaceTranslationKeys["shared.services.api"])
+    : "";
+
+  const baseMessage =
+    translated !== resCode ? translated : resMessage || t("Unknown Error");
+
+  return detailMessage ? `${baseMessage}\n\n${detailMessage}` : baseMessage;
 }
 
 export async function dummyTranslationsForScanner(

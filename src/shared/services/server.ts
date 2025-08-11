@@ -30,46 +30,45 @@ async function handleResponse<T>(request: Promise<any>): Promise<IResponse<T>> {
   }
 }
 
-export const getWithHandle = async <T>(url: string): Promise<IResponse<T>> =>
-  await handleResponse<T>(apiClient.get(url));
+export const getWithHandle = async <T>(
+  url: string,
+  config?: AxiosRequestConfig,
+): Promise<IResponse<T>> => await handleResponse<T>(apiClient.get(url, config));
 
 export const getPaginatedWithHandle = async <T>(
   url: string,
   params: IPaginationParams = DEFAULT_PAGINATION_PARAMS,
+  config?: AxiosRequestConfig,
 ): Promise<IResponse<IPaginatedResponse<T>>> => {
   const query = buildQueryParams(params);
   return await handleResponse<IPaginatedResponse<T>>(
-    apiClient.get(`${url}${query}`),
+    apiClient.get(`${url}${query}`, config),
   );
 };
 
 export const postWithHandle = async <T>(
   url: string,
   payload: unknown,
+  config?: AxiosRequestConfig,
 ): Promise<IResponse<T>> =>
-  await handleResponse<T>(apiClient.post(url, payload));
+  await handleResponse<T>(apiClient.post(url, payload, config));
 
 export const patchWithHandle = async <T>(
   url: string,
   payload: unknown,
+  config?: AxiosRequestConfig,
 ): Promise<IResponse<T>> =>
-  await handleResponse<T>(apiClient.patch(url, payload));
+  await handleResponse<T>(apiClient.patch(url, payload, config));
 
 export const putWithHandle = async <T>(
   url: string,
   payload: unknown,
+  config?: AxiosRequestConfig,
 ): Promise<IResponse<T>> =>
-  await handleResponse<T>(apiClient.put(url, payload));
+  await handleResponse<T>(apiClient.put(url, payload, config));
 
-export const postFormWithHandle = async <T>(
+export const deleteWithHandle = async <T>(
   url: string,
-  formData: FormData,
+  config?: AxiosRequestConfig,
 ): Promise<IResponse<T>> =>
-  await handleResponse<T>(
-    apiClient.post(url, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    }),
-  );
-
-export const deleteWithHandle = async <T>(url: string): Promise<IResponse<T>> =>
-  await handleResponse<T>(apiClient.delete(url));
+  await handleResponse<T>(apiClient.delete(url, config));

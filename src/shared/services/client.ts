@@ -3,11 +3,11 @@
  */
 
 "use client";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { env } from "@/shared/data/env/client";
 import { getSession } from "next-auth/react";
 import { tokenStore } from "@/shared/lib/tokenStore";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/i18n/lib/client";
 import { useMemo } from "react";
 import { IPaginatedResponse, IPaginationParams, IResponse } from "@/shared";
 import { DEFAULT_PAGINATION_PARAMS } from "@/shared/lib/constants";
@@ -78,36 +78,42 @@ export function useCentralApi() {
   // Memoizing the API methods to optimize performance and avoid unnecessary rerenders
   return useMemo(
     () => ({
-      getWithHandle: <T>(url: string) => handleResponse<T>(apiClient.get(url)),
+      getWithHandle: <T>(url: string, config?: AxiosRequestConfig<unknown>) =>
+        handleResponse<T>(apiClient.get(url, config)),
 
       getPaginatedWithHandle: <T>(
         url: string,
         params: IPaginationParams = DEFAULT_PAGINATION_PARAMS,
+        config?: AxiosRequestConfig<unknown>,
       ) => {
         const query = buildQueryParams(params);
         return handleResponse<IPaginatedResponse<T>>(
-          apiClient.get(`${url}${query}`),
+          apiClient.get(`${url}${query}`, config),
         );
       },
 
-      postWithHandle: <T>(url: string, payload: unknown) =>
-        handleResponse<T>(apiClient.post(url, payload)),
+      postWithHandle: <T>(
+        url: string,
+        payload: unknown,
+        config?: AxiosRequestConfig<unknown>,
+      ) => handleResponse<T>(apiClient.post(url, payload, config)),
 
-      patchWithHandle: <T>(url: string, payload: unknown) =>
-        handleResponse<T>(apiClient.patch(url, payload)),
+      patchWithHandle: <T>(
+        url: string,
+        payload: unknown,
+        config?: AxiosRequestConfig<unknown>,
+      ) => handleResponse<T>(apiClient.patch(url, payload, config)),
 
-      putWithHandle: <T>(url: string, payload: unknown) =>
-        handleResponse<T>(apiClient.put(url, payload)),
+      putWithHandle: <T>(
+        url: string,
+        payload: unknown,
+        config?: AxiosRequestConfig<unknown>,
+      ) => handleResponse<T>(apiClient.put(url, payload, config)),
 
-      postFormWithHandle: <T>(url: string, formData: FormData) =>
-        handleResponse<T>(
-          apiClient.post(url, formData, {
-            headers: { "Content-Type": "multipart/form-data" },
-          }),
-        ),
-
-      deleteWithHandle: <T>(url: string, payload: unknown) =>
-        handleResponse<T>(apiClient.delete(url)),
+      deleteWithHandle: <T>(
+        url: string,
+        config?: AxiosRequestConfig<unknown>,
+      ) => handleResponse<T>(apiClient.delete(url, config)),
     }),
     [apiClient, handleResponse],
   );
