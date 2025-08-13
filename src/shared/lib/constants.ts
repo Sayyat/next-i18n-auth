@@ -1,6 +1,11 @@
-import {IPaginationParams} from "@/shared";
+/*
+ * Copyright (c) 2025. Sayat Raykul
+ */
+
+import { IPaginationParams } from "@/shared";
 
 export const DEFAULT_PAGINATION_PARAMS: IPaginationParams = {
-    limit: 100,
-    offset: 0,
-}
+  lang: "ru",
+  page: 1,
+  page_size: 50,
+};
