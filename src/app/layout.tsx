@@ -46,13 +46,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://next-i18n-auth-mu.vercel.app",
+    url: "https://next-i18n-auth.vercel.app",
     title: "Next i18n Auth",
     description: "Next i18n Auth Boilerplate",
     siteName: "Next i18n Auth",
     images: [
       {
-        url: "https://next-i18n-auth-mu.vercel.app/assets/logo.png",
+        url: "https://next-i18n-auth.vercel.app/assets/logo.png",
         width: 1200,
         height: 630,
         alt: "Next i18n Auth",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     shortcut: "/assets/android-chrome-512x512.png",
     apple: "/assets/apple-touch-icon.png",
   },
-  manifest: "https://next-i18n-auth-mu.vercel.app/site.webmanifest",
+  manifest: "https://next-i18n-auth.vercel.app/site.webmanifest",
 };
 
 export const viewport: Viewport = {
