@@ -28,14 +28,14 @@ import {
   DialogTitle,
 } from "@/shared/components/ui/dialog";
 import { TAuthModal } from "@/core/types/header";
-import { useCities } from "@/features/authentication/hooks/useCities";
+import { useCitiesQuery } from "@/features/cities/hooks/useCities";
+import { ICity } from "@/features/cities/types/city";
 import { Select } from "@/shared/components/form/Select";
 import { FloatingLabelPasswordInput } from "@/shared/components/form/FloatingLabelPasswordInput";
 import { FloatingLabelInput } from "@/shared/components/form/FloatingLabelInput";
 import { FloatingLabelPhoneInput } from "@/shared/components/form/FloatingLabelPhoneInput";
 import { Loading } from "@/shared/components/svg/Loading";
 import { useAuth } from "@/features/authentication/hooks/useAuth";
-import { ICity } from "@/features/authentication/types/city";
 import { useRegisterSchema } from "@/features/authentication/lib/zodClient";
 import { z } from "zod";
 import { useTranslation } from "@/i18n";
@@ -52,7 +52,7 @@ export const RegisterDialog: React.FC<IRegisterDialogProps> = ({
   const { t } = useTranslation(
     "features.authentication.components.RegisterDialog",
   );
-  const { data: cities } = useCities();
+  const citiesQuery = useCitiesQuery();
   const { registerMutation } = useAuth();
 
   const [loading, setLoading] = useState(false);
@@ -72,7 +72,7 @@ export const RegisterDialog: React.FC<IRegisterDialogProps> = ({
       birthdate: "",
       iin: "",
       phone_number: "",
-      city_id: (cities?.success && cities.data.items[0]?.id) || undefined,
+      city_id: citiesQuery.data?.results[0]?.id || undefined,
       address: "",
       password: "",
       confirm: "",
@@ -195,7 +195,7 @@ export const RegisterDialog: React.FC<IRegisterDialogProps> = ({
                       name="phone_number"
                       label={t("Phone")}
                       value={field.value}
-                      onChange={(value) => form.setValue("phone_number", value)}
+                      onChange={field.onChange}
                     />
                   </FormControl>
                   <FormMessage />
@@ -208,7 +208,7 @@ export const RegisterDialog: React.FC<IRegisterDialogProps> = ({
               control={form.control}
               name="city_id"
               render={({ field }) => {
-                const options = cities?.success ? cities.data.items : [];
+                const options = citiesQuery.data?.results ?? [];
                 return (
                   <FormItem className="w-full">
                     <FormControl>
@@ -218,14 +218,12 @@ export const RegisterDialog: React.FC<IRegisterDialogProps> = ({
                         options={options}
                         label={t("City")}
                         optionValueKey="id"
-                        optionLabelKeys={["city_name"]}
+                        optionLabelKeys={["name"]}
                         wrapperClassName="p-0"
                         value={options.find(
                           (option) => option.id === field.value,
                         )}
-                        onChange={(value) =>
-                          form.setValue("city_id", value?.id ?? 0)
-                        }
+                        onChange={(selected) => field.onChange(selected?.id)}
                       />
                     </FormControl>
                     <FormMessage />
