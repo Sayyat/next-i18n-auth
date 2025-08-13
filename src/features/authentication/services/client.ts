@@ -5,7 +5,6 @@
 import { IPaginatedResponse, IResponse } from "@/shared";
 import { useCentralApi } from "@/shared/services/client";
 import { IProfile } from "@/features/authentication/types/profile";
-import { ICity } from "@/features/authentication/types/city";
 import {
   IResetPayload,
   IResetResponse,
@@ -13,7 +12,6 @@ import {
 
 export interface IAuthenticationApi {
   resetPassword: (payload: IResetPayload) => Promise<IResponse<IResetResponse>>;
-  getCities: () => Promise<IResponse<IPaginatedResponse<ICity>>>;
   getProfile: () => Promise<IResponse<IProfile>>;
   updateProfile: (data: Partial<IProfile>) => Promise<IResponse<IProfile>>;
   updateProfileImage: (file: File) => Promise<IResponse<IProfile>>;
@@ -29,9 +27,6 @@ export const useAuthenticationApi = (): IAuthenticationApi => {
       email: payload.email,
     });
   };
-
-  const getCities = (): Promise<IResponse<IPaginatedResponse<ICity>>> =>
-    api.getWithHandle<IPaginatedResponse<ICity>>("/api/cities/");
 
   const getProfile = (): Promise<IResponse<IProfile>> =>
     api.getWithHandle<IProfile>("/api/user/profile/");
@@ -55,7 +50,6 @@ export const useAuthenticationApi = (): IAuthenticationApi => {
 
   return {
     resetPassword,
-    getCities,
     getProfile,
     updateProfile,
     updateProfileImage,
